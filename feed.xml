@@ -14,18 +14,18 @@
     <link rel="alternate" href="http://blog.url.com/uwater.html"/>
     <id>http://blog.url.com/uwater.html</id>
     <published>2016-04-28T11:12:00+02:00</published>
-    <updated>2016-05-28T12:02:22+02:00</updated>
+    <updated>2016-05-29T03:10:30+02:00</updated>
     <author>
       <name>Article Author</name>
     </author>
     <content type="html">
 &lt;h1 id="uwater---microcontroller-project"&gt;UWater - Microcontroller project&lt;/h1&gt;
-&lt;p&gt;&lt;img alt="uwater-setup" src="/images/images/uwater_setup.png" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="uwater-setup" width="750" height="1000" src="/images/uwater_setup-34d8d191.png" /&gt;&lt;/p&gt;
 
 &lt;h2 id="how-did-i-end-up-building-uwater"&gt;How did I end up building UWater?&lt;/h2&gt;
 &lt;p&gt;During my senior year in high school I saw an article in the newspaper by our famous &lt;a href="http://www.iis.fraunhofer.de/en.html"&gt;Fraunhofer Institut&lt;/a&gt; (Applied Science Institut).&lt;/p&gt;
 
-&lt;p&gt;&lt;img alt="iis_logo" src="/images/images/uwater_iis_logo.png" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="iis_logo" width="600" height="170" src="/images/uwater_iis_logo-3731def0.png" /&gt;&lt;/p&gt;
 
 &lt;p&gt;They were looking for students for an embedded systems internship with a competition at the end. I applied immediatley and got in.&lt;/p&gt;
 
@@ -58,7 +58,7 @@ At the end my learning curve decreased and I left for a startup!&lt;/p&gt;
     <link rel="alternate" href="http://blog.url.com/make-it-happen.html"/>
     <id>http://blog.url.com/make-it-happen.html</id>
     <published>2016-04-28T11:12:00+02:00</published>
-    <updated>2016-05-28T11:18:51+02:00</updated>
+    <updated>2016-05-29T03:09:49+02:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -69,7 +69,7 @@ I really &lt;i class="fa fa-heart"&gt;&lt;/i&gt; Hackathons!  You always improve
 
 &lt;p&gt;Let me introduce you to TEAM AWESOME… (I am the guy on the right)&lt;/p&gt;
 
-&lt;p&gt;&lt;img alt="team" src="/images/images/makeithappen_team.png" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="team" width="1000" height="375" src="/images/makeithappen_team-73317bf4.png" /&gt;&lt;/p&gt;
 
 &lt;h2 id="what-did-we-end-up-building"&gt;What did we end up building?&lt;/h2&gt;
 
@@ -80,7 +80,7 @@ Person A can donate an item by inserting all relevant information (including the
 
 &lt;h2 id="what-did-actually-work-at-the-end"&gt;What did actually work at the end?&lt;/h2&gt;
 &lt;p&gt;Here you can see our rails app.
-      &lt;img alt="index" src="/images/images/makeithappen_index.png" /&gt;&lt;/p&gt;
+      &lt;img alt="index" width="1430" height="911" src="/images/makeithappen_index-ba296d66.png" /&gt;&lt;/p&gt;
 
 &lt;p&gt;At the end Person A could insert a donation item. We then used the google API to calculate the exact coordinates of the address of Person A and the ONE AND ONLY donation station in Munich hahaha ;-) Then we fed the UBER API with these coordinates and calculated the price for trip. Person B could see a list of all donated items and their estimated prices to get them to the donation station.&lt;/p&gt;
 
@@ -118,7 +118,7 @@ I always see guys at Hackathons who spend the whole time with brainstoarming and
     <link rel="alternate" href="http://blog.url.com/personal-blog.html"/>
     <id>http://blog.url.com/personal-blog.html</id>
     <published>2016-04-28T11:12:00+02:00</published>
-    <updated>2016-05-28T11:42:01+02:00</updated>
+    <updated>2016-05-29T03:10:13+02:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -195,11 +195,11 @@ Get coffee with him&lt;/li&gt;
 
 &lt;h2 id="version-1-was-born"&gt;Version 1 was born&lt;/h2&gt;
 
-&lt;p&gt;&lt;img alt="blog_v1_index" src="/images/images/blog_v1_index.png" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="blog_v1_index" width="1249" height="869" src="/images/blog_v1_index-b1adf3fa.png" /&gt;&lt;/p&gt;
 
-&lt;p&gt;&lt;img alt="blog_v1_index" src="/images/images/blog_v1_footer.png" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="blog_v1_index" width="1249" height="869" src="/images/blog_v1_footer-af7606f7.png" /&gt;&lt;/p&gt;
 
-&lt;p&gt;&lt;img alt="blog_v1_index" src="/images/images/blog_v1_projects.png" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="blog_v1_index" width="1249" height="869" src="/images/blog_v1_projects-2836cdc4.png" /&gt;&lt;/p&gt;
 
 &lt;p&gt;When I finished the first version, I was definitely proud of myself.
 However I quickly realized that this structure was not the right one for me. I didn't like user flow (too complicated) and the focus was different. He designed his website to get paying clients for his freelance work. My goals are different.&lt;/p&gt;
@@ -207,7 +207,7 @@ However I quickly realized that this structure was not the right one for me. I d
 &lt;h2 id="version-2---restart"&gt;Version 2 - Restart&lt;/h2&gt;
 &lt;p&gt;I did some more research and started again.&lt;/p&gt;
 
-&lt;p&gt;&lt;img alt="blog_v2_index" src="/images/images/blog_v2_index.png" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="blog_v2_index" width="1374" height="946" src="/images/blog_v2_index-8102b8a0.png" /&gt;&lt;/p&gt;
 
 &lt;p&gt;This version is even more minimalistic. So far I still like it. I guess that's an important point. If you do not like your website you probably won't post as much.&lt;/p&gt;
 
@@ -246,7 +246,7 @@ However I quickly realized that this structure was not the right one for me. I d
     <link rel="alternate" href="http://blog.url.com/bayern-su.html"/>
     <id>http://blog.url.com/bayern-su.html</id>
     <published>2016-04-28T11:12:00+02:00</published>
-    <updated>2016-05-28T11:19:05+02:00</updated>
+    <updated>2016-05-29T03:10:50+02:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -279,20 +279,20 @@ Pupils who want to join our organization can now apply online instead of mailing
   &lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;&lt;img alt="bayernsu_application" src="/images/images/bayernsu_application.png" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="bayernsu_application" width="1552" height="869" src="/images/bayernsu_application-670663db.png" /&gt;&lt;/p&gt;
 
 &lt;ul&gt;
   &lt;li&gt;Meet a student of your favorite university&lt;br /&gt;
 Visitors of our site can request a meeting with a student of our network who attends their favorite university.&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;&lt;img alt="bayernsu_university" src="/images/images/bayernsu_university.png" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="bayernsu_university" width="1552" height="869" src="/images/bayernsu_university-ccd8ff5d.png" /&gt;&lt;/p&gt;
 
 &lt;ul&gt;
   &lt;li&gt;Find our local group close to your home&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;&lt;img alt="bayernsu_localization" src="/images/images/bayernsu_localization.png" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="bayernsu_localization" width="1552" height="869" src="/images/bayernsu_localization-76296fc9.png" /&gt;&lt;/p&gt;
 
 &lt;ul&gt;
   &lt;li&gt;
@@ -303,7 +303,7 @@ Visitors of our site can request a meeting with a student of our network who att
   &lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;&lt;img alt="bayernsu_index" src="/images/images/bayernsu_index.png" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="bayernsu_index" width="1552" height="869" src="/images/bayernsu_index-fb3ecbf1.png" /&gt;&lt;/p&gt;
 
 &lt;h2 id="what-did-i-learn"&gt;What did I learn?&lt;/h2&gt;
 &lt;ol&gt;
@@ -519,7 +519,7 @@ and you haven't been."&lt;br /&gt;
     <link rel="alternate" href="http://blog.url.com/idea-generation.html"/>
     <id>http://blog.url.com/idea-generation.html</id>
     <published>2016-04-28T11:10:00+02:00</published>
-    <updated>2016-05-28T11:19:31+02:00</updated>
+    <updated>2016-05-29T03:11:21+02:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -545,7 +545,7 @@ Forbes, TechCrunch, etc. are full of positiv stories in which a guy just came up
 
 &lt;p&gt;Ok again: “Where do ideas come from?”&lt;br /&gt;
 Let’s have a closer look at how our mind works. You probably know that we have a conscious and a subconscious. Our thinking takes place in our conscious - we can control it as opposed to our subconscious which we can't control. So why do we have it? To answer that question we need to understand how information processing works in our brain. Here is a picture which illustrates the basics.&lt;br /&gt;
-&lt;img alt="idea_generation_model" src="/images/images/idea_generation_model.png" /&gt;&lt;/p&gt;
+&lt;img alt="idea_generation_model" width="667" height="389" src="/images/idea_generation_model-ba895906.png" /&gt;&lt;/p&gt;
 
 &lt;p&gt;Our sensory organs deliver us up to 11 million bits of information per second! That’s a huge amount of data. Our conscious can only process around 10-40 bits per second. That’s why we need a filter first, which only sends the most important information to our conscious - the filter is called subconscious. It can handle 11 million bits per second and does the filter work as well (see algorithm box).&lt;/p&gt;
 
@@ -664,7 +664,7 @@ Our time is limited, so we have to optimize it as best as possible.&lt;br /&gt;
 How do we meassure the effectiveness of the different methods?&lt;br /&gt;
 Let me introduce you to &lt;strong&gt;Habit #3: Create note cards of useful information&lt;/strong&gt;. One of my favorites! You probably all know this guy. He is Ryan Holiday and a ridicilous successful marketing expert in his mid-late 20s.&lt;/p&gt;
 
-&lt;p&gt;&lt;img alt="ryan holiday" src="/images/images/ryan_holiday.png" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="ryan holiday" width="650" height="366" src="/images/ryan_holiday-31a6f702.png" /&gt;&lt;/p&gt;
 
 &lt;p&gt;In one of his &amp;lt;%= link_to "articles", "http://ryanholiday.net/how-and-why-to-keep-a-commonplace-book/" %&amp;gt; he introduced a method he uses almost on a daily basis. Whenever he consumes media (book, tv, podcast) he writes down all useful ideas on simple note cards. Some books are so powerful that he can create up to 40 note cards per book, some are just straight garbage and he can only find a handful of useful information. I use the same method but in a digital form as opposed to Ryan who is more of a touchy guy and prefers the physical way.  This method not only helps us to keep track of useful information but also allows us to find out how effective our old idea consumption process is. I assume you will create way less note cards after a 10h netflix marathon than by reading 5h. Try it out and find your most effective way to consume old ideas - produce note cards!&lt;/p&gt;
 

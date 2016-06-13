@@ -5,10 +5,407 @@
   <id>http://blog.url.com/</id>
   <link href="http://blog.url.com/"/>
   <link href="http://blog.url.com/feed.xml" rel="self"/>
-  <updated>2016-04-28T11:12:00+02:00</updated>
+  <updated>2016-06-12T21:00:00+02:00</updated>
   <author>
     <name>Blog Author</name>
   </author>
+  <entry>
+    <title>Syntax highlighting with middleman</title>
+    <link rel="alternate" href="http://blog.url.com/syntax-highlighting-with-middleman.html"/>
+    <id>http://blog.url.com/syntax-highlighting-with-middleman.html</id>
+    <published>2016-06-12T21:00:00+02:00</published>
+    <updated>2016-06-12T21:35:03+02:00</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <content type="html">&lt;h1&gt;Syntax highlighting with middleman&lt;/h1&gt;
+
+&lt;h2&gt;Prerequisites&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Blog/static site with middleman&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3&gt;1. Step: Add two gems to your Gemfile&lt;/h3&gt;
+&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="n"&gt;gem&lt;/span&gt; &lt;span class="s2"&gt;"middleman-syntax"&lt;/span&gt;
+&lt;span class="n"&gt;gem&lt;/span&gt; &lt;span class="s2"&gt;"redcarpet"&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&amp;ldquo;middleman-syntax&amp;rdquo; works with all major markdown parsers. I just prefer using redcarpet. Use which ever you like.&lt;/p&gt;
+
+&lt;h3&gt;2. Step: Edit config.rb&lt;/h3&gt;
+
+&lt;p&gt;Add these lines to your config.rb.&lt;/p&gt;
+&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="n"&gt;active&lt;/span&gt; &lt;span class="ss"&gt;:syntax&lt;/span&gt;
+&lt;span class="n"&gt;set&lt;/span&gt; &lt;span class="ss"&gt;:markdown_enginge&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;redcarpet&lt;/span&gt;
+&lt;span class="n"&gt;set&lt;/span&gt; &lt;span class="ss"&gt;:markdown&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;:fenced_code_blocks&lt;/span&gt; &lt;span class="o"&gt;=&amp;gt;&lt;/span&gt; &lt;span class="kp"&gt;true&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;smartypants&lt;/span&gt; &lt;span class="o"&gt;=&amp;gt;&lt;/span&gt; &lt;span class="kp"&gt;true&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&amp;ldquo;fenced code blocks&amp;rdquo; adds a pretty background to your code blocks so that it differs from plain text on your site. &lt;/p&gt;
+
+&lt;h3&gt;3. Step: Create a file &lt;em&gt;highlighting.css.erb&lt;/em&gt; and put it into &lt;em&gt;/source/stylesheets&lt;/em&gt;&lt;/h3&gt;
+
+&lt;p&gt;Put this code in the file.&lt;/p&gt;
+&lt;pre class="highlight erb"&gt;&lt;code&gt; &lt;span class="cp"&gt;&amp;lt;%=&lt;/span&gt; &lt;span class="no"&gt;Rouge&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="no"&gt;Themes&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="no"&gt;Github&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;render&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:scope&lt;/span&gt; &lt;span class="o"&gt;=&amp;gt;&lt;/span&gt; &lt;span class="s1"&gt;'.highlight'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="cp"&gt;%&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&amp;ldquo;Middleman-syntax&amp;rdquo; uses the ruby library &lt;a href="https://github.com/jneen/rouge"&gt;Rouge&lt;/a&gt; by default. Rouge can hightlight 100 different languages and supports several themes like Github, colorful, molokai,monokai, thankful_eyes. I just went with the theme &amp;ldquo;Github&amp;rdquo;.&lt;/p&gt;
+
+&lt;h3&gt;4. Step: You can start writing code now!&lt;/h3&gt;
+
+&lt;p&gt;Ruby example:&lt;/p&gt;
+&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="c1"&gt;#comment&lt;/span&gt;
+
+&lt;span class="vg"&gt;$i&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;
+&lt;span class="vg"&gt;$num&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;5&lt;/span&gt;
+
+&lt;span class="k"&gt;while&lt;/span&gt; &lt;span class="vg"&gt;$i&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt; &lt;span class="vg"&gt;$num&lt;/span&gt;  &lt;span class="k"&gt;do&lt;/span&gt;
+   &lt;span class="nb"&gt;puts&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;"Inside the loop i = &lt;/span&gt;&lt;span class="si"&gt;#$i&lt;/span&gt;&lt;span class="s2"&gt;"&lt;/span&gt; &lt;span class="p"&gt;)&lt;/span&gt;
+   &lt;span class="vg"&gt;$i&lt;/span&gt; &lt;span class="o"&gt;+=&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;
+&lt;span class="k"&gt;end&lt;/span&gt; 
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Just put your code inside this wrapper:&lt;/p&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;```ruby
+#Your code
+```
+&lt;/code&gt;&lt;/pre&gt;
+</content>
+  </entry>
+  <entry>
+    <title>User authentification from scratch in Rails</title>
+    <link rel="alternate" href="http://blog.url.com/rails-authentification-from-scratch.html"/>
+    <id>http://blog.url.com/rails-authentification-from-scratch.html</id>
+    <published>2016-06-10T02:00:00+02:00</published>
+    <updated>2016-06-13T04:06:51+02:00</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <content type="html">&lt;h1&gt;Rails user authentification from scratch&lt;/h1&gt;
+
+&lt;p&gt;In this post, I want to help beginners to get started with user authentification in rails.  &lt;/p&gt;
+
+&lt;p&gt;Firstly, I want to prevent some confusion with authentification vs authorization.  &lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Authentification&lt;/strong&gt;&lt;br&gt;
+- Who is the user?&lt;br&gt;
+- Is the user really he/she pretends to be?&lt;br&gt;
+- =&amp;gt; Username + password  &lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Authorization&lt;/strong&gt;&lt;br&gt;
+- What is the user allowed to do?&lt;br&gt;
+- Has the user permission to access resource X?&lt;br&gt;
+- =&amp;gt; Different user roles like admin/normal user/guest/&amp;hellip;&lt;/p&gt;
+
+&lt;h2&gt;Many libraries/gems to choose from&amp;hellip;&lt;/h2&gt;
+
+&lt;p&gt;Indeed, there are quite a lot of libraries out there who help you with user authentification and authorization. But in order to really understand how authentification works, you need to write the code from scratch at least once. That&amp;rsquo;s exactly what I want to show you in this post. At the end I will introduce you to some useful libraries though.&lt;/p&gt;
+
+&lt;p&gt;I assume you know the basics about ruby and rails and won&amp;rsquo;t explain every single line of code. But feel free to ask upcoming questions.&lt;/p&gt;
+
+&lt;h3&gt;Step 0 - Create a new rails app&lt;/h3&gt;
+&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="n"&gt;rails&lt;/span&gt; &lt;span class="kp"&gt;new&lt;/span&gt; &lt;span class="n"&gt;authentification_from_scratch&lt;/span&gt; &lt;span class="o"&gt;--&lt;/span&gt;&lt;span class="n"&gt;database&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;postgresql&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3&gt;Step 1 - Create a user model&lt;/h3&gt;
+&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="n"&gt;rails&lt;/span&gt; &lt;span class="n"&gt;generate&lt;/span&gt; &lt;span class="n"&gt;model&lt;/span&gt; &lt;span class="n"&gt;user&lt;/span&gt; &lt;span class="nb"&gt;name&lt;/span&gt; &lt;span class="n"&gt;email&lt;/span&gt; &lt;span class="n"&gt;password_digest&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;We will use a gem called &amp;ldquo;bicrypt&amp;rdquo; to encrypt our passwords. The Gem requires us to have a attribute &amp;ldquo;password_digest&amp;rdquo;. Therefore watch out for typos!&lt;/p&gt;
+
+&lt;h3&gt;Step 2 - Setup the database&lt;/h3&gt;
+&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="n"&gt;rake&lt;/span&gt; &lt;span class="n"&gt;db&lt;/span&gt;&lt;span class="ss"&gt;:create&lt;/span&gt;
+&lt;span class="n"&gt;rake&lt;/span&gt; &lt;span class="n"&gt;db&lt;/span&gt;&lt;span class="ss"&gt;:migrate&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3&gt;Step 3 - Setup some initial routes&lt;/h3&gt;
+&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="o"&gt;&amp;lt;--&lt;/span&gt; &lt;span class="n"&gt;config&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;routes&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;erb&lt;/span&gt; &lt;span class="o"&gt;--&amp;gt;&lt;/span&gt;  
+&lt;span class="no"&gt;Rails&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;application&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;routes&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;draw&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
+
+  &lt;span class="c1"&gt;#root url =&amp;gt; First page after login&lt;/span&gt;
+  &lt;span class="n"&gt;root&lt;/span&gt; &lt;span class="ss"&gt;to: &lt;/span&gt;&lt;span class="s1"&gt;'users#show'&lt;/span&gt;
+
+  &lt;span class="c1"&gt;#Url for signup page =&amp;gt; posts form parameters to users#create&lt;/span&gt;
+  &lt;span class="n"&gt;get&lt;/span&gt; &lt;span class="s1"&gt;'/signup'&lt;/span&gt; &lt;span class="o"&gt;=&amp;gt;&lt;/span&gt; &lt;span class="s1"&gt;'users#new'&lt;/span&gt;
+
+  &lt;span class="c1"&gt;#Form from users#new will post to users#create&lt;/span&gt;
+  &lt;span class="n"&gt;post&lt;/span&gt; &lt;span class="s1"&gt;'/users'&lt;/span&gt; &lt;span class="o"&gt;=&amp;gt;&lt;/span&gt; &lt;span class="s1"&gt;'users#create'&lt;/span&gt;
+
+&lt;span class="k"&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3&gt;Step 4 - Create users controller&lt;/h3&gt;
+&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="n"&gt;rails&lt;/span&gt; &lt;span class="n"&gt;generate&lt;/span&gt; &lt;span class="n"&gt;controller&lt;/span&gt; &lt;span class="n"&gt;users&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3&gt;Step 5 - Add actions for the previous created routes&lt;/h3&gt;
+&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="o"&gt;&amp;lt;--&lt;/span&gt; &lt;span class="n"&gt;app&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;controllers&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;users_controller&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;erb&lt;/span&gt; &lt;span class="o"&gt;--&amp;gt;&lt;/span&gt;
+
+&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;UsersController&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt; &lt;span class="no"&gt;ApplicationController&lt;/span&gt;
+
+  &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;show&lt;/span&gt;
+  &lt;span class="k"&gt;end&lt;/span&gt;
+
+  &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;new&lt;/span&gt;
+  &lt;span class="k"&gt;end&lt;/span&gt;
+
+  &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;create&lt;/span&gt;
+  &lt;span class="k"&gt;end&lt;/span&gt;
+&lt;span class="k"&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3&gt;Step 6 - Create the signup form&lt;/h3&gt;
+&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="o"&gt;&amp;lt;--&lt;/span&gt; &lt;span class="n"&gt;app&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;views&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;users&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="kp"&gt;new&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;html&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;erb&lt;/span&gt; &lt;span class="o"&gt;--&amp;gt;&lt;/span&gt;
+
+&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;h1&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;&lt;span class="no"&gt;Signup&lt;/span&gt; &lt;span class="n"&gt;here!&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="sr"&gt;/h1&amp;gt;
+  &amp;lt;%= form_for :user, :url: '/use&lt;/span&gt;&lt;span class="n"&gt;rs&lt;/span&gt;&lt;span class="err"&gt;'&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="sx"&gt;%&amp;gt;
+    Name: &amp;lt;%= f.text_field :name %&amp;gt;&lt;/span&gt;
+    &lt;span class="no"&gt;Email&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="sx"&gt;%= f.text_field :email %&amp;gt;
+    Password: &amp;lt;%=&lt;/span&gt; &lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;password_field&lt;/span&gt; &lt;span class="ss"&gt;:password&lt;/span&gt; &lt;span class="o"&gt;%&amp;gt;&lt;/span&gt;
+    &lt;span class="no"&gt;Password&lt;/span&gt; &lt;span class="no"&gt;Confirmation&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="sx"&gt;%= f.password_field :password_confirmation %&amp;gt;
+    &amp;lt;%=&lt;/span&gt; &lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;submit&lt;/span&gt; &lt;span class="s2"&gt;"Submit"&lt;/span&gt; &lt;span class="o"&gt;%&amp;gt;&lt;/span&gt;
+  &lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="sx"&gt;% end &lt;/span&gt;&lt;span class="o"&gt;%&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The password_confirmation field is not required, so you can ommit it if you like. Keep in mind all the rails conventions for the &lt;a href="http://apidock.com/rails/ActionView/Helpers/FormHelper/form_for"&gt;form builder&lt;/a&gt;. Our form will send its parameters wrapped in a hash table called &amp;ldquo;user&amp;rdquo; to the &amp;ldquo;/users&amp;rdquo; url using the post method. (We have already defined this route in routes.rb)&lt;/p&gt;
+
+&lt;h3&gt;Step 7 - Receive the form parameters =&amp;gt; create action&lt;/h3&gt;
+&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="o"&gt;&amp;lt;--&lt;/span&gt; &lt;span class="n"&gt;app&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;controllers&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;users_controller&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;rb&lt;/span&gt; &lt;span class="o"&gt;--&amp;gt;&lt;/span&gt;
+
+&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;UsersController&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt; &lt;span class="no"&gt;ApplicationController&lt;/span&gt;
+
+  &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;show&lt;/span&gt;
+  &lt;span class="k"&gt;end&lt;/span&gt;
+
+  &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;new&lt;/span&gt;
+  &lt;span class="k"&gt;end&lt;/span&gt;
+
+  &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;create&lt;/span&gt;
+    &lt;span class="n"&gt;user&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="no"&gt;User&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;new&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;user_params&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;user&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;save&lt;/span&gt;
+      &lt;span class="n"&gt;session&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="ss"&gt;:user_id&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;user&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;id&lt;/span&gt;
+      &lt;span class="n"&gt;redirect_to&lt;/span&gt; &lt;span class="s1"&gt;'/'' # after signup redirect to root page
+    else
+      redirect_to '&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;signup&lt;/span&gt;&lt;span class="err"&gt;'&lt;/span&gt; &lt;span class="c1"&gt;#after failed signup =&amp;gt; redirect to signup page again&lt;/span&gt;
+    &lt;span class="k"&gt;end&lt;/span&gt;
+  &lt;span class="k"&gt;end&lt;/span&gt;
+
+  &lt;span class="kp"&gt;private&lt;/span&gt;
+
+  &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;user_params&lt;/span&gt;
+    &lt;span class="n"&gt;params&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;require&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:user&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;permit&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:name&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;:email&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;:password&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;:password_confirmation&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+  &lt;span class="k"&gt;end&lt;/span&gt;
+&lt;span class="k"&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;First we need to whitelist our user parameters. Then we can use them to actually create a new user in the database. After the user is saved succesfully, we will create a new session cookie (cookie = little piece of information stored in your browser) and store the user_id in it. Rails offers to types of cookies: Session cookies and normal cookies. The only difference between them is the way they are stored. Session cookies are stored encrypted and normal cookies are stored in plain text. You can adjust the code, signup and see the differences in your browser stored cookies.&lt;/p&gt;
+&lt;pre class="highlight erb"&gt;&lt;code&gt;&lt;span class="nt"&gt;&amp;lt;--&lt;/span&gt; &lt;span class="na"&gt;Change&lt;/span&gt; &lt;span class="na"&gt;cookie&lt;/span&gt; &lt;span class="na"&gt;type&lt;/span&gt; &lt;span class="na"&gt;--&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;
+
+  def create
+    user = User.new(user_params)
+    if user.save
+      cookie[:user_id] = user.id
+      redirect_to `/`
+    else
+      redirect_to '/signup'
+    end
+  end
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3&gt;Step 8 - Install bycrypt gem&lt;/h3&gt;
+
+&lt;p&gt;Usally the bycrypt gem is just commented out. So uncomment or add this line:&lt;/p&gt;
+&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="o"&gt;&amp;lt;--&lt;/span&gt; &lt;span class="no"&gt;Use&lt;/span&gt; &lt;span class="no"&gt;ActiveModel&lt;/span&gt; &lt;span class="n"&gt;has_secure_password&lt;/span&gt; &lt;span class="o"&gt;--&amp;gt;&lt;/span&gt;
+  &lt;span class="n"&gt;gem&lt;/span&gt; &lt;span class="s1"&gt;'bcrypt'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;'~&amp;gt; 3.1.7'&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;After you have added the line install the gem with&lt;/p&gt;
+&lt;pre class="highlight erb"&gt;&lt;code&gt;bundle install
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3&gt;Step 9 - User Model (where the magic happens)&lt;/h3&gt;
+
+&lt;p&gt;I want to cover the core principles of authentification in this post. That&amp;rsquo;s why I won&amp;rsquo;t add any constraints like checking for duplicated email addresses or a required password length.  &lt;/p&gt;
+
+&lt;p&gt;Here we just need to add &lt;/p&gt;
+&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="o"&gt;&amp;lt;--&lt;/span&gt; &lt;span class="n"&gt;app&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;models&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;user&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;rb&lt;/span&gt; &lt;span class="o"&gt;--&amp;gt;&lt;/span&gt;
+
+&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;User&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt; &lt;span class="no"&gt;ActiveRecord&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="no"&gt;Base&lt;/span&gt;
+
+  &lt;span class="n"&gt;has_secure_password&lt;/span&gt;
+
+&lt;span class="k"&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;What has happend here? The method &amp;ldquo;has&lt;em&gt;secure&lt;/em&gt;password&amp;rdquo; basically compares our user.password and user.password&lt;em&gt;confirmation, creates a hash of our password and stores it inside the attribute password&lt;/em&gt;digest (Step 1).&lt;br&gt;
+If you even want to do that on your own, take a look at &lt;a href="http://stackoverflow.com/questions/19173175/rails-how-to-write-your-own-authentication-without-using-has-secure-password"&gt;this&lt;/a&gt; post on stackoverflow. &lt;/p&gt;
+
+&lt;h3&gt;Step 10 - Create the sessions controller&lt;/h3&gt;
+&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="o"&gt;&amp;lt;--&lt;/span&gt; &lt;span class="n"&gt;app&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;controllers&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;sessions_controller&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;rb&lt;/span&gt; &lt;span class="o"&gt;--&amp;gt;&lt;/span&gt;
+
+&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;SessionsController&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt; &lt;span class="no"&gt;ApplicationController&lt;/span&gt;
+
+  &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;new&lt;/span&gt; &lt;span class="c1"&gt;#login form&lt;/span&gt;
+  &lt;span class="k"&gt;end&lt;/span&gt;
+
+  &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;create&lt;/span&gt; &lt;span class="c1"&gt;#login action&lt;/span&gt;
+  &lt;span class="k"&gt;end&lt;/span&gt;
+
+  &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;destroy&lt;/span&gt; &lt;span class="c1"&gt;#logout action&lt;/span&gt;
+  &lt;span class="k"&gt;end&lt;/span&gt;
+
+&lt;span class="k"&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3&gt;Step 11 - Create the login form&lt;/h3&gt;
+&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="o"&gt;&amp;lt;--&lt;/span&gt; &lt;span class="n"&gt;app&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;views&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;sessions&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="kp"&gt;new&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;html&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;erb&lt;/span&gt; &lt;span class="o"&gt;--&amp;gt;&lt;/span&gt;
+
+&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;h1&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;&lt;span class="no"&gt;Login&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="sr"&gt;/h1&amp;gt;
+
+&amp;lt;%= form_tag '/&lt;/span&gt;&lt;span class="n"&gt;login&lt;/span&gt;&lt;span class="err"&gt;'&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt; &lt;span class="sx"&gt;%&amp;gt;
+  Email: &amp;lt;%= text_field_tag :email %&amp;gt;&lt;/span&gt;
+  &lt;span class="no"&gt;Password&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="sx"&gt;%= password_field_tag :password %&amp;gt;
+  &amp;lt;%=&lt;/span&gt; &lt;span class="n"&gt;submit_tag&lt;/span&gt; &lt;span class="s2"&gt;"Submit"&lt;/span&gt; &lt;span class="o"&gt;%&amp;gt;&lt;/span&gt;
+&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="sx"&gt;% end &lt;/span&gt;&lt;span class="o"&gt;%&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3&gt;Step 12 - Add the new login/logout routes&lt;/h3&gt;
+&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="o"&gt;&amp;lt;--&lt;/span&gt; &lt;span class="n"&gt;config&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;routes&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;rb&lt;/span&gt; &lt;span class="o"&gt;--&amp;gt;&lt;/span&gt;
+&lt;span class="no"&gt;Rails&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;application&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;routes&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;draw&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
+
+  &lt;span class="n"&gt;root&lt;/span&gt; &lt;span class="ss"&gt;to: &lt;/span&gt;&lt;span class="s1"&gt;'users#new'&lt;/span&gt;
+
+  &lt;span class="n"&gt;get&lt;/span&gt; &lt;span class="s1"&gt;'/login'&lt;/span&gt; &lt;span class="o"&gt;=&amp;gt;&lt;/span&gt; &lt;span class="s1"&gt;'sessions#new'&lt;/span&gt; &lt;span class="c1"&gt;#send login form&lt;/span&gt;
+  &lt;span class="n"&gt;post&lt;/span&gt; &lt;span class="s1"&gt;'/login'&lt;/span&gt; &lt;span class="o"&gt;=&amp;gt;&lt;/span&gt; &lt;span class="s1"&gt;'sessions#create'&lt;/span&gt; &lt;span class="c1"&gt;#receive login form&lt;/span&gt;
+  &lt;span class="n"&gt;get&lt;/span&gt; &lt;span class="s1"&gt;'/logout'&lt;/span&gt; &lt;span class="o"&gt;=&amp;gt;&lt;/span&gt; &lt;span class="s1"&gt;'sessions#destroy'&lt;/span&gt; &lt;span class="c1"&gt;#logout&lt;/span&gt;
+
+  &lt;span class="n"&gt;get&lt;/span&gt; &lt;span class="s1"&gt;'/signup'&lt;/span&gt; &lt;span class="o"&gt;=&amp;gt;&lt;/span&gt; &lt;span class="s1"&gt;'users#new'&lt;/span&gt;
+  &lt;span class="n"&gt;post&lt;/span&gt; &lt;span class="s1"&gt;'/users'&lt;/span&gt; &lt;span class="o"&gt;=&amp;gt;&lt;/span&gt; &lt;span class="s1"&gt;'users#create'&lt;/span&gt;
+
+&lt;span class="k"&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3&gt;Step 13 - Add the login and logout logic&lt;/h3&gt;
+&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="o"&gt;&amp;lt;--&lt;/span&gt; &lt;span class="n"&gt;app&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;controllers&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;sessions_controller&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;rb&lt;/span&gt; &lt;span class="o"&gt;--&amp;gt;&lt;/span&gt;
+
+&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;SessionsController&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt; &lt;span class="no"&gt;ApplicationController&lt;/span&gt;
+
+  &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;new&lt;/span&gt;
+  &lt;span class="k"&gt;end&lt;/span&gt;
+
+  &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;create&lt;/span&gt;
+    &lt;span class="n"&gt;user&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="no"&gt;User&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;find_by_email&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;params&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="ss"&gt;:email&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
+    &lt;span class="c1"&gt;#If user exists AND password is entered correctly&lt;/span&gt;
+    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;user&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class="n"&gt;user&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;authenticate&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;params&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="ss"&gt;:password&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
+      &lt;span class="c1"&gt;#Store user id in a brwoser cookie&lt;/span&gt;
+      &lt;span class="c1"&gt;#This is how we will keep the user logged in while he can navigate on our site&lt;/span&gt;
+      &lt;span class="n"&gt;session&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="ss"&gt;:user_id&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;user&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;id&lt;/span&gt;
+      &lt;span class="n"&gt;redirect_to&lt;/span&gt; &lt;span class="s1"&gt;'/'&lt;/span&gt;
+    &lt;span class="k"&gt;else&lt;/span&gt;
+      &lt;span class="c1"&gt;#Login failed =&amp;gt; back to login form&lt;/span&gt;
+      &lt;span class="n"&gt;redirect_to&lt;/span&gt; &lt;span class="s1"&gt;'/login'&lt;/span&gt;
+    &lt;span class="k"&gt;end&lt;/span&gt;
+  &lt;span class="k"&gt;end&lt;/span&gt;
+
+  &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;destroy&lt;/span&gt;
+    &lt;span class="n"&gt;session&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="ss"&gt;:user_id&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="kp"&gt;nil&lt;/span&gt;
+    &lt;span class="n"&gt;redirect_to&lt;/span&gt; &lt;span class="s1"&gt;'/login'&lt;/span&gt;
+  &lt;span class="k"&gt;end&lt;/span&gt;
+
+&lt;span class="k"&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3&gt;Step 14 - Check if user is logged in&lt;/h3&gt;
+&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="o"&gt;&amp;lt;--&lt;/span&gt; &lt;span class="n"&gt;app&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;controllers&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;application_controller&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;rb&lt;/span&gt; &lt;span class="o"&gt;--&amp;gt;&lt;/span&gt;
+
+&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;ApplicationController&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt; &lt;span class="no"&gt;ActionController&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="no"&gt;Base&lt;/span&gt;
+  &lt;span class="c1"&gt;# Prevent CSRF attacks by raising an exception.&lt;/span&gt;
+  &lt;span class="c1"&gt;# For APIs, you may want to use :null_session instead.&lt;/span&gt;
+  &lt;span class="n"&gt;protect_from_forgery&lt;/span&gt; &lt;span class="ss"&gt;with: :exception&lt;/span&gt;
+
+  &lt;span class="c1"&gt;# returns current_user if it already exists or looks if there is a session_cookie with the correct value and assigns current_user afterwards&lt;/span&gt;
+  &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;current_user&lt;/span&gt;
+    &lt;span class="vi"&gt;@current_user&lt;/span&gt; &lt;span class="o"&gt;||=&lt;/span&gt; &lt;span class="no"&gt;User&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;find&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;session&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="ss"&gt;:user_id&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt; &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;session&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="ss"&gt;:user_id&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+  &lt;span class="k"&gt;end&lt;/span&gt;
+  &lt;span class="n"&gt;helper_method&lt;/span&gt; &lt;span class="ss"&gt;:current_user&lt;/span&gt; &lt;span class="c1"&gt;#to make the method available in our views&lt;/span&gt;
+
+  &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;authorize&lt;/span&gt;
+    &lt;span class="n"&gt;redirect_to&lt;/span&gt; &lt;span class="s1"&gt;'/login'&lt;/span&gt; &lt;span class="k"&gt;unless&lt;/span&gt; &lt;span class="n"&gt;current_user&lt;/span&gt;
+  &lt;span class="k"&gt;end&lt;/span&gt;
+
+&lt;span class="k"&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;I have also included three lines of authorization here. Otherwise there is no sense in loggin in.&lt;/p&gt;
+
+&lt;h3&gt;Step 15 - Setup our top secret page&lt;/h3&gt;
+&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="n"&gt;rails&lt;/span&gt; &lt;span class="n"&gt;g&lt;/span&gt; &lt;span class="n"&gt;controller&lt;/span&gt; &lt;span class="no"&gt;Pages&lt;/span&gt; &lt;span class="n"&gt;secret&lt;/span&gt; 
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="o"&gt;&amp;lt;--&lt;/span&gt; &lt;span class="n"&gt;app&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;views&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;pages&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;secret&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;html&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;erb&lt;/span&gt; &lt;span class="o"&gt;--&amp;gt;&lt;/span&gt;
+&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;h1&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;&lt;span class="no"&gt;Top&lt;/span&gt; &lt;span class="no"&gt;Secret&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="sr"&gt;/h1&amp;gt;
+
+&amp;lt;h2&amp;gt;Hallo &amp;lt;%= @current_user.name %&amp;gt;&amp;lt;/&lt;/span&gt;&lt;span class="n"&gt;h2&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Update the route.rb&lt;/p&gt;
+&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="no"&gt;Rails&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;application&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;routes&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;draw&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
+
+  &lt;span class="n"&gt;root&lt;/span&gt; &lt;span class="ss"&gt;to: &lt;/span&gt;&lt;span class="s1"&gt;'pages#secret'&lt;/span&gt;
+
+  &lt;span class="n"&gt;get&lt;/span&gt; &lt;span class="s1"&gt;'/secret'&lt;/span&gt; &lt;span class="o"&gt;=&amp;gt;&lt;/span&gt; &lt;span class="s1"&gt;'pages#secret'&lt;/span&gt;
+
+  &lt;span class="n"&gt;get&lt;/span&gt; &lt;span class="s1"&gt;'/login'&lt;/span&gt; &lt;span class="o"&gt;=&amp;gt;&lt;/span&gt; &lt;span class="s1"&gt;'sessions#new'&lt;/span&gt;
+  &lt;span class="n"&gt;post&lt;/span&gt; &lt;span class="s1"&gt;'/login'&lt;/span&gt; &lt;span class="o"&gt;=&amp;gt;&lt;/span&gt; &lt;span class="s1"&gt;'sessions#create'&lt;/span&gt;
+  &lt;span class="n"&gt;get&lt;/span&gt; &lt;span class="s1"&gt;'/logout'&lt;/span&gt; &lt;span class="o"&gt;=&amp;gt;&lt;/span&gt; &lt;span class="s1"&gt;'sessions#destroy'&lt;/span&gt;
+
+
+  &lt;span class="n"&gt;get&lt;/span&gt; &lt;span class="s1"&gt;'/signup'&lt;/span&gt; &lt;span class="o"&gt;=&amp;gt;&lt;/span&gt; &lt;span class="s1"&gt;'users#new'&lt;/span&gt;
+  &lt;span class="n"&gt;post&lt;/span&gt; &lt;span class="s1"&gt;'/users'&lt;/span&gt; &lt;span class="o"&gt;=&amp;gt;&lt;/span&gt; &lt;span class="s1"&gt;'users#create'&lt;/span&gt;
+
+&lt;span class="k"&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;No we can determine who will be allowed to access our top secret page.&lt;/p&gt;
+
+&lt;h3&gt;Step 16 - Authorize all succeessfully logged in users to see the page&lt;/h3&gt;
+&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="o"&gt;&amp;lt;--&lt;/span&gt; &lt;span class="n"&gt;app&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;controllers&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;pages_controller&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;rb&lt;/span&gt; &lt;span class="o"&gt;--&amp;gt;&lt;/span&gt;
+
+&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;PagesController&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt; &lt;span class="no"&gt;ApplicationController&lt;/span&gt;
+  &lt;span class="n"&gt;before_filter&lt;/span&gt; &lt;span class="ss"&gt;:authorize&lt;/span&gt;
+
+  &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;secret&lt;/span&gt;
+  &lt;span class="k"&gt;end&lt;/span&gt;
+
+&lt;span class="k"&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Before our server will execute the secret action (and send the top secret site to our client&amp;rsquo;s browser) the authorize method is called. As we have seen in Step 13, the authorize mehtod checks if the user is logged in, otherwise it redirects the user to the login page.&lt;/p&gt;
+
+&lt;h2&gt;What&amp;rsquo;s missing?&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;All sorts of validations on the user model level&lt;/li&gt;
+&lt;li&gt;Confirmation email&lt;/li&gt;
+&lt;li&gt;All sorts of user notifications (e.g. failed login)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2&gt;Authentification in action&lt;/h2&gt;
+
+&lt;p&gt;Quality: Vintage style ;)&lt;/p&gt;
+
+&lt;p&gt;&lt;img alt="demo" width="640" height="284" src="/images/authentification_demo-ab116e7b.gif" /&gt;&lt;/p&gt;
+
+&lt;h2&gt;Gems vs code from scratch&lt;/h2&gt;
+
+&lt;p&gt;It is definitely helpful to knwo how to implement user authentification by only using bycrypt or even completly from scratch. However it is quite boring to do it again and again for every single app. Therefore you will create a gem for it. Now it&amp;rsquo;s up to you, if you want to maintain your own authentification gem or if you want other people to do it for you.  &lt;/p&gt;
+
+&lt;p&gt;Here is a short list of interesting gems:&lt;br&gt;
+- &lt;a href="https://github.com/plataformatec/devise"&gt;device&lt;/a&gt; (authentification)&lt;br&gt;
+- &lt;a href="https://github.com/thoughtbot/clearance"&gt;clearance&lt;/a&gt; (authentification)&lt;br&gt;
+- &lt;a href="https://github.com/CanCanCommunity/cancancan"&gt;cancancan&lt;/a&gt; (authorication)&lt;br&gt;
+- &lt;a href="https://github.com/elabs/pundit"&gt;pundit&lt;/a&gt; (authorication)&lt;/p&gt;
+</content>
+  </entry>
   <entry>
     <title>UWater - Microcontroller project</title>
     <link rel="alternate" href="http://blog.url.com/uwater.html"/>
@@ -18,99 +415,42 @@
     <author>
       <name>Article Author</name>
     </author>
-    <content type="html">
-&lt;h1 id="uwater---microcontroller-project"&gt;UWater - Microcontroller project&lt;/h1&gt;
+    <content type="html">&lt;h1&gt;UWater - Microcontroller project&lt;/h1&gt;
+
 &lt;p&gt;&lt;img alt="uwater-setup" width="750" height="1000" src="/images/uwater_setup-34d8d191.png" /&gt;&lt;/p&gt;
 
-&lt;h2 id="how-did-i-end-up-building-uwater"&gt;How did I end up building UWater?&lt;/h2&gt;
+&lt;h2&gt;How did I end up building UWater?&lt;/h2&gt;
+
 &lt;p&gt;During my senior year in high school I saw an article in the newspaper by our famous &lt;a href="http://www.iis.fraunhofer.de/en.html"&gt;Fraunhofer Institut&lt;/a&gt; (Applied Science Institut).&lt;/p&gt;
 
 &lt;p&gt;&lt;img alt="iis_logo" width="600" height="170" src="/images/uwater_iis_logo-3731def0.png" /&gt;&lt;/p&gt;
 
-&lt;p&gt;They were looking for students for an embedded systems internship with a competition at the end. I applied immediatley and got in.&lt;/p&gt;
+&lt;p&gt;They were looking for students for an embedded systems internship with a competition at the end. I applied immediatley and got in.  &lt;/p&gt;
 
-&lt;p&gt;They gave us a &lt;a href="http://www.nxp.com/pages/usb-mini-board-for-freescales-low-end-8-bit-microcontrollers:USBSPYDER08"&gt;dev board&lt;/a&gt; (USB Spyder08 from freescale) with several introduction sessions. We basically came in on weekends and they showed us the basics by buidling some sample projects.&lt;/p&gt;
+&lt;p&gt;They gave us a &lt;a href="http://www.nxp.com/pages/usb-mini-board-for-freescales-low-end-8-bit-microcontrollers:USBSPYDER08"&gt;dev board&lt;/a&gt; (USB Spyder08 from freescale) with several introduction sessions. We basically came in on weekends and they showed us the basics by buidling some sample projects. &lt;/p&gt;
 
 &lt;p&gt;After the initial training persiod we should come up with our own idea and build it during the next 9 months. After these nine months we all came back together again and they judged our projects.&lt;/p&gt;
 
-&lt;h2 id="what-actually-is-uwater"&gt;What actually is UWater?&lt;/h2&gt;
+&lt;h2&gt;What actually is UWater?&lt;/h2&gt;
+
 &lt;p&gt;UWater is a system which takes care that your plants get enough water while you are on vacation.&lt;/p&gt;
 
-&lt;h2 id="how-does-uwater-work"&gt;How does UWater work?&lt;/h2&gt;
+&lt;h2&gt;How does UWater work?&lt;/h2&gt;
+
 &lt;p&gt;UWater meassures the degree of humidity in the earth of the plant pot by using the ressistance between two nails which are put into the plant pot. The higher the ressistance, the lower the degree of humidity of the earth in the plant pot is.
-With that knowledge UWater controls a little water pump to fill water in the plant pot and increase the degree of humidity again.&lt;br /&gt;
-The concept is really basic - but it works surprisingly well.&lt;br /&gt;
-The hardest part was to adjust the scale for the degree of humidity and figuring out how to control the water pump.&lt;br /&gt;
+With that knowledge UWater controls a little water pump to fill water in the plant pot and increase the degree of humidity again.&lt;br&gt;
+The concept is really basic - but it works surprisingly well.&lt;br&gt;
+The hardest part was to adjust the scale for the degree of humidity and figuring out how to control the water pump.&lt;br&gt;
 It was an honor to present my project at one of their exhibitions!
-![uwater_presentation]!(images/uwater_presentation.png)&lt;/p&gt;
+![uwater&lt;em&gt;presentation]!(images/uwater&lt;/em&gt;presentation.png)&lt;/p&gt;
 
-&lt;p&gt;…. at the end I won the first price! &lt;i class="fa fa-birthday-cake"&gt;&lt;/i&gt;&lt;/p&gt;
+&lt;p&gt;&amp;hellip;. at the end I won the first price! &lt;i class="fa fa-birthday-cake"&gt;&lt;/i&gt;&lt;/p&gt;
 
-&lt;h2 id="what-did-i-do-next"&gt;What did I do next?&lt;/h2&gt;
-&lt;p&gt;After I won the first price, I got a job offer as a working student.&lt;br /&gt;
-I accepted and spent about 1.5 year working on microcontroller projects with similiar hardware I had already used.&lt;br /&gt;
+&lt;h2&gt;What did I do next?&lt;/h2&gt;
+
+&lt;p&gt;After I won the first price, I got a job offer as a working student.&lt;br&gt;
+I accepted and spent about 1.5 year working on microcontroller projects with similiar hardware I had already used.&lt;br&gt;
 At the end my learning curve decreased and I left for a startup!&lt;/p&gt;
-
-</content>
-  </entry>
-  <entry>
-    <title>MakeItHappen</title>
-    <link rel="alternate" href="http://blog.url.com/make-it-happen.html"/>
-    <id>http://blog.url.com/make-it-happen.html</id>
-    <published>2016-04-28T11:12:00+02:00</published>
-    <updated>2016-05-29T03:09:49+02:00</updated>
-    <author>
-      <name>Article Author</name>
-    </author>
-    <content type="html">&lt;h1 id="makeithappen---hackathon-cornell-university"&gt;MakeItHappen - Hackathon Cornell University&lt;/h1&gt;
-
-&lt;p&gt;Right at the beginning of my internship in New York City, I got involved with Hackathons. Before that I didn't even know that they exist. BigRedHacks at Cornell University was my second Hackathon ever. 
-I really &lt;i class="fa fa-heart"&gt;&lt;/i&gt; Hackathons!  You always improve your skills and get to know awesome people!  Try it even you can't code, I promise you will learn a ton!&lt;/p&gt;
-
-&lt;p&gt;Let me introduce you to TEAM AWESOME… (I am the guy on the right)&lt;/p&gt;
-
-&lt;p&gt;&lt;img alt="team" width="1000" height="375" src="/images/makeithappen_team-73317bf4.png" /&gt;&lt;/p&gt;
-
-&lt;h2 id="what-did-we-end-up-building"&gt;What did we end up building?&lt;/h2&gt;
-
-&lt;p&gt;Michael (my partner) and me, we built a rails app called "makeithappen". The idea for our app was inspired by the refugee crisis going on in Europe. We wanted to help!&lt;/p&gt;
-
-&lt;p&gt;MakeItHappen is platform which simplifies the donation process. Let's imagine there is a person A in Germany who wants to donate clothes but is too lazy to actually take the clothes to an official donation station. Ok that sucks! Then there is another person B from anywhere in the world who feels deeply touched by the pictures in the news and wants to donate money. Our platform brings brings these two persons together.&lt;br /&gt;
-Person A can donate an item by inserting all relevant information (including the address). Person B then can see a list of donated items and can press the button "MakeItHappen". Person B will then donate the amount of money which is needed to pay for an UBER to pick up the clothes and take them to an official donation station. Problem solved and everybody is satisfied - including the refugees!&lt;/p&gt;
-
-&lt;h2 id="what-did-actually-work-at-the-end"&gt;What did actually work at the end?&lt;/h2&gt;
-&lt;p&gt;Here you can see our rails app.
-      &lt;img alt="index" width="1430" height="911" src="/images/makeithappen_index-ba296d66.png" /&gt;&lt;/p&gt;
-
-&lt;p&gt;At the end Person A could insert a donation item. We then used the google API to calculate the exact coordinates of the address of Person A and the ONE AND ONLY donation station in Munich hahaha ;-) Then we fed the UBER API with these coordinates and calculated the price for trip. Person B could see a list of all donated items and their estimated prices to get them to the donation station.&lt;/p&gt;
-
-&lt;p&gt;As we were both rails beginners, we were pretty proud of our results!&lt;/p&gt;
-
-&lt;h2 id="woop-and-we-won-a-price"&gt;Woop and we won a price!&lt;/h2&gt;
-&lt;p&gt;We both couldn't believe it, but it really happened!&lt;br /&gt;
-We were second in the category "Best use of UBER API".
-&lt;img alt="winner" width="1552" height="892" src="/images/makeithappen_winner-d6e33314.png" /&gt;&lt;/p&gt;
-
-&lt;p&gt;At a hackathon you have to cheat a little bit in the presentation.&lt;br /&gt;
-For example we ran out of time to actually develop a signup/login system. So our login button always "worked". It didn't matter which data you put in. Our second limitation was the special ONE AND ONLY donation station in Munich. All items should be delivered to this station whether they were donated in Munich or in Berlin. That of course doens't make sense! In our presentation we picked a person who lives in Munich of course ;-)&lt;/p&gt;
-
-&lt;h2 id="what-did-we-learn"&gt;What did we learn?&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;Hackathons are fun - So have fun!&lt;br /&gt;
-Don't get to serious about your project and forget to have fun!&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;A Hackathon without preparation is a lost Hackathon&lt;br /&gt;
-OK that's not true. Only a Hackathon where you did't show up is a lost Hackathon. With that being said, the preparation we did before helped us a lot to get started. For example we discussed our git workflow before (at the end it was a mess, but at the beginning everything was clean) as well as the version of rails we wanted to use.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Get something done - it doens't matter how bad it is&lt;br /&gt;
-I always see guys at Hackathons who spend the whole time with brainstoarming and starting again and again. They end up learning not much. Fuck it and just build something. Nobody will judge you!&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
 </content>
   </entry>
   <entry>
@@ -122,78 +462,59 @@ I always see guys at Hackathons who spend the whole time with brainstoarming and
     <author>
       <name>Article Author</name>
     </author>
-    <content type="html">&lt;h1 id="my-personal-blog"&gt;My Personal Blog&lt;/h1&gt;
-&lt;p&gt;During my internship in New York City I realized "Dude - You need a blog!".&lt;/p&gt;
+    <content type="html">&lt;h1&gt;My Personal Blog&lt;/h1&gt;
 
-&lt;h2 id="what-messages-do-i-want-to-convey-with-my-blog"&gt;What messages do I want to convey with my Blog?&lt;/h2&gt;
-&lt;ul&gt;
-  &lt;li&gt;Efficiency is important to him&lt;br /&gt;
-No wordpress overhead; only the important bootstrap components
-    &lt;ul&gt;
-      &lt;li&gt;Free domain from a hackathon&lt;/li&gt;
-      &lt;li&gt;Minimalistic and clean design&lt;/li&gt;
-      &lt;li&gt;No delays&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;This guy is into tech (articles/projects)&lt;br /&gt;
-Hire/Refer/Work with him&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Startups are his passion (articles/projects)&lt;br /&gt;
-Hire/Refer/Work with him&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;Out of the box thinker (articles)&lt;br /&gt;
-Get coffee with him&lt;/li&gt;
-&lt;/ul&gt;
+&lt;p&gt;During my internship in New York City I realized &amp;ldquo;Dude - You need a blog!&amp;rdquo;.&lt;/p&gt;
 
-&lt;h2 id="development-process"&gt;Development Process&lt;/h2&gt;
-&lt;p&gt;First I did some research by looking at all the blogs of my hackathon friends.&lt;/p&gt;
-
-&lt;p&gt;Here is a short list:&lt;/p&gt;
+&lt;h2&gt;What messages do I want to convey with my Blog?&lt;/h2&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;a href="http://www.simeon.io/"&gt;Simeon Videnov&lt;/a&gt;&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;a href="http://cyrusroshan.com"&gt;Cyrus Roshan&lt;/a&gt;&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;a href="http://itsmrlin.com"&gt;Zhiyuan Lin&lt;/a&gt;&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;a href="http://www.christopherjwang.info"&gt;Christopher Wang&lt;/a&gt;&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;a href="http://ethansinjin.com"&gt;Ethan Gill&lt;/a&gt;&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;a href="http://jacobkahn.me"&gt;Jacob Kahn&lt;/a&gt;&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;a href="http://pwu.me"&gt;Pine Wu&lt;/a&gt;&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;a href="http://tehjawn.github.io/mygithubpage/"&gt;John Nguyen&lt;/a&gt;&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;a href="http://www.sandile.io"&gt;Sandile Keswa&lt;/a&gt;&lt;/p&gt;
-  &lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Efficiency is important to him&lt;br&gt;
+No wordpress overhead; only the important bootstrap components  &lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Free domain from a hackathon&lt;br&gt;&lt;/li&gt;
+&lt;li&gt;Minimalistic and clean design&lt;br&gt;&lt;/li&gt;
+&lt;li&gt;No delays&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;This guy is into tech (articles/projects)&lt;br&gt;
+Hire/Refer/Work with him &lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Startups are his passion (articles/projects)&lt;br&gt;
+Hire/Refer/Work with him&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Out of the box thinker (articles)&lt;br&gt;
+Get coffee with him&lt;/p&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;I got a rough picture what is possible and how to structure a personal website.&lt;/p&gt;
+&lt;h2&gt;Development Process&lt;/h2&gt;
+
+&lt;p&gt;First I did some research by looking at all the blogs of my hackathon friends.  &lt;/p&gt;
+
+&lt;p&gt;Here is a short list:  &lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href="http://www.simeon.io/"&gt;Simeon Videnov&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href="http://cyrusroshan.com"&gt;Cyrus Roshan&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href="http://itsmrlin.com"&gt;Zhiyuan Lin&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href="http://www.christopherjwang.info"&gt;Christopher Wang&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href="http://ethansinjin.com"&gt;Ethan Gill&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href="http://jacobkahn.me"&gt;Jacob Kahn&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href="http://pwu.me"&gt;Pine Wu&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href="http://tehjawn.github.io/mygithubpage/"&gt;John Nguyen&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href="http://www.sandile.io"&gt;Sandile Keswa&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;I got a rough picture what is possible and how to structure a personal website. &lt;/p&gt;
 
 &lt;p&gt;Finally I saw german guy on &lt;a href="https://twitter.com/ivomynttinen"&gt;twitter&lt;/a&gt; who had been living in Thailand (like me right now!) before he started a job at a startup in LA. His website was just awesome - I was stunned! Then I looked at his code and everything was so clean!&lt;/p&gt;
 
 &lt;blockquote&gt;
-  &lt;p&gt;"Good artists copy; great artists steal"
+&lt;p&gt;&amp;ldquo;Good artists copy; great artists steal&amp;rdquo;
 &lt;strong&gt;Steve Jobs&lt;/strong&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
 
 &lt;p&gt;I am still a novice developer, so I thought well copying the elements you like is okay ;-)&lt;/p&gt;
 
-&lt;h2 id="version-1-was-born"&gt;Version 1 was born&lt;/h2&gt;
+&lt;h2&gt;Version 1 was born&lt;/h2&gt;
 
 &lt;p&gt;&lt;img alt="blog_v1_index" width="1249" height="869" src="/images/blog_v1_index-b1adf3fa.png" /&gt;&lt;/p&gt;
 
@@ -202,43 +523,86 @@ Get coffee with him&lt;/li&gt;
 &lt;p&gt;&lt;img alt="blog_v1_index" width="1249" height="869" src="/images/blog_v1_projects-2836cdc4.png" /&gt;&lt;/p&gt;
 
 &lt;p&gt;When I finished the first version, I was definitely proud of myself.
-However I quickly realized that this structure was not the right one for me. I didn't like user flow (too complicated) and the focus was different. He designed his website to get paying clients for his freelance work. My goals are different.&lt;/p&gt;
+However I quickly realized that this structure was not the right one for me. I didn&amp;rsquo;t like user flow (too complicated) and the focus was different. He designed his website to get paying clients for his freelance work. My goals are different.&lt;/p&gt;
 
-&lt;h2 id="version-2---restart"&gt;Version 2 - Restart&lt;/h2&gt;
+&lt;h2&gt;Version 2 - Restart&lt;/h2&gt;
+
 &lt;p&gt;I did some more research and started again.&lt;/p&gt;
 
 &lt;p&gt;&lt;img alt="blog_v2_index" width="1374" height="946" src="/images/blog_v2_index-8102b8a0.png" /&gt;&lt;/p&gt;
 
-&lt;p&gt;This version is even more minimalistic. So far I still like it. I guess that's an important point. If you do not like your website you probably won't post as much.&lt;/p&gt;
+&lt;p&gt;This version is even more minimalistic. So far I still like it. I guess that&amp;rsquo;s an important point. If you do not like your website you probably won&amp;rsquo;t post as much.&lt;/p&gt;
 
-&lt;h3 id="what-kind-of-setup-do-i-use"&gt;What kind of setup do I use?&lt;/h3&gt;
+&lt;h3&gt;What kind of setup do I use?&lt;/h3&gt;
+
 &lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;u&gt;Backend:&lt;/u&gt; Ruby on Rails&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;u&gt;Frontend:&lt;/u&gt; Bootstrap (only required components), no JS so far&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;u&gt;Domain:&lt;/u&gt; Free .co domain from a Hackathon&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;u&gt;Hoster:&lt;/u&gt; Heroku&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;u&gt;Version Control:&lt;/u&gt; Git&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;u&gt;Text Editor:&lt;/u&gt; Sublime Text 2&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;u&gt;Computer:&lt;/u&gt; Mac book Air (2014) without external mouse or keyboard&lt;/p&gt;
-  &lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;u&gt;Backend:&lt;/u&gt; Ruby on Rails&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;u&gt;Frontend:&lt;/u&gt; Bootstrap (only required components), no JS so far&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;u&gt;Domain:&lt;/u&gt; Free .co domain from a Hackathon&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;u&gt;Hoster:&lt;/u&gt; Heroku&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;u&gt;Version Control:&lt;/u&gt; Git&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;u&gt;Text Editor:&lt;/u&gt; Sublime Text 2&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;u&gt;Computer:&lt;/u&gt; Mac book Air (2014) without external mouse or keyboard &lt;/p&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h2 id="version-3---static-site"&gt;Version 3 - Static site&lt;/h2&gt;
+&lt;h2&gt;Version 3 - Static site&lt;/h2&gt;
 
 &lt;p&gt;Recently I did some more changes under the hood. I switched from Rails to the static site generator &lt;a href="https://middlemanapp.com"&gt;Middleman&lt;/a&gt;.&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
+    <title>MakeItHappen</title>
+    <link rel="alternate" href="http://blog.url.com/make-it-happen.html"/>
+    <id>http://blog.url.com/make-it-happen.html</id>
+    <published>2016-04-28T11:12:00+02:00</published>
+    <updated>2016-06-12T20:08:53+02:00</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <content type="html">&lt;h1&gt;MakeItHappen - Hackathon Cornell University&lt;/h1&gt;
+
+&lt;p&gt;Right at the beginning of my internship in New York City, I got involved with Hackathons. Before that I didn&amp;rsquo;t even know that they exist. BigRedHacks at Cornell University was my second Hackathon ever. 
+I really &lt;i class="fa fa-heart"&gt;&lt;/i&gt; Hackathons!  You always improve your skills and get to know awesome people!  Try it even you can&amp;rsquo;t code, I promise you will learn a ton!  &lt;/p&gt;
+
+&lt;p&gt;Let me introduce you to TEAM AWESOME&amp;hellip; (I am the guy on the right)&lt;/p&gt;
+
+&lt;p&gt;&lt;img alt="team" width="1000" height="375" src="/images/makeithappen_team-73317bf4.png" /&gt;&lt;/p&gt;
+
+&lt;h2&gt;What did we end up building?&lt;/h2&gt;
+
+&lt;p&gt;Michael (my partner) and me, we built a rails app called &amp;ldquo;makeithappen&amp;rdquo;. The idea for our app was inspired by the refugee crisis going on in Europe. We wanted to help!  &lt;/p&gt;
+
+&lt;p&gt;MakeItHappen is platform which simplifies the donation process. Let&amp;rsquo;s imagine there is a person A in Germany who wants to donate clothes but is too lazy to actually take the clothes to an official donation station. Ok that sucks! Then there is another person B from anywhere in the world who feels deeply touched by the pictures in the news and wants to donate money. Our platform brings brings these two persons together.&lt;br&gt;
+Person A can donate an item by inserting all relevant information (including the address). Person B then can see a list of donated items and can press the button &amp;ldquo;MakeItHappen&amp;rdquo;. Person B will then donate the amount of money which is needed to pay for an UBER to pick up the clothes and take them to an official donation station. Problem solved and everybody is satisfied - including the refugees!&lt;/p&gt;
+
+&lt;h2&gt;What did actually work at the end?&lt;/h2&gt;
+
+&lt;p&gt;Here you can see our rails app.
+      &lt;img alt="index" width="1430" height="911" src="/images/makeithappen_index-ba296d66.png" /&gt;&lt;/p&gt;
+
+&lt;p&gt;At the end Person A could insert a donation item. We then used the google API to calculate the exact coordinates of the address of Person A and the ONE AND ONLY donation station in Munich hahaha ;-) Then we fed the UBER API with these coordinates and calculated the price for trip. Person B could see a list of all donated items and their estimated prices to get them to the donation station.  &lt;/p&gt;
+
+&lt;p&gt;As we were both rails beginners, we were pretty proud of our results!&lt;/p&gt;
+
+&lt;h2&gt;Woop and we won a price!&lt;/h2&gt;
+
+&lt;p&gt;We both couldn&amp;rsquo;t believe it, but it really happened!&lt;br&gt;
+We were second in the category &amp;ldquo;Best use of UBER API&amp;rdquo;.
+&lt;img alt="winner" width="1552" height="892" src="/images/makeithappen_winner-d6e33314.png" /&gt;&lt;/p&gt;
+
+&lt;p&gt;At a hackathon you have to cheat a little bit in the presentation.&lt;br&gt;
+For example we ran out of time to actually develop a signup/login system. So our login button always &amp;ldquo;worked&amp;rdquo;. It didn&amp;rsquo;t matter which data you put in. Our second limitation was the special ONE AND ONLY donation station in Munich. All items should be delivered to this station whether they were donated in Munich or in Berlin. That of course doens&amp;rsquo;t make sense! In our presentation we picked a person who lives in Munich of course ;-)&lt;/p&gt;
+
+&lt;h2&gt;What did we learn?&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;Hackathons are fun - So have fun!&lt;br&gt;
+Don&amp;rsquo;t get to serious about your project and forget to have fun!&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;A Hackathon without preparation is a lost Hackathon&lt;br&gt;
+OK that&amp;rsquo;s not true. Only a Hackathon where you did&amp;rsquo;t show up is a lost Hackathon. With that being said, the preparation we did before helped us a lot to get started. For example we discussed our git workflow before (at the end it was a mess, but at the beginning everything was clean) as well as the version of rails we wanted to use.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Get something done - it doens&amp;rsquo;t matter how bad it is&lt;br&gt;
+I always see guys at Hackathons who spend the whole time with brainstoarming and starting again and again. They end up learning not much. Fuck it and just build something. Nobody will judge you!  &lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
 </content>
   </entry>
   <entry>
@@ -250,452 +614,87 @@ However I quickly realized that this structure was not the right one for me. I d
     <author>
       <name>Article Author</name>
     </author>
-    <content type="html">&lt;h1 id="website-for-the-political-youth-orginazation-of-the-csu"&gt;Website for the political youth orginazation of the CSU&lt;/h1&gt;
+    <content type="html">&lt;h1&gt;Website for the political youth orginazation of the CSU&lt;/h1&gt;
 
-&lt;h2 id="general-information-about-the-project"&gt;General information about the project&lt;/h2&gt;
+&lt;h2&gt;General information about the project&lt;/h2&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;u&gt;What:&lt;/u&gt; Wordpress site for a political youth organization of a german party (~ 1000 members)&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;u&gt;Time frame:&lt;/u&gt; Several months in 2014&amp;lt;/li&amp;gt;&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;u&gt;Cost:&lt;/u&gt; I am part of that orgnization, so I did it for free ;-)&lt;/p&gt;
-  &lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;u&gt;What:&lt;/u&gt; Wordpress site for a political youth organization of a german party (~ 1000 members)&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;u&gt;Time frame:&lt;/u&gt; Several months in 2014&lt;/li&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;u&gt;Cost:&lt;/u&gt; I am part of that orgnization, so I did it for free ;-)&lt;/p&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h2 id="features"&gt;Features&lt;/h2&gt;
+&lt;h2&gt;Features&lt;/h2&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;Every member of the executive board with the right permission can post articles.&lt;br /&gt;
-I used a simple wordpress plugin to do the member management.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Enable new members to sign up online&lt;br /&gt;
-Pupils who want to join our organization can now apply online instead of mailing us a print out.&lt;/p&gt;
-  &lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Every member of the executive board with the right permission can post articles.&lt;br&gt;
+I used a simple wordpress plugin to do the member management.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Enable new members to sign up online&lt;br&gt;
+Pupils who want to join our organization can now apply online instead of mailing us a print out.&lt;/p&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;p&gt;&lt;img alt="bayernsu_application" width="1552" height="869" src="/images/bayernsu_application-670663db.png" /&gt;&lt;/p&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;Meet a student of your favorite university&lt;br /&gt;
+&lt;li&gt;Meet a student of your favorite university&lt;br&gt;
 Visitors of our site can request a meeting with a student of our network who attends their favorite university.&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;p&gt;&lt;img alt="bayernsu_university" width="1552" height="869" src="/images/bayernsu_university-ccd8ff5d.png" /&gt;&lt;/p&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;Find our local group close to your home&lt;/li&gt;
+&lt;li&gt;Find our local group close to your home&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;p&gt;&lt;img alt="bayernsu_localization" width="1552" height="869" src="/images/bayernsu_localization-76296fc9.png" /&gt;&lt;/p&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;Included an RSS Feed of important government sites&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Modern and professional design&lt;/p&gt;
-  &lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Included an RSS Feed of important government sites&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Modern and professional design&lt;/p&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;p&gt;&lt;img alt="bayernsu_index" width="1552" height="869" src="/images/bayernsu_index-fb3ecbf1.png" /&gt;&lt;/p&gt;
 
-&lt;h2 id="what-did-i-learn"&gt;What did I learn?&lt;/h2&gt;
+&lt;h2&gt;What did I learn?&lt;/h2&gt;
+
 &lt;ol&gt;
-  &lt;li&gt;
-    &lt;p&gt;Communication with a big democratic orgnaization is time consuming&lt;br /&gt;
-The executive board of the youth organization only gets together around 8 times per year. Mayor changes (like a new way for people to become a member) need to be discussed with the entire group. Sometimes that was really frustrating.&lt;/p&gt;
+&lt;li&gt;&lt;p&gt;Communication with a big democratic orgnaization is time consuming&lt;br&gt;
+The executive board of the youth organization only gets together around 8 times per year. Mayor changes (like a new way for people to become a member) need to be discussed with the entire group. Sometimes that was really frustrating.  &lt;/p&gt;
 
-    &lt;p&gt;&lt;i class="fa fa-lightbulb-o fa-2x"&gt;&lt;/i&gt; Tip @freelancers&lt;br /&gt;
- Take on projects only with one single responsible person who is also in charge of the budget!&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;A solid plan saves you a lot of time and trouble&lt;br /&gt;
-That sounds abvious, but we forget about way too often. I had no idea which features I wanted to implement and when I wanted to be finished with the project. Hell yeah it was my first web project ever.&lt;br /&gt;
-I would highly recommend sketch out all your features first on paper or with a simple tool like Sketch, get a buy in from all responsible parties and THEN start coding.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;It took way longer than I thought&lt;br /&gt;
-I have never done a web project before, but I thought it's not real programming it's just wordpress… Oh  my god was I wrong. At the end I had to modify plugins which took years as I didn't know php either.&lt;/p&gt;
+&lt;p&gt;&lt;i class="fa fa-lightbulb-o fa-2x"&gt;&lt;/i&gt; Tip @freelancers&lt;br&gt;
+Take on projects only with one single responsible person who is also in charge of the budget!&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;A solid plan saves you a lot of time and trouble&lt;br&gt;
+That sounds abvious, but we forget about way too often. I had no idea which features I wanted to implement and when I wanted to be finished with the project. Hell yeah it was my first web project ever.&lt;br&gt;
+I would highly recommend sketch out all your features first on paper or with a simple tool like Sketch, get a buy in from all responsible parties and THEN start coding.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;It took way longer than I thought&lt;br&gt;
+I have never done a web project before, but I thought it&amp;rsquo;s not real programming it&amp;rsquo;s just wordpress&amp;hellip; Oh  my god was I wrong. At the end I had to modify plugins which took years as I didn&amp;rsquo;t know php either.  &lt;/p&gt;
 
-    &lt;p&gt;&lt;i class="fa fa-lightbulb-o fa-2x"&gt;&lt;/i&gt; Tip &lt;br /&gt; Look at your schedule for the next weeks/months if you have enough time for your project!&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Adverse circumstances made me procrastinate on the project&lt;br /&gt;
-At some point I was not happy with the code implementation, so I refused to finish this particular feature and instead started another one. Then I was not pleased by visual appearance and switched to back to the other feature. At the end it was kind of mess and it took me way more energy to really finish a feature.&lt;/p&gt;
+&lt;p&gt;&lt;i class="fa fa-lightbulb-o fa-2x"&gt;&lt;/i&gt; Tip &lt;br&gt; Look at your schedule for the next weeks/months if you have enough time for your project!&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Adverse circumstances made me procrastinate on the project&lt;br&gt;
+At some point I was not happy with the code implementation, so I refused to finish this particular feature and instead started another one. Then I was not pleased by visual appearance and switched to back to the other feature. At the end it was kind of mess and it took me way more energy to really finish a feature.  &lt;/p&gt;
 
-    &lt;p&gt;&lt;i class="fa fa-lightbulb-o fa-2x"&gt;&lt;/i&gt; Tip &lt;br /&gt;Get things done as quickly as possible and then just iterate!&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Don't start coding without a final agreement&lt;br /&gt;
-This issue is related to my approach to start working without a real plan. I mean of course I made notes on a paper first, but that was by far not detailed enough. Finally I ended up developing a feature and then getting the feedback that nobody needs it or even worse we can't use it for other reasons and I need to remove.&lt;/p&gt;
+&lt;p&gt;&lt;i class="fa fa-lightbulb-o fa-2x"&gt;&lt;/i&gt; Tip &lt;br&gt;Get things done as quickly as possible and then just iterate!&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Don&amp;rsquo;t start coding without a final agreement&lt;br&gt;
+This issue is related to my approach to start working without a real plan. I mean of course I made notes on a paper first, but that was by far not detailed enough. Finally I ended up developing a feature and then getting the feedback that nobody needs it or even worse we can&amp;rsquo;t use it for other reasons and I need to remove.  &lt;/p&gt;
 
-    &lt;p&gt;&lt;i class="fa fa-lightbulb-o fa-2x"&gt;&lt;/i&gt; Tip &lt;br /&gt; Use the startup approach and always get feedback before you actually start building a feature/product.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;I didn't use version control…&lt;br /&gt;
-At that point I didn't know that git exists and that it's that easy. So I developed version v0.9 then v0.95 followed by v1.0, then v1.05, went back to v0.95 and continued with v2.0. It was a total mess…&lt;/p&gt;
+&lt;p&gt;&lt;i class="fa fa-lightbulb-o fa-2x"&gt;&lt;/i&gt; Tip &lt;br&gt; Use the startup approach and always get feedback before you actually start building a feature/product.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;I didn&amp;rsquo;t use version control&amp;hellip;&lt;br&gt;
+At that point I didn&amp;rsquo;t know that git exists and that it&amp;rsquo;s that easy. So I developed version v0.9 then v0.95 followed by v1.0, then v1.05, went back to v0.95 and continued with v2.0. It was a total mess&amp;hellip;  &lt;/p&gt;
 
-    &lt;p&gt;&lt;i class="fa fa-lightbulb-o fa-2x"&gt;&lt;/i&gt; Tip &lt;br /&gt;Use version control early on. Check out my articles on how to learn git and my personal git workflow.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;At the beginning I had no idea…now I am developing rails apps&lt;br /&gt;
-I had worked for a german science institut on some microcontroller projects before I started working on this wordpress project. You can say I had NO IDEA what I was doing. You can learn a lot on the way. I just googled, stackoverflowed and youtubed a lot. At the end I had a pretty decent knowledge about wordpress.&lt;/p&gt;
+&lt;p&gt;&lt;i class="fa fa-lightbulb-o fa-2x"&gt;&lt;/i&gt; Tip &lt;br&gt;Use version control early on. Check out my articles on how to learn git and my personal git workflow.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;At the beginning I had no idea&amp;hellip;now I am developing rails apps&lt;br&gt;
+I had worked for a german science institut on some microcontroller projects before I started working on this wordpress project. You can say I had NO IDEA what I was doing. You can learn a lot on the way. I just googled, stackoverflowed and youtubed a lot. At the end I had a pretty decent knowledge about wordpress.  &lt;/p&gt;
 
-    &lt;p&gt;&lt;i class="fa fa-lightbulb-o fa-2x"&gt;&lt;/i&gt; Tip &lt;br /&gt;Make bold moves and just try it even if you are not 100% certain if you can make it! Leave your comfort zone!&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Creating stuff is way more fun than consuming&lt;br /&gt;
-This goes especially to all my friends in Germnay. Creating stuff is so much fun in particular when other people give you feedback. It doesn't matter if you build a company or just feed your facebook timeline with interesting content. As long as you get feedback - you will have fun.&lt;/p&gt;
+&lt;p&gt;&lt;i class="fa fa-lightbulb-o fa-2x"&gt;&lt;/i&gt; Tip &lt;br&gt;Make bold moves and just try it even if you are not 100% certain if you can make it! Leave your comfort zone!&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Creating stuff is way more fun than consuming&lt;br&gt;
+This goes especially to all my friends in Germnay. Creating stuff is so much fun in particular when other people give you feedback. It doesn&amp;rsquo;t matter if you build a company or just feed your facebook timeline with interesting content. As long as you get feedback - you will have fun.  &lt;/p&gt;
 
-    &lt;p&gt;&lt;i class="fa fa-lightbulb-o fa-2x"&gt;&lt;/i&gt; Tip&lt;br /&gt;
- #1 Start being a creator instead of a consumer!&lt;br /&gt;
- #2 You can start right now and share some details about my awesome blog ;-)&lt;/p&gt;
-  &lt;/li&gt;
+&lt;p&gt;&lt;i class="fa fa-lightbulb-o fa-2x"&gt;&lt;/i&gt; Tip  &lt;/p&gt;
+
+&lt;h1&gt;1 Start being a creator instead of a consumer!&lt;/h1&gt;
+
+&lt;h1&gt;2 You can start right now and share some details about my awesome blog ;-)&lt;/h1&gt;&lt;/li&gt;
 &lt;/ol&gt;
-
-</content>
-  </entry>
-  <entry>
-    <title>My favorite quotes</title>
-    <link rel="alternate" href="http://blog.url.com/favorite-quotes.html"/>
-    <id>http://blog.url.com/favorite-quotes.html</id>
-    <published>2016-04-28T11:11:00+02:00</published>
-    <updated>2016-05-27T22:45:28+02:00</updated>
-    <author>
-      <name>Article Author</name>
-    </author>
-    <content type="html">&lt;h1 id="my-favorite-quotes"&gt;My favorite Quotes&lt;/h1&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;“Every person has two educations, one which he receives from others and one, &amp;gt; more important, which he gives himself.”&lt;br /&gt;
-&lt;strong&gt;Edward Gibbon&lt;/strong&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;"Choose not to be harmed – and you won't feel harmed. Don't feel harmed – 
-and you haven't been."&lt;br /&gt;
-&lt;strong&gt;Marcus Aurelius&lt;/strong&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;"It's not about you, but how you react that matters."&lt;br /&gt;
-&lt;strong&gt;Epictetus&lt;/strong&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;"You are what you do, so what are you right NOW?"&lt;br /&gt;
- &lt;strong&gt;Manuel Gondzales&lt;/strong&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;"By living in the Bay Area you are basically agreeing to be a beta tester for all the crazy ways we’ll live in the future."&lt;br /&gt;
- &lt;strong&gt;Aaron Levie&lt;/strong&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;"Early stage VC is a lot like baseball, if you get a hit one out of every three times, you are headed to the hall of fame.”&lt;br /&gt;
-&lt;strong&gt;Fred Wilson&lt;/strong&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;Boyd’s Law: "speed of iteration beats quality of iteration."&lt;br /&gt;
-&lt;strong&gt;John Boyd&lt;/strong&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;"You know that old saw about a plane flying from California to Hawaii being off course 99% of the time—but constantly correcting? The same is true of successful startups—except they may start out heading toward Alaska."&lt;br /&gt;
-&lt;strong&gt;Evan Williams&lt;/strong&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;“if you’re not embarrassed by your first release, you’ve launched too late.”&lt;br /&gt;
-&lt;strong&gt;Reid Hoffman&lt;/strong&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;“People don’t want to buy a quarter-inch drill. They want a quarter-inch hole!”&lt;br /&gt;
-&lt;strong&gt;Theodore Levitt&lt;/strong&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;"The sum total of our efforts—which included hundreds of cold calls, tens of thousands of emails (I was invited to a “top 20 customers” dinner with TK from Tout), seminars, an appearance on FOX News Live, ads, reaching out to our personal networks as well as the Blueprint Health mentor network—was one paying doctor (who later went out of business) and a handshake deal to partner with a small 20-year-old EMR.&lt;br /&gt;
-&lt;strong&gt;Jeff Novich&lt;/strong&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;"If I had asked people what they wanted, they would have said faster horses."  &lt;strong&gt;Henry Ford&lt;/strong&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;"As far as the customer is concerned, the interface is the product."&lt;br /&gt;
-&lt;strong&gt;Jeff Raskin&lt;/strong&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;"Most people make the mistake of thinking design is what it looks like. People think it’s this veneer—that the designers are handed this box and told, Make it look good! That’s not what we think design is. It’s not just what it looks like and feels like. Design is how it works."&lt;br /&gt;
-&lt;strong&gt;Steve Jobs&lt;/strong&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;"The process of programming subverts the process of making easy-to-use products for the simple reason that the goals of the programmer and the goals of the user are dramatically different. The programmer wants the construction process to be smooth and easy. The user wants the interaction with the program to be smooth and easy. These two objectives almost never result in the same program."&lt;br /&gt;
-&lt;strong&gt;Alan Cooper&lt;/strong&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;“I suppose it is tempting, if the only tool you have is a hammer, to treat everything as if it were a nail”&lt;br /&gt;
-&lt;strong&gt;Abraham Maslow&lt;/strong&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;"Don’t design for the average person: The actual Average User is kept in a hermetically sealed vault at the International Bureau of Standards in Geneva."&lt;br /&gt;
-&lt;strong&gt;Steve Krug&lt;/strong&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;"I would have written a shorter letter, but I did not have the time."&lt;br /&gt;
-&lt;strong&gt;Blaise Pascal&lt;/strong&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;“Perfection is attained not when there is nothing more to add, but when there is nothing more to remove.”&lt;br /&gt;
-&lt;strong&gt;Antoine de Saint Exupéry&lt;/strong&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;… solve problems so that, “you’re not aware really of the solution [and] you’re not aware of how hard the problem was that was eventually solved”&lt;br /&gt;
-&lt;strong&gt;Johnathan Ive&lt;/strong&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;"Good artists copy; great artists steal."&lt;br /&gt;
-&lt;strong&gt;Steve Jobs&lt;/strong&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;“An MVP is a version of a new product which allows a team to collect the maximum amount of validated learning about customers with the least effort”&lt;br /&gt;
-&lt;strong&gt;Eric Ries&lt;/strong&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;“It’s much easier to take a product that a small number of users love and get a lot more users to love it than it is to take a product that a large number of users like and get them to love it”&lt;br /&gt;
-&lt;strong&gt;Paul Graham&lt;/strong&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;I ask [my customers], “If the product were free, how many would you actually deploy or use?” The goal is to take pricing away as an issue and see whether the product itself gets customers excited. If it does, I follow up with my next question: “Ok, it’s not free. In fact, imagine I charged you $1 million. Would you buy it?” While this may sound like a facetious dialog, I use it all the time. Why? Because more than half the time customers will say something like, “Steve, you’re out of your mind. This product isn’t worth more than $250,000.” I’ve just gotten customers to tell me how much they are willing to pay. Wow.&lt;br /&gt;
-&lt;strong&gt;Steve Blank&lt;/strong&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;"Perhaps the biggest thing preventing founders from realizing how attentive they could be to their users is that they’ve never experienced such attention themselves. Their standards for customer service have been set by the companies they’ve been customers of, which are mostly big ones. Tim Cook doesn’t send you a hand-written note after you buy a laptop. He can’t. But you can. That’s one advantage of being small: you can provide a level of service no big company can. Once you realize that existing conventions are not the upper bound on user experience, it’s interesting in a very pleasant way to think about how far you could go to delight your users."&lt;br /&gt;
-&lt;strong&gt;Paul Graham&lt;/strong&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;"A user interface is like a joke. If you have to explain it, it’s not that good."&lt;br /&gt;
-&lt;strong&gt;Martin LeBlanc&lt;/strong&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;"I’ve missed more than 9000 shots in my career. I’ve lost almost 300 games. 26 times, I’ve been trusted to take the game winning shot and missed. I’ve failed over and over and over again in my life. And that is why I succeed."&lt;br /&gt;
-&lt;strong&gt;Michael Jordan&lt;/strong&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;There is a classic story of Pablo Picasso traveling on train when a passenger recognizes him and asks, “Why do you distort reality in your art instead of painting people the way they actually are?” Picasso asks, “What do you mean by the way they actually are?” The passenger pulls out a photo of his wife from his wallet and says, “Well, this is what my wife actually looks like.” Picasso looks at the image and says, “She’s rather small and flat, isn’t she?”&lt;br /&gt;
-&lt;strong&gt;Pablo Picasso&lt;/strong&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-
-</content>
-  </entry>
-  <entry>
-    <title>Understanding how idea generation works</title>
-    <link rel="alternate" href="http://blog.url.com/idea-generation.html"/>
-    <id>http://blog.url.com/idea-generation.html</id>
-    <published>2016-04-28T11:10:00+02:00</published>
-    <updated>2016-05-29T03:11:21+02:00</updated>
-    <author>
-      <name>Article Author</name>
-    </author>
-    <content type="html">&lt;h1 id="understanding-how-ideas-are-generated"&gt;Understanding how ideas are generated&lt;/h1&gt;
-
-&lt;p&gt;People often think of founders like Steve Jobs, Mark Zuckerberg, Reid Hoffman or Jeff Bezos as creativity monsters with a special gene they were born with: Either you are lucky and have it, or you don’t. That is straight bullshit! Never ever let this false belief be part of your mindset. Creativity is a skill that can be learnt. Naturally as it is with every other skill, some people will be better at it than others, but really anyone can reach a certain level of creativity which is sufficient to come up with pretty impressive ideas. As often determination is the key to success.&lt;/p&gt;
-
-&lt;p&gt;In this article I am going to write down all my knowledge about idea generation. As I am a hands-on startup guy, I am always interested in what kind of habits I can implement in my daily life to improve my personal idea generation process.&lt;/p&gt;
-
-&lt;p&gt;Let's get started!&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;“A problem well stated is a problem half solved.”&lt;br /&gt;
-&lt;strong&gt;Charles Kettering, former head of research at GM&lt;/strong&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;Ok we want to come up with lots of awesome ideas. But what is actually the core of our problem? Not knowing how to come up with good ideas, that's not accurate enough. I would rather say the core of our problem is, that we don't know how the idea generation process works and in particular we don't know where ideas get generated. If we understand the concept of idea generation, we will be able to tweak the process so that we get much better results.&lt;/p&gt;
-
-&lt;h2 id="where-do-ideas-come-from"&gt;Where do ideas come from?&lt;/h2&gt;
-
-&lt;p&gt;Before talking about the origin of ideas, I want to bring up one popular misconception: “Ideas spontaneously pop into our mind.” That is simply not true, scientists know that since years, people still tend to believe it because they see affected examples every single day in the news.&lt;br /&gt;
-Forbes, TechCrunch, etc. are full of positiv stories in which a guy just came up with an idea and then started a million dollar business. They just don’t tell us about all the failures which came first. We can’t admonish them because that’s how media business works. People don’t want to read long exhausting stories of failure. And media companies just want to earn as much money as possible like every other company. That's why they just deliver us what we want: Positiv stories where guys came surprisingly up with good ideas without showing us all the failures before. Just keep that in mind for later.&lt;/p&gt;
-
-&lt;p&gt;Ok again: “Where do ideas come from?”&lt;br /&gt;
-Let’s have a closer look at how our mind works. You probably know that we have a conscious and a subconscious. Our thinking takes place in our conscious - we can control it as opposed to our subconscious which we can't control. So why do we have it? To answer that question we need to understand how information processing works in our brain. Here is a picture which illustrates the basics.&lt;br /&gt;
-&lt;img alt="idea_generation_model" width="667" height="389" src="/images/idea_generation_model-ba895906.png" /&gt;&lt;/p&gt;
-
-&lt;p&gt;Our sensory organs deliver us up to 11 million bits of information per second! That’s a huge amount of data. Our conscious can only process around 10-40 bits per second. That’s why we need a filter first, which only sends the most important information to our conscious - the filter is called subconscious. It can handle 11 million bits per second and does the filter work as well (see algorithm box).&lt;/p&gt;
-
-&lt;p&gt;As mentioned earlier I want to focus rather on the practical part for us than on the scientific part. So let's use this very simple model and look what we can derive from it  how an idea is generated step by step and how it gets an actual thought in our conscious.&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;Information is sent as a trigger to our subconscious&lt;br /&gt;
-Yes, our subconscious needs a trigger in form of a a thought from our conscious (not in the picture) or just plain data from our sensory organs. Without that trigger signal nothing will happen.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Our subconscious uses its algorithm to process the information.&lt;br /&gt;
-We don’t know how the algorithm works (black box) and we can’t control it directly. We know it's there and it works slightly different for each person. The algorithm uses all the information in our subconscious (storage) plus the new information and eventually creates a result of it like a simple two input (storage + new information) one output (result) machine.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;The result is sent to our conscious only in rare cases &lt;br /&gt;Either the result is sent to our body directly (reflex), is straight garbage, gets stored or gets sent to our conscious as a thought. If it is a thought, it could contain our wanted idea.&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;There are a lot of simplications included, that's for sure. But you will see this simple model helps us to understand why some powerful habits can make a huge difference.&lt;/p&gt;
-
-&lt;p&gt;Okay what does it mean for us in terms of better idea creation?&lt;/p&gt;
-
-&lt;h3 id="there-are-basically-three-important-conclusions-for-us"&gt;There are basically three important conclusions for us:&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;Ideas don’t just magically appear in our conscious, they are the result of a complex calculation in our uncontrollable subconscious&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;In the calculation new AND old information are getting combined to form a result&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Our subconscious transfers the result only in rare cases to our conscious&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id="how-can-we-transform-these-conclusions-into-useful-habits"&gt;How can we transform these conclusions into useful habits?&lt;/h2&gt;
-
-&lt;h3 id="conclusion-2--habit-1"&gt;Conclusion #2 =&amp;gt; Habit #1&lt;/h3&gt;
-&lt;p&gt;Our subconscious is the place where ideas get generated. We can’t control the algorithm in our subconscious which determines how the calculation works. We only know that new as well as old information are both input for that calculation.&lt;br /&gt;
-Okay that sounds pretty bad. We can’t control the most important part of the idea generation process, so it seems to be true that you need to be lucky to be born with a “good” algorithm in your subconscious.&lt;br /&gt;
-What if I tell you that we can’t change the algorithm of our black box, but we can train and direct it indirectly. That sounds pretty dope!&lt;br /&gt;
-Let me give you a very simple example how we can train our subconscious.&lt;br /&gt;
-Remeber the first time you were driving a car , you probably felt pretty overwhelmed. Watch the traffic, control the speed, listen to your co-driver, decide which direction to go, etc. All the information which goes into your brain is new for your subconscious, so it transfers it to your conscious to deal with it. That is pretty stressful as we all know. After a few weeks however, you know how to drive and the information isn’t new anymore. The algorithm in your subconscious finds similar old information and already knows what to do. So it can transfer the information directly to your body instead of to your conscious. That’s why driving feels easy after a few weeks.You see we can undoubtedly train the algorithm in our subconscious.&lt;/p&gt;
-
-&lt;p&gt;Ok that sounds cool. But how can we train our algorithm to come up with good ideas? I will use a simple equation to answer that question:&lt;/p&gt;
-
-&lt;p&gt;&lt;code&gt;New Idea = Old ideas * (Copy + Transform + Combine)&lt;/code&gt;&lt;/p&gt;
-
-&lt;p&gt;I didn’t come up with it. Credits go to Kirby Ferguson. I would highly recommend to check out his inspiring Ted talk “Everything is a remix”. It's especially cool to see where the ideas from the innovator #1 on earth Steve Jobs came from.&lt;/p&gt;
-
-&lt;div class="embed-responsive embed-responsive-16by9"&gt;
-    &lt;iframe src="https://www.youtube.com/embed/zd-dqUuvLk4" class="embed-responsive-item" frameborder="0" allowfullscreen=""&gt;&lt;/iframe&gt;
-  &lt;/div&gt;
-
-&lt;p&gt;Is copying, transforming and combining old ideas more difficult than driving? No, of course it’s not!&lt;/p&gt;
-
-&lt;p&gt;So here we basically have the answer what we want to train our subconscious and also our first habit! How do we do it? It’s just plain boring repetition as always.&lt;br /&gt;
-I use a method introduced by James Altucher aka &amp;lt;%= link_to "Mr. Choose Yourself", "http://www.amazon.com/Choose-Yourself-James-Altucher/dp/1490313370/" %&amp;gt;.&lt;/p&gt;
-
-&lt;p&gt;What does he suggest? Pick a random topic every day and write down ten ideas related to that topic. Due to the constrain that all your ideas should be related to that topic, you automatically go through all your old ideas and combine them to new ones. That's exactly what we want.&lt;br /&gt;
-For example today I chose the topic “Most awesome co-working space” and came up with these ideas:&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;Separated areas for designers/developers/writers/photographers for better networkin&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Only vegetarian/vegan food - no tempting fries&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;If you work longer than 12h, your food will be free&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Running group organized by the co-working space (showers included)&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Brainstoarming/idea validation area&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Co-working space part of a hotel =&amp;gt; Co-working space is hip and helps the reputation of the hotel, in exchange the co-working space is cheaper&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;If you have learnt anything useful and you are under 25, the gov pays for all your expenses while being at the co-working space&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Media room to watch Ted Talks and listen to podcasts together&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Really really good chairs (in most co working spaces the chairs suck)&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Open 24/7&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Some ideas suck/some don’t. I couldn’t care less. That’s not the point here. It’s is all about to force your brain to combine, copy and transform at least 10 times a day. That’s it. During this exercise I thought about all the co working spaces to which I have been so far (Ass hotel New York, CAMP Thailand, Josef Fraunhofer (Germany), …). I also included other daily habits (podcasts/ted talks) + random early stage startup tasks (idea validation). I can assure you, you will see results when you do it on a daily basis for at least 3 months.&lt;br /&gt;
-I would suggest give it a try and start today with the topic "Best Valentine's Day".&lt;/p&gt;
-
-&lt;p&gt;That's our Habit #1: Write down 10 ideas to a random topic everyday.&lt;/p&gt;
-
-&lt;h3 id="conclusion-3--habit-2"&gt;Conclusion #3 =&amp;gt; Habit #2&lt;/h3&gt;
-
-&lt;p&gt;Lets go on with conclusion #3. We need to give our subconscious a chance to deliver our ideas to our conscious so that we can actually know about it. We can create a very simple but powerful habit to achieve this.&lt;br /&gt;
-Imagine your subconscious is now able to combine old ideas and new information like a god. But unfortunately it can’t transfer the information to your conscious because your conscious is busy all the time watching Netflix. We love Netflix our subconscious doesn't!&lt;br /&gt;
-That sucks! The solution is obvious - give your conscious free time. So Habit #2: Free your mind at least 90min per week is just a simple method to  enable our subconscious to transfer its results/ideas to our conscious.&lt;br /&gt;
-Everybody should find a method which suits best for him/her. I usually go out for a walk at least two times a week for about 45mins. That helps me free my mind and and let my subconscious communicate with my conscious. As you can imagine while sleeping the same can happen - your subconscious combines old ideas and then tries to transfer it secretly to your conscious. Then in the morning you wake up and “Eureka” you have a solution. This can’t happen if you don’t sleep enough. Conclusion: Get enough sleep!&lt;/p&gt;
-
-&lt;h3 id="conclusion-1--habit-3"&gt;Conclusion #1 =&amp;gt; Habit #3&lt;/h3&gt;
-
-&lt;p&gt;Ideas can’t grow from nothing, our subconscious needs old ideas and new information as a trigger to do the calculation. That’s also pretty straight forward. The more old ideas your subconscious has, the easier it is to combine them and create new ideas.&lt;br /&gt;
-What is the best way to get old ideas in your brain?&lt;br /&gt;
-There are lots of possibilities: Reading, traveling, listening to podcasts, talking to people, going to school, watching netflix,…&lt;br /&gt;
-Our time is limited, so we have to optimize it as best as possible.&lt;br /&gt;
-How do we meassure the effectiveness of the different methods?&lt;br /&gt;
-Let me introduce you to &lt;strong&gt;Habit #3: Create note cards of useful information&lt;/strong&gt;. One of my favorites! You probably all know this guy. He is Ryan Holiday and a ridicilous successful marketing expert in his mid-late 20s.&lt;/p&gt;
-
-&lt;p&gt;&lt;img alt="ryan holiday" width="650" height="366" src="/images/ryan_holiday-31a6f702.png" /&gt;&lt;/p&gt;
-
-&lt;p&gt;In one of his &amp;lt;%= link_to "articles", "http://ryanholiday.net/how-and-why-to-keep-a-commonplace-book/" %&amp;gt; he introduced a method he uses almost on a daily basis. Whenever he consumes media (book, tv, podcast) he writes down all useful ideas on simple note cards. Some books are so powerful that he can create up to 40 note cards per book, some are just straight garbage and he can only find a handful of useful information. I use the same method but in a digital form as opposed to Ryan who is more of a touchy guy and prefers the physical way.  This method not only helps us to keep track of useful information but also allows us to find out how effective our old idea consumption process is. I assume you will create way less note cards after a 10h netflix marathon than by reading 5h. Try it out and find your most effective way to consume old ideas - produce note cards!&lt;/p&gt;
-
-&lt;h3 id="conclusion-1--habit-4"&gt;Conclusion #1 =&amp;gt; Habit #4&lt;/h3&gt;
-
-&lt;p&gt;Ideas don't just magically appear in our subconscious, they need a trigger signal first. The trigger is even more powerful, if it is related to the kind of idea you want to generate. So we basically need to fire lots of trigger signals of new information to our subconscious and at some point the right idea will be created.&lt;br /&gt;
-You probably have experienced this before. Somebody explained a concept to you and you didn't quite get it. Then another person explained it slightly differently to you, you still didn't get it. Then you read an article about the same topic and boom - you finally got it. The information was similiar all the time, your subconscious just needed more trigger signals to create the right idea.&lt;br /&gt;
-If we are aware of that phenomen we can use it to our advantage and build &lt;strong&gt;Habit #4: Immerge into the topic in which you want to create an idea&lt;/strong&gt;.   That is basically not really difficult. Again just consume as much content possible to a related topic and fire endless trigger signals. We sometimes just don't have to get frustrated if it doens't work out early on. Be patient and calm, read more and push harder!&lt;/p&gt;
-
-&lt;p&gt;For me it always helps a lot to understand why a certain habit works instead of just doing it. Then I will most likely stick to it. I hope this article helps you to understand why certain habits are useful.&lt;/p&gt;
-
-&lt;p&gt;One last point I definitely want to mention. I am a big fan of "Find your own bio rhythm". That means I believe that everybody's mind works slightly differently and things that work for me don't always work for you. I highly recommend to experiment as much as possible especially while you are young.&lt;br /&gt;
-Now you know the basic concept of idea creation, use this knowledge as a foundation and start experimenting!&lt;/p&gt;
-
-&lt;h2 id="habit-summary"&gt;Habit summary&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;Free your mind at least 90min per week&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Write down 10 ideas to a random topic everyday&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Create note cards of useful information&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Immerge into the topic in which you want to create an idea&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
 </content>
   </entry>
 </feed>

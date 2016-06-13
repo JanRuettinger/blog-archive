@@ -1,0 +1,199 @@
+<!DOCTYPE html> <html> <head> <link rel=apple-touch-icon-precomposed sizes=152x152 href="apple-touch-icon-152x152-precomposed.png"/> <link rel=apple-touch-icon-precomposed sizes=144x144 href="apple-touch-icon-144x144-precomposed.png"/> <link rel=apple-touch-icon-precomposed sizes=114x114 href="apple-touch-icon-114x114-precomposed.png"/> <link rel=apple-touch-icon-precomposed sizes=72x72 href="apple-touch-icon-72x72-precomposed.png"/> <link rel=apple-touch-icon-precomposed href="apple-touch-icon-precomposed.png"/> <link rel="shortcut icon" href="favicon.png"/> <link rel=icon type="image/ico" href="favicon.ico"/> <link href='https://fonts.googleapis.com/css?family=Titillium+Web:400,300' rel=stylesheet> <link rel=stylesheet href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css"> <meta name=viewport content="width=device-width, initial-scale=1.0"> <link href="stylesheets/main-53956dda.css" rel=stylesheet /> <link href="stylesheets/highlighting-33a23ae7.css" rel=stylesheet /> </head> <div class=row> <section class=article-container> <h1>Rails user authentification from scratch</h1> <p>In this post, I want to help beginners to get started with user authentification in rails. </p> <p>Firstly, I want to prevent some confusion with authentification vs authorization. </p> <p><strong>Authentification</strong><br> - Who is the user?<br> - Is the user really he/she pretends to be?<br> - =&gt; Username + password </p> <p><strong>Authorization</strong><br> - What is the user allowed to do?<br> - Has the user permission to access resource X?<br> - =&gt; Different user roles like admin/normal user/guest/&hellip;</p> <h2>Many libraries/gems to choose from&hellip;</h2> <p>Indeed, there are quite a lot of libraries out there who help you with user authentification and authorization. But in order to really understand how authentification works, you need to write the code from scratch at least once. That&rsquo;s exactly what I want to show you in this post. At the end I will introduce you to some useful libraries though.</p> <p>I assume you know the basics about ruby and rails and won&rsquo;t explain every single line of code. But feel free to ask upcoming questions.</p> <h3>Step 0 - Create a new rails app</h3> <pre class="highlight ruby"><code><span class="n">rails</span> <span class="kp">new</span> <span class="n">authentification_from_scratch</span> <span class="o">--</span><span class="n">database</span><span class="o">=</span><span class="n">postgresql</span>
+</code></pre> <h3>Step 1 - Create a user model</h3> <pre class="highlight ruby"><code><span class="n">rails</span> <span class="n">generate</span> <span class="n">model</span> <span class="n">user</span> <span class="nb">name</span> <span class="n">email</span> <span class="n">password_digest</span>
+</code></pre> <p>We will use a gem called &ldquo;bicrypt&rdquo; to encrypt our passwords. The Gem requires us to have a attribute &ldquo;password_digest&rdquo;. Therefore watch out for typos!</p> <h3>Step 2 - Setup the database</h3> <pre class="highlight ruby"><code><span class="n">rake</span> <span class="n">db</span><span class="ss">:create</span>
+<span class="n">rake</span> <span class="n">db</span><span class="ss">:migrate</span>
+</code></pre> <h3>Step 3 - Setup some initial routes</h3> <pre class="highlight ruby"><code><span class="o">&lt;--</span> <span class="n">config</span><span class="o">/</span><span class="n">routes</span><span class="p">.</span><span class="nf">erb</span> <span class="o">--&gt;</span>  
+<span class="no">Rails</span><span class="p">.</span><span class="nf">application</span><span class="p">.</span><span class="nf">routes</span><span class="p">.</span><span class="nf">draw</span> <span class="k">do</span>
+
+  <span class="c1">#root url =&gt; First page after login</span>
+  <span class="n">root</span> <span class="ss">to: </span><span class="s1">'users#show'</span>
+
+  <span class="c1">#Url for signup page =&gt; posts form parameters to users#create</span>
+  <span class="n">get</span> <span class="s1">'/signup'</span> <span class="o">=&gt;</span> <span class="s1">'users#new'</span>
+
+  <span class="c1">#Form from users#new will post to users#create</span>
+  <span class="n">post</span> <span class="s1">'/users'</span> <span class="o">=&gt;</span> <span class="s1">'users#create'</span>
+
+<span class="k">end</span>
+</code></pre> <h3>Step 4 - Create users controller</h3> <pre class="highlight ruby"><code><span class="n">rails</span> <span class="n">generate</span> <span class="n">controller</span> <span class="n">users</span>
+</code></pre> <h3>Step 5 - Add actions for the previous created routes</h3> <pre class="highlight ruby"><code><span class="o">&lt;--</span> <span class="n">app</span><span class="p">.</span><span class="nf">controllers</span><span class="o">/</span><span class="n">users_controller</span><span class="p">.</span><span class="nf">erb</span> <span class="o">--&gt;</span>
+
+<span class="k">class</span> <span class="nc">UsersController</span> <span class="o">&lt;</span> <span class="no">ApplicationController</span>
+
+  <span class="k">def</span> <span class="nf">show</span>
+  <span class="k">end</span>
+
+  <span class="k">def</span> <span class="nf">new</span>
+  <span class="k">end</span>
+
+  <span class="k">def</span> <span class="nf">create</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre> <h3>Step 6 - Create the signup form</h3> <pre class="highlight ruby"><code><span class="o">&lt;--</span> <span class="n">app</span><span class="o">/</span><span class="n">views</span><span class="o">/</span><span class="n">users</span><span class="o">/</span><span class="kp">new</span><span class="p">.</span><span class="nf">html</span><span class="p">.</span><span class="nf">erb</span> <span class="o">--&gt;</span>
+
+<span class="o">&lt;</span><span class="n">h1</span><span class="o">&gt;</span><span class="no">Signup</span> <span class="n">here!</span><span class="o">&lt;</span><span class="sr">/h1&gt;
+  &lt;%= form_for :user, :url: '/use</span><span class="n">rs</span><span class="err">'</span> <span class="k">do</span> <span class="o">|</span><span class="n">f</span><span class="o">|</span> <span class="sx">%&gt;
+    Name: &lt;%= f.text_field :name %&gt;</span>
+    <span class="no">Email</span> <span class="o">&lt;</span><span class="sx">%= f.text_field :email %&gt;
+    Password: &lt;%=</span> <span class="n">f</span><span class="p">.</span><span class="nf">password_field</span> <span class="ss">:password</span> <span class="o">%&gt;</span>
+    <span class="no">Password</span> <span class="no">Confirmation</span><span class="p">:</span> <span class="o">&lt;</span><span class="sx">%= f.password_field :password_confirmation %&gt;
+    &lt;%=</span> <span class="n">f</span><span class="p">.</span><span class="nf">submit</span> <span class="s2">"Submit"</span> <span class="o">%&gt;</span>
+  <span class="o">&lt;</span><span class="sx">% end </span><span class="o">%&gt;</span>
+</code></pre> <p>The password_confirmation field is not required, so you can ommit it if you like. Keep in mind all the rails conventions for the <a href="http://apidock.com/rails/ActionView/Helpers/FormHelper/form_for">form builder</a>. Our form will send its parameters wrapped in a hash table called &ldquo;user&rdquo; to the &ldquo;/users&rdquo; url using the post method. (We have already defined this route in routes.rb)</p> <h3>Step 7 - Receive the form parameters =&gt; create action</h3> <pre class="highlight ruby"><code><span class="o">&lt;--</span> <span class="n">app</span><span class="o">/</span><span class="n">controllers</span><span class="o">/</span><span class="n">users_controller</span><span class="p">.</span><span class="nf">rb</span> <span class="o">--&gt;</span>
+
+<span class="k">class</span> <span class="nc">UsersController</span> <span class="o">&lt;</span> <span class="no">ApplicationController</span>
+
+  <span class="k">def</span> <span class="nf">show</span>
+  <span class="k">end</span>
+
+  <span class="k">def</span> <span class="nf">new</span>
+  <span class="k">end</span>
+
+  <span class="k">def</span> <span class="nf">create</span>
+    <span class="n">user</span> <span class="o">=</span> <span class="no">User</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">user_params</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">user</span><span class="p">.</span><span class="nf">save</span>
+      <span class="n">session</span><span class="p">[</span><span class="ss">:user_id</span><span class="p">]</span> <span class="o">=</span> <span class="n">user</span><span class="p">.</span><span class="nf">id</span>
+      <span class="n">redirect_to</span> <span class="s1">'/'' # after signup redirect to root page
+    else
+      redirect_to '</span><span class="o">/</span><span class="n">signup</span><span class="err">'</span> <span class="c1">#after failed signup =&gt; redirect to signup page again</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+
+  <span class="kp">private</span>
+
+  <span class="k">def</span> <span class="nf">user_params</span>
+    <span class="n">params</span><span class="p">.</span><span class="nf">require</span><span class="p">(</span><span class="ss">:user</span><span class="p">).</span><span class="nf">permit</span><span class="p">(</span><span class="ss">:name</span><span class="p">,</span> <span class="ss">:email</span><span class="p">,</span> <span class="ss">:password</span><span class="p">,</span> <span class="ss">:password_confirmation</span><span class="p">)</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre> <p>First we need to whitelist our user parameters. Then we can use them to actually create a new user in the database. After the user is saved succesfully, we will create a new session cookie (cookie = little piece of information stored in your browser) and store the user_id in it. Rails offers to types of cookies: Session cookies and normal cookies. The only difference between them is the way they are stored. Session cookies are stored encrypted and normal cookies are stored in plain text. You can adjust the code, signup and see the differences in your browser stored cookies.</p> <pre class="highlight erb"><code><span class="nt">&lt;--</span> <span class="na">Change</span> <span class="na">cookie</span> <span class="na">type</span> <span class="na">--</span><span class="nt">&gt;</span>
+
+  def create
+    user = User.new(user_params)
+    if user.save
+      cookie[:user_id] = user.id
+      redirect_to `/`
+    else
+      redirect_to '/signup'
+    end
+  end
+</code></pre> <h3>Step 8 - Install bycrypt gem</h3> <p>Usally the bycrypt gem is just commented out. So uncomment or add this line:</p> <pre class="highlight ruby"><code><span class="o">&lt;--</span> <span class="no">Use</span> <span class="no">ActiveModel</span> <span class="n">has_secure_password</span> <span class="o">--&gt;</span>
+  <span class="n">gem</span> <span class="s1">'bcrypt'</span><span class="p">,</span> <span class="s1">'~&gt; 3.1.7'</span>
+</code></pre> <p>After you have added the line install the gem with</p> <pre class="highlight erb"><code>bundle install
+</code></pre> <h3>Step 9 - User Model (where the magic happens)</h3> <p>I want to cover the core principles of authentification in this post. That&rsquo;s why I won&rsquo;t add any constraints like checking for duplicated email addresses or a required password length. </p> <p>Here we just need to add </p> <pre class="highlight ruby"><code><span class="o">&lt;--</span> <span class="n">app</span><span class="o">/</span><span class="n">models</span><span class="o">/</span><span class="n">user</span><span class="p">.</span><span class="nf">rb</span> <span class="o">--&gt;</span>
+
+<span class="k">class</span> <span class="nc">User</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span>
+
+  <span class="n">has_secure_password</span>
+
+<span class="k">end</span>
+</code></pre> <p>What has happend here? The method &ldquo;has<em>secure</em>password&rdquo; basically compares our user.password and user.password<em>confirmation, creates a hash of our password and stores it inside the attribute password</em>digest (Step 1).<br> If you even want to do that on your own, take a look at <a href="http://stackoverflow.com/questions/19173175/rails-how-to-write-your-own-authentication-without-using-has-secure-password">this</a> post on stackoverflow. </p> <h3>Step 10 - Create the sessions controller</h3> <pre class="highlight ruby"><code><span class="o">&lt;--</span> <span class="n">app</span><span class="o">/</span><span class="n">controllers</span><span class="o">/</span><span class="n">sessions_controller</span><span class="p">.</span><span class="nf">rb</span> <span class="o">--&gt;</span>
+
+<span class="k">class</span> <span class="nc">SessionsController</span> <span class="o">&lt;</span> <span class="no">ApplicationController</span>
+
+  <span class="k">def</span> <span class="nf">new</span> <span class="c1">#login form</span>
+  <span class="k">end</span>
+
+  <span class="k">def</span> <span class="nf">create</span> <span class="c1">#login action</span>
+  <span class="k">end</span>
+
+  <span class="k">def</span> <span class="nf">destroy</span> <span class="c1">#logout action</span>
+  <span class="k">end</span>
+
+<span class="k">end</span>
+</code></pre> <h3>Step 11 - Create the login form</h3> <pre class="highlight ruby"><code><span class="o">&lt;--</span> <span class="n">app</span><span class="o">/</span><span class="n">views</span><span class="o">/</span><span class="n">sessions</span><span class="o">/</span><span class="kp">new</span><span class="p">.</span><span class="nf">html</span><span class="p">.</span><span class="nf">erb</span> <span class="o">--&gt;</span>
+
+<span class="o">&lt;</span><span class="n">h1</span><span class="o">&gt;</span><span class="no">Login</span><span class="o">&lt;</span><span class="sr">/h1&gt;
+
+&lt;%= form_tag '/</span><span class="n">login</span><span class="err">'</span> <span class="k">do</span> <span class="sx">%&gt;
+  Email: &lt;%= text_field_tag :email %&gt;</span>
+  <span class="no">Password</span><span class="p">:</span> <span class="o">&lt;</span><span class="sx">%= password_field_tag :password %&gt;
+  &lt;%=</span> <span class="n">submit_tag</span> <span class="s2">"Submit"</span> <span class="o">%&gt;</span>
+<span class="o">&lt;</span><span class="sx">% end </span><span class="o">%&gt;</span>
+</code></pre> <h3>Step 12 - Add the new login/logout routes</h3> <pre class="highlight ruby"><code><span class="o">&lt;--</span> <span class="n">config</span><span class="o">/</span><span class="n">routes</span><span class="p">.</span><span class="nf">rb</span> <span class="o">--&gt;</span>
+<span class="no">Rails</span><span class="p">.</span><span class="nf">application</span><span class="p">.</span><span class="nf">routes</span><span class="p">.</span><span class="nf">draw</span> <span class="k">do</span>
+
+  <span class="n">root</span> <span class="ss">to: </span><span class="s1">'users#new'</span>
+
+  <span class="n">get</span> <span class="s1">'/login'</span> <span class="o">=&gt;</span> <span class="s1">'sessions#new'</span> <span class="c1">#send login form</span>
+  <span class="n">post</span> <span class="s1">'/login'</span> <span class="o">=&gt;</span> <span class="s1">'sessions#create'</span> <span class="c1">#receive login form</span>
+  <span class="n">get</span> <span class="s1">'/logout'</span> <span class="o">=&gt;</span> <span class="s1">'sessions#destroy'</span> <span class="c1">#logout</span>
+
+  <span class="n">get</span> <span class="s1">'/signup'</span> <span class="o">=&gt;</span> <span class="s1">'users#new'</span>
+  <span class="n">post</span> <span class="s1">'/users'</span> <span class="o">=&gt;</span> <span class="s1">'users#create'</span>
+
+<span class="k">end</span>
+</code></pre> <h3>Step 13 - Add the login and logout logic</h3> <pre class="highlight ruby"><code><span class="o">&lt;--</span> <span class="n">app</span><span class="o">/</span><span class="n">controllers</span><span class="o">/</span><span class="n">sessions_controller</span><span class="p">.</span><span class="nf">rb</span> <span class="o">--&gt;</span>
+
+<span class="k">class</span> <span class="nc">SessionsController</span> <span class="o">&lt;</span> <span class="no">ApplicationController</span>
+
+  <span class="k">def</span> <span class="nf">new</span>
+  <span class="k">end</span>
+
+  <span class="k">def</span> <span class="nf">create</span>
+    <span class="n">user</span> <span class="o">=</span> <span class="no">User</span><span class="p">.</span><span class="nf">find_by_email</span><span class="p">(</span><span class="n">params</span><span class="p">[</span><span class="ss">:email</span><span class="p">])</span>
+    <span class="c1">#If user exists AND password is entered correctly</span>
+    <span class="k">if</span> <span class="n">user</span> <span class="o">&amp;&amp;</span> <span class="n">user</span><span class="p">.</span><span class="nf">authenticate</span><span class="p">(</span><span class="n">params</span><span class="p">[</span><span class="ss">:password</span><span class="p">])</span>
+      <span class="c1">#Store user id in a brwoser cookie</span>
+      <span class="c1">#This is how we will keep the user logged in while he can navigate on our site</span>
+      <span class="n">session</span><span class="p">[</span><span class="ss">:user_id</span><span class="p">]</span> <span class="o">=</span> <span class="n">user</span><span class="p">.</span><span class="nf">id</span>
+      <span class="n">redirect_to</span> <span class="s1">'/'</span>
+    <span class="k">else</span>
+      <span class="c1">#Login failed =&gt; back to login form</span>
+      <span class="n">redirect_to</span> <span class="s1">'/login'</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+
+  <span class="k">def</span> <span class="nf">destroy</span>
+    <span class="n">session</span><span class="p">[</span><span class="ss">:user_id</span><span class="p">]</span> <span class="o">=</span> <span class="kp">nil</span>
+    <span class="n">redirect_to</span> <span class="s1">'/login'</span>
+  <span class="k">end</span>
+
+<span class="k">end</span>
+</code></pre> <h3>Step 14 - Check if user is logged in</h3> <pre class="highlight ruby"><code><span class="o">&lt;--</span> <span class="n">app</span><span class="o">/</span><span class="n">controllers</span><span class="o">/</span><span class="n">application_controller</span><span class="p">.</span><span class="nf">rb</span> <span class="o">--&gt;</span>
+
+<span class="k">class</span> <span class="nc">ApplicationController</span> <span class="o">&lt;</span> <span class="no">ActionController</span><span class="o">::</span><span class="no">Base</span>
+  <span class="c1"># Prevent CSRF attacks by raising an exception.</span>
+  <span class="c1"># For APIs, you may want to use :null_session instead.</span>
+  <span class="n">protect_from_forgery</span> <span class="ss">with: :exception</span>
+
+  <span class="c1"># returns current_user if it already exists or looks if there is a session_cookie with the correct value and assigns current_user afterwards</span>
+  <span class="k">def</span> <span class="nf">current_user</span>
+    <span class="vi">@current_user</span> <span class="o">||=</span> <span class="no">User</span><span class="p">.</span><span class="nf">find</span><span class="p">(</span><span class="n">session</span><span class="p">[</span><span class="ss">:user_id</span><span class="p">])</span> <span class="k">if</span> <span class="n">session</span><span class="p">[</span><span class="ss">:user_id</span><span class="p">]</span>
+  <span class="k">end</span>
+  <span class="n">helper_method</span> <span class="ss">:current_user</span> <span class="c1">#to make the method available in our views</span>
+
+  <span class="k">def</span> <span class="nf">authorize</span>
+    <span class="n">redirect_to</span> <span class="s1">'/login'</span> <span class="k">unless</span> <span class="n">current_user</span>
+  <span class="k">end</span>
+
+<span class="k">end</span>
+</code></pre> <p>I have also included three lines of authorization here. Otherwise there is no sense in loggin in.</p> <h3>Step 15 - Setup our top secret page</h3> <pre class="highlight ruby"><code><span class="n">rails</span> <span class="n">g</span> <span class="n">controller</span> <span class="no">Pages</span> <span class="n">secret</span> 
+</code></pre> <pre class="highlight ruby"><code><span class="o">&lt;--</span> <span class="n">app</span><span class="o">/</span><span class="n">views</span><span class="o">/</span><span class="n">pages</span><span class="o">/</span><span class="n">secret</span><span class="p">.</span><span class="nf">html</span><span class="p">.</span><span class="nf">erb</span> <span class="o">--&gt;</span>
+<span class="o">&lt;</span><span class="n">h1</span><span class="o">&gt;</span><span class="no">Top</span> <span class="no">Secret</span><span class="o">&lt;</span><span class="sr">/h1&gt;
+
+&lt;h2&gt;Hallo &lt;%= @current_user.name %&gt;&lt;/</span><span class="n">h2</span><span class="o">&gt;</span>
+</code></pre> <p>Update the route.rb</p> <pre class="highlight ruby"><code><span class="no">Rails</span><span class="p">.</span><span class="nf">application</span><span class="p">.</span><span class="nf">routes</span><span class="p">.</span><span class="nf">draw</span> <span class="k">do</span>
+
+  <span class="n">root</span> <span class="ss">to: </span><span class="s1">'pages#secret'</span>
+
+  <span class="n">get</span> <span class="s1">'/secret'</span> <span class="o">=&gt;</span> <span class="s1">'pages#secret'</span>
+
+  <span class="n">get</span> <span class="s1">'/login'</span> <span class="o">=&gt;</span> <span class="s1">'sessions#new'</span>
+  <span class="n">post</span> <span class="s1">'/login'</span> <span class="o">=&gt;</span> <span class="s1">'sessions#create'</span>
+  <span class="n">get</span> <span class="s1">'/logout'</span> <span class="o">=&gt;</span> <span class="s1">'sessions#destroy'</span>
+
+
+  <span class="n">get</span> <span class="s1">'/signup'</span> <span class="o">=&gt;</span> <span class="s1">'users#new'</span>
+  <span class="n">post</span> <span class="s1">'/users'</span> <span class="o">=&gt;</span> <span class="s1">'users#create'</span>
+
+<span class="k">end</span>
+</code></pre> <p>No we can determine who will be allowed to access our top secret page.</p> <h3>Step 16 - Authorize all succeessfully logged in users to see the page</h3> <pre class="highlight ruby"><code><span class="o">&lt;--</span> <span class="n">app</span><span class="o">/</span><span class="n">controllers</span><span class="o">/</span><span class="n">pages_controller</span><span class="p">.</span><span class="nf">rb</span> <span class="o">--&gt;</span>
+
+<span class="k">class</span> <span class="nc">PagesController</span> <span class="o">&lt;</span> <span class="no">ApplicationController</span>
+  <span class="n">before_filter</span> <span class="ss">:authorize</span>
+
+  <span class="k">def</span> <span class="nf">secret</span>
+  <span class="k">end</span>
+
+<span class="k">end</span>
+</code></pre> <p>Before our server will execute the secret action (and send the top secret site to our client&rsquo;s browser) the authorize method is called. As we have seen in Step 13, the authorize mehtod checks if the user is logged in, otherwise it redirects the user to the login page.</p> <h2>What&rsquo;s missing?</h2> <ul> <li>All sorts of validations on the user model level</li> <li>Confirmation email</li> <li>All sorts of user notifications (e.g. failed login)</li> </ul> <h2>Authentification in action</h2> <p>Quality: Vintage style ;)</p> <p><img alt=demo width=640 height=284 src="images/authentification_demo-ab116e7b.gif"/></p> <h2>Gems vs code from scratch</h2> <p>It is definitely helpful to knwo how to implement user authentification by only using bycrypt or even completly from scratch. However it is quite boring to do it again and again for every single app. Therefore you will create a gem for it. Now it&rsquo;s up to you, if you want to maintain your own authentification gem or if you want other people to do it for you. </p> <p>Here is a short list of interesting gems:<br> - <a href="https://github.com/plataformatec/devise">device</a> (authentification)<br> - <a href="https://github.com/thoughtbot/clearance">clearance</a> (authentification)<br> - <a href="https://github.com/CanCanCommunity/cancancan">cancancan</a> (authorication)<br> - <a href="https://github.com/elabs/pundit">pundit</a> (authorication)</p> <div class=ending> <p> As always, I would love to hear your feedback!<br> Shoot me an email: hello@janruettinger.co </p> </div> </section> </div> <footer class=footer> </footer> </body> </html>

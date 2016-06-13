@@ -10,15 +10,15 @@
     <name>Blog Author</name>
   </author>
   <entry>
-    <title>Syntax highlighting with middleman</title>
-    <link rel="alternate" href="http://blog.url.com/syntax-highlighting-with-middleman.html"/>
-    <id>http://blog.url.com/syntax-highlighting-with-middleman.html</id>
+    <title>Syntax highlighting on your middleman blog</title>
+    <link rel="alternate" href="http://blog.url.com/syntax-highlighting-on-your-middleman-blog.html"/>
+    <id>http://blog.url.com/syntax-highlighting-on-your-middleman-blog.html</id>
     <published>2016-06-12T21:00:00+02:00</published>
-    <updated>2016-06-12T21:35:03+02:00</updated>
+    <updated>2016-06-13T04:10:29+02:00</updated>
     <author>
       <name>Article Author</name>
     </author>
-    <content type="html">&lt;h1&gt;Syntax highlighting with middleman&lt;/h1&gt;
+    <content type="html">&lt;h1&gt;Syntax highlighting on your middleman blog&lt;/h1&gt;
 
 &lt;h2&gt;Prerequisites&lt;/h2&gt;
 

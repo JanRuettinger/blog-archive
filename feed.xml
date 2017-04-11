@@ -5,10 +5,33 @@
   <id>http://blog.url.com/</id>
   <link href="http://blog.url.com/"/>
   <link href="http://blog.url.com/feed.xml" rel="self"/>
-  <updated>2016-06-12T21:00:00+02:00</updated>
+  <updated>2017-03-25T10:10:00+01:00</updated>
   <author>
     <name>Blog Author</name>
   </author>
+  <entry>
+    <title>Trip to China</title>
+    <link rel="alternate" href="http://blog.url.com/trip-to-china.html"/>
+    <id>http://blog.url.com/trip-to-china.html</id>
+    <published>2017-03-25T10:10:00+01:00</published>
+    <updated>2017-04-01T22:20:16+02:00</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <content type="html">&lt;h1&gt;Trip to China for 28 days&lt;/h1&gt;
+
+&lt;h2&gt;Where do ideas come from?&lt;/h2&gt;
+
+&lt;p&gt;Before talking about the origin of ideas, I want to bring up one popular&lt;br&gt;
+&lt;img alt="idea_generation_model" width="667" height="389" src="/images/idea_generation_model-ba895906.png" /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Information is sent as a trigger to our subconscious&lt;br&gt;
+Yes, our subconscious needs a trigger in form of a a thought from our nsforming and combining old ideas more difficult than driving? No, of course 
+&lt;img alt="ryan holiday" width="650" height="366" src="/images/ryan_holiday-31a6f702.png" /&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+  </entry>
   <entry>
     <title>Syntax highlighting on your middleman blog</title>
     <link rel="alternate" href="http://blog.url.com/syntax-highlighting-on-your-middleman-blog.html"/>
@@ -604,98 +627,6 @@ OK that&amp;rsquo;s not true. Only a Hackathon where you did&amp;rsquo;t show up
 &lt;li&gt;&lt;p&gt;Get something done - it doens&amp;rsquo;t matter how bad it is&lt;br&gt;
 I always see guys at Hackathons who spend the whole time with brainstoarming and starting again and again. They end up learning not much. Fuck it and just build something. Nobody will judge you!  &lt;/p&gt;&lt;/li&gt;
 &lt;/ul&gt;
-</content>
-  </entry>
-  <entry>
-    <title>Bayern SU - Wordpress site</title>
-    <link rel="alternate" href="http://blog.url.com/bayern-su.html"/>
-    <id>http://blog.url.com/bayern-su.html</id>
-    <published>2016-04-28T11:12:00+02:00</published>
-    <updated>2016-05-29T03:10:50+02:00</updated>
-    <author>
-      <name>Article Author</name>
-    </author>
-    <content type="html">&lt;h1&gt;Website for the political youth orginazation of the CSU&lt;/h1&gt;
-
-&lt;h2&gt;General information about the project&lt;/h2&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;&lt;u&gt;What:&lt;/u&gt; Wordpress site for a political youth organization of a german party (~ 1000 members)&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;u&gt;Time frame:&lt;/u&gt; Several months in 2014&lt;/li&gt;&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;u&gt;Cost:&lt;/u&gt; I am part of that orgnization, so I did it for free ;-)&lt;/p&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2&gt;Features&lt;/h2&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;Every member of the executive board with the right permission can post articles.&lt;br&gt;
-I used a simple wordpress plugin to do the member management.&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;Enable new members to sign up online&lt;br&gt;
-Pupils who want to join our organization can now apply online instead of mailing us a print out.&lt;/p&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;img alt="bayernsu_application" width="1552" height="869" src="/images/bayernsu_application-670663db.png" /&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Meet a student of your favorite university&lt;br&gt;
-Visitors of our site can request a meeting with a student of our network who attends their favorite university.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;img alt="bayernsu_university" width="1552" height="869" src="/images/bayernsu_university-ccd8ff5d.png" /&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Find our local group close to your home&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;img alt="bayernsu_localization" width="1552" height="869" src="/images/bayernsu_localization-76296fc9.png" /&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;Included an RSS Feed of important government sites&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;Modern and professional design&lt;/p&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;img alt="bayernsu_index" width="1552" height="869" src="/images/bayernsu_index-fb3ecbf1.png" /&gt;&lt;/p&gt;
-
-&lt;h2&gt;What did I learn?&lt;/h2&gt;
-
-&lt;ol&gt;
-&lt;li&gt;&lt;p&gt;Communication with a big democratic orgnaization is time consuming&lt;br&gt;
-The executive board of the youth organization only gets together around 8 times per year. Mayor changes (like a new way for people to become a member) need to be discussed with the entire group. Sometimes that was really frustrating.  &lt;/p&gt;
-
-&lt;p&gt;&lt;i class="fa fa-lightbulb-o fa-2x"&gt;&lt;/i&gt; Tip @freelancers&lt;br&gt;
-Take on projects only with one single responsible person who is also in charge of the budget!&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;A solid plan saves you a lot of time and trouble&lt;br&gt;
-That sounds abvious, but we forget about way too often. I had no idea which features I wanted to implement and when I wanted to be finished with the project. Hell yeah it was my first web project ever.&lt;br&gt;
-I would highly recommend sketch out all your features first on paper or with a simple tool like Sketch, get a buy in from all responsible parties and THEN start coding.&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;It took way longer than I thought&lt;br&gt;
-I have never done a web project before, but I thought it&amp;rsquo;s not real programming it&amp;rsquo;s just wordpress&amp;hellip; Oh  my god was I wrong. At the end I had to modify plugins which took years as I didn&amp;rsquo;t know php either.  &lt;/p&gt;
-
-&lt;p&gt;&lt;i class="fa fa-lightbulb-o fa-2x"&gt;&lt;/i&gt; Tip &lt;br&gt; Look at your schedule for the next weeks/months if you have enough time for your project!&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;Adverse circumstances made me procrastinate on the project&lt;br&gt;
-At some point I was not happy with the code implementation, so I refused to finish this particular feature and instead started another one. Then I was not pleased by visual appearance and switched to back to the other feature. At the end it was kind of mess and it took me way more energy to really finish a feature.  &lt;/p&gt;
-
-&lt;p&gt;&lt;i class="fa fa-lightbulb-o fa-2x"&gt;&lt;/i&gt; Tip &lt;br&gt;Get things done as quickly as possible and then just iterate!&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;Don&amp;rsquo;t start coding without a final agreement&lt;br&gt;
-This issue is related to my approach to start working without a real plan. I mean of course I made notes on a paper first, but that was by far not detailed enough. Finally I ended up developing a feature and then getting the feedback that nobody needs it or even worse we can&amp;rsquo;t use it for other reasons and I need to remove.  &lt;/p&gt;
-
-&lt;p&gt;&lt;i class="fa fa-lightbulb-o fa-2x"&gt;&lt;/i&gt; Tip &lt;br&gt; Use the startup approach and always get feedback before you actually start building a feature/product.&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;I didn&amp;rsquo;t use version control&amp;hellip;&lt;br&gt;
-At that point I didn&amp;rsquo;t know that git exists and that it&amp;rsquo;s that easy. So I developed version v0.9 then v0.95 followed by v1.0, then v1.05, went back to v0.95 and continued with v2.0. It was a total mess&amp;hellip;  &lt;/p&gt;
-
-&lt;p&gt;&lt;i class="fa fa-lightbulb-o fa-2x"&gt;&lt;/i&gt; Tip &lt;br&gt;Use version control early on. Check out my articles on how to learn git and my personal git workflow.&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;At the beginning I had no idea&amp;hellip;now I am developing rails apps&lt;br&gt;
-I had worked for a german science institut on some microcontroller projects before I started working on this wordpress project. You can say I had NO IDEA what I was doing. You can learn a lot on the way. I just googled, stackoverflowed and youtubed a lot. At the end I had a pretty decent knowledge about wordpress.  &lt;/p&gt;
-
-&lt;p&gt;&lt;i class="fa fa-lightbulb-o fa-2x"&gt;&lt;/i&gt; Tip &lt;br&gt;Make bold moves and just try it even if you are not 100% certain if you can make it! Leave your comfort zone!&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;Creating stuff is way more fun than consuming&lt;br&gt;
-This goes especially to all my friends in Germnay. Creating stuff is so much fun in particular when other people give you feedback. It doesn&amp;rsquo;t matter if you build a company or just feed your facebook timeline with interesting content. As long as you get feedback - you will have fun.  &lt;/p&gt;
-
-&lt;p&gt;&lt;i class="fa fa-lightbulb-o fa-2x"&gt;&lt;/i&gt; Tip  &lt;/p&gt;
-
-&lt;h1&gt;1 Start being a creator instead of a consumer!&lt;/h1&gt;
-
-&lt;h1&gt;2 You can start right now and share some details about my awesome blog ;-)&lt;/h1&gt;&lt;/li&gt;
-&lt;/ol&gt;
 </content>
   </entry>
 </feed>

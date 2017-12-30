@@ -14,7 +14,7 @@
     <link rel="alternate" href="http://blog.url.com/cookandrun.html"/>
     <id>http://blog.url.com/cookandrun.html</id>
     <published>2017-12-28T01:00:00+01:00</published>
-    <updated>2017-12-30T14:29:23+01:00</updated>
+    <updated>2017-12-30T15:21:33+01:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -87,7 +87,7 @@ The goal is that all teams who share a meal together are as close together as po
 
 &lt;h2&gt;Code&lt;/h2&gt;
 
-&lt;p&gt;You can find the code on github. In order to use it you need to change your configs (mail server, etc).&lt;/p&gt;
+&lt;p&gt;You can find the code on &lt;a href="https://github.com/JanRuettinger/cookandrun_public"&gt;github&lt;/a&gt;. In order to use it you need to change some configs (mail server, aws key, etc.).&lt;/p&gt;
 </content>
   </entry>
   <entry>

@@ -91,15 +91,31 @@ The goal is that all teams who share a meal together are as close together as po
 </content>
   </entry>
   <entry>
-    <title>Reainforcement Learning notes</title>
+    <title>Reainforcement Learning notes (german)</title>
     <link rel="alternate" href="http://blog.url.com/rl-notes.html"/>
     <id>http://blog.url.com/rl-notes.html</id>
     <published>2017-12-15T10:10:00+01:00</published>
-    <updated>2017-12-29T00:18:59+01:00</updated>
+    <updated>2017-12-30T18:42:43+01:00</updated>
     <author>
       <name>Article Author</name>
     </author>
     <content type="html">&lt;h1&gt;RL notes&lt;/h1&gt;
+
+&lt;p&gt;You can find the material &lt;a href="https://github.com/JanRuettinger/RL_notes"&gt;here&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Some time ago I prepared an introduction to Reinforcement Learning for our department. It consists of a PDF presentation an three demos. The slides are in german though.&lt;/p&gt;
+
+&lt;h3&gt;How to run the demos?&lt;/h3&gt;
+
+&lt;p&gt;The demos are based on jupyter notebooks. So all you need to do is start a jupyter notebook server inside the demo folder.&lt;/p&gt;
+
+&lt;h3&gt;Credits&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="http://www0.cs.ucl.ac.uk/staff/d.silver/web/Teaching.html"&gt;Lecture&lt;/a&gt; by David Silver&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://incompleteideas.net/book/the-book-2nd.html"&gt;Book&lt;/a&gt; by Richard S. Sutton&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://www.wildml.com/2016/10/learning-reinforcement-learning/"&gt;Material&lt;/a&gt; by Denny Biatz &lt;/li&gt;
+&lt;/ul&gt;
 </content>
   </entry>
   <entry>

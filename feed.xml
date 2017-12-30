@@ -119,15 +119,39 @@ The goal is that all teams who share a meal together are as close together as po
 </content>
   </entry>
   <entry>
-    <title>Kaggle workshop material</title>
-    <link rel="alternate" href="http://blog.url.com/kaggle-workshop-material.html"/>
-    <id>http://blog.url.com/kaggle-workshop-material.html</id>
-    <published>2017-12-15T10:10:00+01:00</published>
-    <updated>2017-12-28T23:03:39+01:00</updated>
+    <title>Kaggle workshop</title>
+    <link rel="alternate" href="http://blog.url.com/kaggle-workshop.html"/>
+    <id>http://blog.url.com/kaggle-workshop.html</id>
+    <published>2017-12-15T01:00:00+01:00</published>
+    <updated>2017-12-30T19:28:36+01:00</updated>
     <author>
       <name>Article Author</name>
     </author>
-    <content type="html">&lt;h1&gt;Kaggle workshop material&lt;/h1&gt;
+    <content type="html">&lt;h1&gt;Kaggle workshop&lt;/h1&gt;
+
+&lt;p&gt;Link to &lt;a href="https://github.com/JanRuettinger/kaggle_workshop"&gt;material&lt;/a&gt; on github.&lt;/p&gt;
+
+&lt;h2&gt;Overview&lt;/h2&gt;
+
+&lt;p&gt;I created this material for a pre-christmas event at our department. The goal was to enable even complete ML beginners (all had an engineering major though) to participant in a kaggle competition. The workshop was divided into two parts. In the first part I went through some Machine Learning basics using the &lt;a href="https://www.kaggle.com/c/titanic"&gt;titanic dataset&lt;/a&gt; from kaggle. This took about 3-4 hours. Here is the outline:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;Machine Learning introduction&lt;/li&gt;
+&lt;li&gt;Linear models&lt;/li&gt;
+&lt;li&gt;Pandas introduction&lt;/li&gt;
+&lt;li&gt;Exploratory Data Analysis (EDA) using Seaborn&lt;/li&gt;
+&lt;li&gt;Feature engineering&lt;/li&gt;
+&lt;li&gt;Model evaluation and cross validation&lt;/li&gt;
+&lt;li&gt;Regularization&lt;/li&gt;
+&lt;li&gt;Decision Trees&lt;/li&gt;
+&lt;li&gt;K-nearest Neighbor&lt;/li&gt;
+&lt;li&gt;Hyperparameter optimization&lt;/li&gt;
+&lt;li&gt;Ensemble methods (bagging, boosting)&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;In the second part we built teams and worked on the &lt;a href="https://www.kaggle.com/c/house-prices-advanced-regression-techniques"&gt;housing price&lt;/a&gt; challenge on kaggle. I created three different starter kits (all included in the repo) so that even people with no ML background could get to a decent solution.&lt;/p&gt;
+
+&lt;p&gt;Feel free to use it in whatever way you want!&lt;/p&gt;
 </content>
   </entry>
   <entry>

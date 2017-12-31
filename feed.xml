@@ -94,8 +94,8 @@ The goal is that all teams who share a meal together are as close together as po
     <title>Reainforcement Learning notes (german)</title>
     <link rel="alternate" href="http://blog.url.com/rl-notes.html"/>
     <id>http://blog.url.com/rl-notes.html</id>
-    <published>2017-12-15T10:10:00+01:00</published>
-    <updated>2017-12-30T18:42:43+01:00</updated>
+    <published>2017-12-15T01:00:00+01:00</published>
+    <updated>2017-12-31T01:35:36+01:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -216,11 +216,58 @@ The CI/CD part is private though.&lt;/p&gt;
 </content>
   </entry>
   <entry>
+    <title>PyConDE 2017</title>
+    <link rel="alternate" href="http://blog.url.com/pyconde-2017.html"/>
+    <id>http://blog.url.com/pyconde-2017.html</id>
+    <published>2017-11-01T01:00:00+01:00</published>
+    <updated>2017-12-31T01:26:24+01:00</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <content type="html">&lt;h1&gt;PyConDE 2017&lt;/h1&gt;
+
+&lt;p&gt;After the amazing EuroSciPy I started looking for other similar conferences. I was lucky and only had to wait two more months till PyConDE. As opposed to EuroSciPy, the audience at PyConDE had less an academic but rather an industry background. There were engineers from companies of all sizes but definitely a lot more from smaller companies.&lt;/p&gt;
+
+&lt;p&gt;I found a couchsurfing accomodation last minute. I only mention this because it was probably my best couchsurfing experience so far. My host was a cook turned internet entrepreneur with a mexican girlfriend. They had invited two exchange students from Venezula to discuss a charity project. Their idea was to help people in Venezula who suffer from huge inflation by enabling them to mine coins and getting back dollars. It only works because they have flatrate electricy contracts that means they can use as much electricty as they want without paying more. The tapas were great, the discussion interesting - obviously I didn&amp;rsquo;t get much sleep.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href="https://de.pycon.org/schedule/"&gt;Conference schedule &lt;/a&gt;&lt;/p&gt;
+
+&lt;h3&gt;Day 1 - The conference begins&lt;/h3&gt;
+
+&lt;p&gt;My goal for this conference was to get a better understanding of how Machine Learning algorithms are applied in industry, what the key challenges are and which skills I lack the most.&lt;/p&gt;
+
+&lt;p&gt;On the way to the venue I met a fellow attende who works as a backend engineer at a pretty successful hotel search company. We got along pretty well. He offered to look at the code of one a side proejct. I barely get feedback on my code so this was an invaluable opportunity for me. Later he introduced me to a collegue who works on the ML pipeline at their company. He provided some valuable insights about job hunting and on which skills I should focus. He doesn&amp;rsquo;t take full time offers anymore because he can get a much higher salary when employed as a contractor. Skillwise he mentioned that one should try to understand the whole pipeline and not just a small aspect of it. &lt;/p&gt;
+
+&lt;p&gt;These kind of discussions are where I get the most out of. So I tried to get into as many of such discussions as possible. Sometimes I realize that &lt;/p&gt;
+
+&lt;p&gt;and he introduced me to his&lt;/p&gt;
+
+&lt;p&gt;EuroSciPy (End of August)
+Bits &amp;amp; Pretzels (End of september)
+PyConDe (October)
+Frankfurt Marathon (October)&lt;/p&gt;
+
+&lt;p&gt;Met a guy backend stuff 
+introduced me to his friend who does ML stuff.&lt;/p&gt;
+
+&lt;p&gt;&lt;img alt="david" width="900" height="675" src="/images/pyconde/talk_david-d4cbf572.png" /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img alt="alex" width="768" height="1024" src="/images/pyconde/alex-b1cbe6d7.jpg" /&gt;&lt;/p&gt;
+
+&lt;p&gt;Alex Conway &amp;amp; David Dao&lt;/p&gt;
+
+&lt;p&gt;I was exhausted three days was too much for me. 
+(Marathon)&lt;/p&gt;
+
+&lt;p&gt;Recognized some faces (small community, fast.ai)&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
     <title>Frankfurt Marathon 2017</title>
     <link rel="alternate" href="http://blog.url.com/frankfurt-marathon.html"/>
     <id>http://blog.url.com/frankfurt-marathon.html</id>
-    <published>2017-11-01T10:10:00+01:00</published>
-    <updated>2017-12-30T19:32:55+01:00</updated>
+    <published>2017-11-01T01:00:00+01:00</published>
+    <updated>2017-12-31T01:35:30+01:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -248,35 +295,6 @@ I think this was at ~30km. I already look quite tired ;)&lt;/p&gt;
 &lt;p&gt;&lt;img alt="finish" src="/images/marathon/finish_01-6c7a3b90.jpeg" /&gt;  &lt;/p&gt;
 
 &lt;p&gt;Next year I want to finish a marathon in under 3:15h.&lt;/p&gt;
-</content>
-  </entry>
-  <entry>
-    <title>PyConDE 2017</title>
-    <link rel="alternate" href="http://blog.url.com/pyconde-2017.html"/>
-    <id>http://blog.url.com/pyconde-2017.html</id>
-    <published>2017-11-01T01:00:00+01:00</published>
-    <updated>2017-12-30T23:34:03+01:00</updated>
-    <author>
-      <name>Article Author</name>
-    </author>
-    <content type="html">&lt;h1&gt;PyConDE 2017&lt;/h1&gt;
-
-&lt;p&gt;After the amazing EuroSciPy I started looking for other similar conferences. The audience at the EuroSciPy  EuroSciPy PyConDe was next up. &lt;/p&gt;
-
-&lt;p&gt;EuroSciPy (End of August)
-Bits &amp;amp; Pretzels (End of september)
-PyConDe (October)
-Frankfurt Marathon (October)&lt;/p&gt;
-
-&lt;p&gt;Met a guy backend stuff 
-introduced me to his friend who does ML stuff.&lt;/p&gt;
-
-&lt;p&gt;Alex Conway &amp;amp; David Dao&lt;/p&gt;
-
-&lt;p&gt;I was exhausted three days was too much for me. 
-(Marathon)&lt;/p&gt;
-
-&lt;p&gt;Recognized some faces (small community, fast.ai)&lt;/p&gt;
 </content>
   </entry>
 </feed>

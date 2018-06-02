@@ -14,108 +14,74 @@
     <link rel="alternate" href="http://blog.url.com/cookandrun.html"/>
     <id>http://blog.url.com/cookandrun.html</id>
     <published>2017-12-28T01:00:00+01:00</published>
-    <updated>2017-12-30T15:23:07+01:00</updated>
+    <updated>2017-12-31T13:23:43+01:00</updated>
     <author>
       <name>Article Author</name>
     </author>
-    <content type="html">&lt;h1&gt;Cookandrun&lt;/h1&gt;
+    <content type="html">&lt;h1 id="cookandrun"&gt;Cookandrun&lt;/h1&gt;
 
 &lt;p&gt;Link to project: &lt;a href="www.cookandrun.fun"&gt;www.cookandrun.fun&lt;/a&gt;&lt;/p&gt;
 
-&lt;h2&gt;Tech stack&lt;/h2&gt;
-
+&lt;h2 id="tech-stack"&gt;Tech stack&lt;/h2&gt;
 &lt;ul&gt;
-&lt;li&gt;Backend: Flask (Python)&lt;/li&gt;
-&lt;li&gt;Frontend: Vanilla JS + JQuery, SASS (neat/bourbon framework by thoughtbots)&lt;/li&gt;
-&lt;li&gt;Database: PostgreSQL&lt;/li&gt;
-&lt;li&gt;Deployment: AWS + AWS Services (e.g. E-Mail)&lt;/li&gt;
+  &lt;li&gt;Backend: Flask (Python)&lt;/li&gt;
+  &lt;li&gt;Frontend: Vanilla JS + JQuery, SASS (neat/bourbon framework by thoughtbots)&lt;/li&gt;
+  &lt;li&gt;Database: PostgreSQL&lt;/li&gt;
+  &lt;li&gt;Deployment: AWS + AWS Services (e.g. E-Mail)&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h2&gt;What is this project about?&lt;/h2&gt;
+&lt;h2 id="what-is-this-project-about"&gt;What is this project about?&lt;/h2&gt;
+&lt;p&gt;I built the project because me and my friends wanted to organize a running dinner event but nobody wanted to the organizational work. A running dinner event is an event where you team up with a partner and invite two other teams consisting of strangers to your appartment and cook a delicious meal for them. In exchange two other teams will prepare a meal for your team. At the end all teams come together for a big after party. It’s especially popular in student cities. At my university such a running dinner event takes place every semester with more than 3000 students. I wanted to build a platform to help organize such events with minimal effort.&lt;/p&gt;
 
-&lt;p&gt;I built the project because me and my friends wanted to organize a running dinner event but nobody wanted to the organizational work. A running dinner event is an event where you team up with a partner and invite two other teams consisting of strangers to your appartment and cook a delicious meal for them. In exchange two other teams will prepare a meal for your team. At the end all teams come together for a big after party. It&amp;rsquo;s especially popular in student cities. At my university such a running dinner event takes place every semester with more than 3000 students. I wanted to build a platform to help organize such events with minimal effort.&lt;/p&gt;
-
-&lt;h2&gt;Key challenges&lt;/h2&gt;
-
+&lt;h2 id="key-challenges"&gt;Key challenges&lt;/h2&gt;
 &lt;ol&gt;
-&lt;li&gt;Teams must have an appartment in a certain area to make sure that every team can reach the next appartment in time.&lt;/li&gt;
-&lt;li&gt;At every stage teams should come together who haven&amp;rsquo;t met each other before.&lt;/li&gt;
+  &lt;li&gt;Teams must have an appartment in a certain area to make sure that every team can reach the next appartment in time.&lt;/li&gt;
+  &lt;li&gt;At every stage teams should come together who haven’t met each other before.&lt;/li&gt;
 &lt;/ol&gt;
 
-&lt;h2&gt;How does it work?&lt;/h2&gt;
-
+&lt;h2 id="how-does-it-work"&gt;How does it work?&lt;/h2&gt;
 &lt;ol&gt;
-&lt;li&gt;Organizer signs up at www.cookandrun.fun
-&lt;img alt="demo" width="1552" height="909" src="/images/project_cookandrun/01-c3370496.png" /&gt;&lt;br&gt;&lt;/li&gt;
-&lt;li&gt;Organizer signs in
+  &lt;li&gt;Organizer signs up at www.cookandrun.fun
+&lt;img alt="demo" width="1552" height="909" src="/images/project_cookandrun/01-c3370496.png" /&gt;&lt;/li&gt;
+  &lt;li&gt;Organizer signs in
 &lt;img alt="demo" width="1552" height="909" src="/images/project_cookandrun/02-a59ef25c.png" /&gt;&lt;/li&gt;
-&lt;li&gt;Organizer creates a new event
+  &lt;li&gt;Organizer creates a new event
 &lt;img alt="demo" width="1552" height="909" src="/images/project_cookandrun/03-c61ef967.png" /&gt;&lt;/li&gt;
-&lt;li&gt;Organizer specifies more details for the event
+  &lt;li&gt;Organizer specifies more details for the event
 &lt;img alt="demo" width="1552" height="909" src="/images/project_cookandrun/04-dee61f7a.png" /&gt;
-E.g. specify the area in which the participants need to have an appartment. Participants who don&amp;rsquo;t live in the specified area won&amp;rsquo;t be allowed to sign up for the event
+E.g. specify the area in which the participants need to have an appartment. Participants who don’t live in the specified area won’t be allowed to sign up for the event
 &lt;img alt="demo" width="1552" height="909" src="/images/project_cookandrun/05-2f17c114.png" /&gt;&lt;/li&gt;
-&lt;li&gt;Organizer opens the registration phase
+  &lt;li&gt;Organizer opens the registration phase
 &lt;img alt="demo" width="1552" height="909" src="/images/project_cookandrun/06-19461683.png" /&gt;&lt;/li&gt;
-&lt;li&gt;Participants can now sign up &lt;specified subdomain&gt;.cookandrun.fun
-&lt;img alt="demo" width="1552" height="909" src="/images/project_cookandrun/07-a6d2f48e.png" /&gt;&lt;/li&gt;
-&lt;li&gt;Organizer closes the registration phase
+  &lt;li&gt;Participants can now sign up &lt;specified subdomain=""&gt;.cookandrun.fun
+![demo](project_cookandrun/07.png)&lt;/specified&gt;&lt;/li&gt;
+  &lt;li&gt;Organizer closes the registration phase
 &lt;img alt="demo" width="1552" height="909" src="/images/project_cookandrun/08-242b249d.png" /&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;Organizer draws the teams 
+  &lt;li&gt;
+    &lt;p&gt;Organizer draws the teams 
 &lt;img alt="demo" width="1552" height="909" src="/images/project_cookandrun/09-f85a390c.png" /&gt;
 The goal is that all teams who share a meal together are as close together as possible. I used K-means algorithm with a fixed cluster size to achieve a near optimal result.
-&lt;img alt="demo" width="1552" height="909" src="/images/project_cookandrun/10-04f4a9f3.png" /&gt;&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;Organizer starts event
-&lt;img alt="demo" width="1552" height="909" src="/images/project_cookandrun/11-efa43c38.png" /&gt;&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;After the event is started participants get access to their individual time table for the event
-&lt;img alt="demo" width="1552" height="909" src="/images/project_cookandrun/12-0e0c445f.png" /&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;img alt="demo" width="1552" height="909" src="/images/project_cookandrun/10-04f4a9f3.png" /&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Organizer starts event
+&lt;img alt="demo" width="1552" height="909" src="/images/project_cookandrun/11-efa43c38.png" /&gt;&lt;/li&gt;
+  &lt;li&gt;After the event is started participants get access to their individual time table for the event
+&lt;img alt="demo" width="1552" height="909" src="/images/project_cookandrun/12-0e0c445f.png" /&gt;&lt;/li&gt;
 &lt;/ol&gt;
 
-&lt;h2&gt;Technical challenges&lt;/h2&gt;
+&lt;h2 id="technical-challenges"&gt;Technical challenges&lt;/h2&gt;
 
-&lt;h3&gt;1. Dynamic subdomains&lt;/h3&gt;
+&lt;h3 id="dynamic-subdomains"&gt;1. Dynamic subdomains&lt;/h3&gt;
+&lt;p&gt;Each event should get its own subdomain for participants to sign up. I split the platform into two seperate applications. The first application serves all requests from cookdandrun.fun. The second application is responsible for all requests from &lt;subdomain&gt;.cookandrun.fun. Both use the flask framework and share the same database.&lt;/subdomain&gt;&lt;/p&gt;
 
-&lt;p&gt;Each event should get its own subdomain for participants to sign up. I split the platform into two seperate applications. The first application serves all requests from cookdandrun.fun. The second application is responsible for all requests from &lt;subdomain&gt;.cookandrun.fun. Both use the flask framework and share the same database.&lt;/p&gt;
+&lt;h3 id="restrict-event-area"&gt;2. Restrict event area&lt;/h3&gt;
+&lt;p&gt;The goal was to make it dead easy for an organizer to specify an area in which all participants need to live in order to be allowed to sign up. I use Google Maps for visualization and the Google Maps API to get the coordinates for an address and check whether it’s within the specified area or not&lt;/p&gt;
 
-&lt;h3&gt;2. Restrict event area&lt;/h3&gt;
+&lt;h3 id="deployment--mail-server"&gt;3. Deployment &amp;amp; mail server&lt;/h3&gt;
+&lt;p&gt;Currently the project is deployed on a free tier instance on AWS via four docker containers (2 web apps container, database container and nignx container). As far as the mail server is concerned I couldn’t use a normal mail providers (zoho or gmail) because they limit the number of outgoing emails. Eventually I went with the Simple Email Service (SES) from AWS. If you are using AWS to host your application then the first 62.000 emails are free each month. That’s more than enough for this project. So the current operating costs are $0.&lt;/p&gt;
 
-&lt;p&gt;The goal was to make it dead easy for an organizer to specify an area in which all participants need to live in order to be allowed to sign up. I use Google Maps for visualization and the Google Maps API to get the coordinates for an address and check whether it&amp;rsquo;s within the specified area or not&lt;/p&gt;
-
-&lt;h3&gt;3. Deployment &amp;amp; mail server&lt;/h3&gt;
-
-&lt;p&gt;Currently the project is deployed on a free tier instance on AWS via four docker containers (2 web apps container, database container and nignx container). As far as the mail server is concerned I couldn&amp;rsquo;t use a normal mail providers (zoho or gmail) because they limit the number of outgoing emails. Eventually I went with the Simple Email Service (SES) from AWS. If you are using AWS to host your application then the first 62.000 emails are free each month. That&amp;rsquo;s more than enough for this project. So the current operating costs are $0.&lt;/p&gt;
-
-&lt;h2&gt;Code&lt;/h2&gt;
-
+&lt;h2 id="code"&gt;Code&lt;/h2&gt;
 &lt;p&gt;You can find the code on &lt;a href="https://github.com/JanRuettinger/cookandrun_public"&gt;github&lt;/a&gt;. In order to use it you need to change some configs (mail server, aws key, etc.).&lt;/p&gt;
-</content>
-  </entry>
-  <entry>
-    <title>Reainforcement Learning notes (german)</title>
-    <link rel="alternate" href="http://blog.url.com/rl-notes.html"/>
-    <id>http://blog.url.com/rl-notes.html</id>
-    <published>2017-12-15T01:00:00+01:00</published>
-    <updated>2017-12-31T01:35:36+01:00</updated>
-    <author>
-      <name>Article Author</name>
-    </author>
-    <content type="html">&lt;h1&gt;RL notes&lt;/h1&gt;
-
-&lt;p&gt;You can find the material &lt;a href="https://github.com/JanRuettinger/RL_notes"&gt;here&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;Some time ago I prepared an introduction to Reinforcement Learning for our department. It consists of a PDF presentation an three demos. The slides are in german though.&lt;/p&gt;
-
-&lt;h3&gt;How to run the demos?&lt;/h3&gt;
-
-&lt;p&gt;The demos are based on jupyter notebooks. So all you need to do is start a jupyter notebook server inside the demo folder.&lt;/p&gt;
-
-&lt;h3&gt;Credits&lt;/h3&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="http://www0.cs.ucl.ac.uk/staff/d.silver/web/Teaching.html"&gt;Lecture&lt;/a&gt; by David Silver&lt;/li&gt;
-&lt;li&gt;&lt;a href="http://incompleteideas.net/book/the-book-2nd.html"&gt;Book&lt;/a&gt; by Richard S. Sutton&lt;/li&gt;
-&lt;li&gt;&lt;a href="http://www.wildml.com/2016/10/learning-reinforcement-learning/"&gt;Material&lt;/a&gt; by Denny Biatz &lt;/li&gt;
-&lt;/ul&gt;
 </content>
   </entry>
   <entry>
@@ -127,31 +93,60 @@ The goal is that all teams who share a meal together are as close together as po
     <author>
       <name>Article Author</name>
     </author>
-    <content type="html">&lt;h1&gt;Kaggle workshop&lt;/h1&gt;
+    <content type="html">
+&lt;h1 id="kaggle-workshop"&gt;Kaggle workshop&lt;/h1&gt;
 
 &lt;p&gt;Link to the &lt;a href="https://github.com/JanRuettinger/kaggle_workshop"&gt;material&lt;/a&gt; on github.&lt;/p&gt;
 
-&lt;h2&gt;Overview&lt;/h2&gt;
-
+&lt;h2 id="overview"&gt;Overview&lt;/h2&gt;
 &lt;p&gt;I created this material for a pre-christmas event at our department. The goal was to enable even complete ML beginners (all had an engineering major though) to participant in a kaggle competition. The workshop was divided into two parts. In the first part I went through some Machine Learning basics using the &lt;a href="https://www.kaggle.com/c/titanic"&gt;titanic dataset&lt;/a&gt; from kaggle. This took about 3-4 hours. Here is the outline:&lt;/p&gt;
 
 &lt;ol&gt;
-&lt;li&gt;Machine Learning introduction&lt;/li&gt;
-&lt;li&gt;Linear models&lt;/li&gt;
-&lt;li&gt;Pandas introduction&lt;/li&gt;
-&lt;li&gt;Exploratory Data Analysis (EDA) using Seaborn&lt;/li&gt;
-&lt;li&gt;Feature engineering&lt;/li&gt;
-&lt;li&gt;Model evaluation and cross validation&lt;/li&gt;
-&lt;li&gt;Regularization&lt;/li&gt;
-&lt;li&gt;Decision Trees&lt;/li&gt;
-&lt;li&gt;K-nearest Neighbor&lt;/li&gt;
-&lt;li&gt;Hyperparameter optimization&lt;/li&gt;
-&lt;li&gt;Ensemble methods (bagging, boosting)&lt;/li&gt;
+  &lt;li&gt;Machine Learning introduction&lt;/li&gt;
+  &lt;li&gt;Linear models&lt;/li&gt;
+  &lt;li&gt;Pandas introduction&lt;/li&gt;
+  &lt;li&gt;Exploratory Data Analysis (EDA) using Seaborn&lt;/li&gt;
+  &lt;li&gt;Feature engineering&lt;/li&gt;
+  &lt;li&gt;Model evaluation and cross validation&lt;/li&gt;
+  &lt;li&gt;Regularization&lt;/li&gt;
+  &lt;li&gt;Decision Trees&lt;/li&gt;
+  &lt;li&gt;K-nearest Neighbor&lt;/li&gt;
+  &lt;li&gt;Hyperparameter optimization&lt;/li&gt;
+  &lt;li&gt;Ensemble methods (bagging, boosting)&lt;/li&gt;
 &lt;/ol&gt;
 
-&lt;p&gt;In the second part we built teams and worked on the &lt;a href="https://www.kaggle.com/c/house-prices-advanced-regression-techniques"&gt;housing price&lt;/a&gt; challenge on kaggle. I created three different starter kits (all included in the repo) so that even people with no ML background could get to a decent solution.&lt;/p&gt;
+&lt;p&gt;In the second part we built teams and worked on the [housing price] (https://www.kaggle.com/c/house-prices-advanced-regression-techniques) challenge on kaggle. I created three different starter kits (all included in the repo) so that even people with no ML background could get to a decent solution.&lt;/p&gt;
 
 &lt;p&gt;Feel free to use it in whatever way you want!&lt;/p&gt;
+
+</content>
+  </entry>
+  <entry>
+    <title>Reainforcement Learning notes (german)</title>
+    <link rel="alternate" href="http://blog.url.com/rl-notes.html"/>
+    <id>http://blog.url.com/rl-notes.html</id>
+    <published>2017-12-15T01:00:00+01:00</published>
+    <updated>2017-12-31T01:35:36+01:00</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <content type="html">
+&lt;h1 id="rl-notes"&gt;RL notes&lt;/h1&gt;
+
+&lt;p&gt;You can find the material &lt;a href="https://github.com/JanRuettinger/RL_notes"&gt;here&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Some time ago I prepared an introduction to Reinforcement Learning for our department. It consists of a PDF presentation an three demos. The slides are in german though.&lt;/p&gt;
+
+&lt;h3 id="how-to-run-the-demos"&gt;How to run the demos?&lt;/h3&gt;
+&lt;p&gt;The demos are based on jupyter notebooks. So all you need to do is start a jupyter notebook server inside the demo folder.&lt;/p&gt;
+
+&lt;h3 id="credits"&gt;Credits&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href="http://www0.cs.ucl.ac.uk/staff/d.silver/web/Teaching.html"&gt;Lecture&lt;/a&gt; by David Silver&lt;/li&gt;
+  &lt;li&gt;&lt;a href="http://incompleteideas.net/book/the-book-2nd.html"&gt;Book&lt;/a&gt; by Richard S. Sutton&lt;/li&gt;
+  &lt;li&gt;&lt;a href="http://www.wildml.com/2016/10/learning-reinforcement-learning/"&gt;Material&lt;/a&gt; by Denny Biatz&lt;/li&gt;
+&lt;/ul&gt;
 </content>
   </entry>
   <entry>
@@ -163,29 +158,27 @@ The goal is that all teams who share a meal together are as close together as po
     <author>
       <name>Article Author</name>
     </author>
-    <content type="html">&lt;h1&gt;Chatanalytics&lt;/h1&gt;
+    <content type="html">&lt;h1 id="chatanalytics"&gt;Chatanalytics&lt;/h1&gt;
 
 &lt;p&gt;Link to project: &lt;a href="www.chatanalytics.io]"&gt;www.chatanalytics.io&lt;/a&gt;&lt;/p&gt;
 
-&lt;h2&gt;Tech stack&lt;/h2&gt;
-
+&lt;h2 id="tech-stack"&gt;Tech stack&lt;/h2&gt;
 &lt;ul&gt;
-&lt;li&gt;Backend: Flask/Celery (Python)&lt;/li&gt;
-&lt;li&gt;Database: PostgreSQL&lt;/li&gt;
-&lt;li&gt;Frontend: HTML, SASS (bourbon, neat)&lt;/li&gt;
-&lt;li&gt;Testing: Pytest (not full coverage)&lt;/li&gt;
-&lt;li&gt;CI/CD: Travis + &lt;a href="https://www.linode.com"&gt;Linode VPS&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Backend: Flask/Celery (Python)&lt;/li&gt;
+  &lt;li&gt;Database: PostgreSQL&lt;/li&gt;
+  &lt;li&gt;Frontend: HTML, SASS (bourbon, neat)&lt;/li&gt;
+  &lt;li&gt;Testing: Pytest (not full coverage)&lt;/li&gt;
+  &lt;li&gt;CI/CD: Travis + &lt;a href="https://www.linode.com"&gt;Linode VPS&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h2&gt;What does it do?&lt;/h2&gt;
-
+&lt;h2 id="what-does-it-do"&gt;What does it do?&lt;/h2&gt;
 &lt;ol&gt;
-&lt;li&gt;Send a whatsapp group chat protocol to chat(at)chatanalytics.io. &lt;/li&gt;
-&lt;li&gt;Get back a link to a result page&lt;/li&gt;
-&lt;li&gt;Result page shows five analytics plot about the group chat&lt;/li&gt;
+  &lt;li&gt;Send a whatsapp group chat protocol to chat(at)chatanalytics.io.&lt;/li&gt;
+  &lt;li&gt;Get back a link to a result page&lt;/li&gt;
+  &lt;li&gt;Result page shows five analytics plot about the group chat&lt;/li&gt;
 &lt;/ol&gt;
 
-&lt;p&gt;Landing page&lt;br&gt;
+&lt;p&gt;Landing page&lt;br /&gt;
 &lt;img alt="start" width="1552" height="909" src="/images/project_chatanalytics/01-495809a0.png" /&gt;&lt;/p&gt;
 
 &lt;p&gt;At which day of the week is the chat the most active? 
@@ -200,66 +193,34 @@ The goal is that all teams who share a meal together are as close together as po
 &lt;p&gt;How active is each group member?
 &lt;img alt="start" width="1552" height="909" src="/images/project_chatanalytics/05-ee45330b.png" /&gt;&lt;/p&gt;
 
-&lt;h2&gt;Technical challenges&lt;/h2&gt;
-
+&lt;h2 id="technical-challenges"&gt;Technical challenges&lt;/h2&gt;
 &lt;ul&gt;
-&lt;li&gt;Frequently check for new emails -&amp;gt; Celery tasks&lt;/li&gt;
-&lt;li&gt;Data analysis -&amp;gt; Pandas and Matplotlib&lt;/li&gt;
-&lt;li&gt;Whatsapp uses different formats for different OS and languages&lt;/li&gt;
-&lt;li&gt;Deployment -&amp;gt; Travis + Linode VPS&lt;/li&gt;
+  &lt;li&gt;Frequently check for new emails -&amp;gt; Celery tasks&lt;/li&gt;
+  &lt;li&gt;Data analysis -&amp;gt; Pandas and Matplotlib&lt;/li&gt;
+  &lt;li&gt;Whatsapp uses different formats for different OS and languages&lt;/li&gt;
+  &lt;li&gt;Deployment -&amp;gt; Travis + Linode VPS&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h2&gt;Code&lt;/h2&gt;
-
-&lt;p&gt;The main parts of the code can be found on &lt;a href="https://github.com/JanRuettinger/chatanalytics_public"&gt;github&lt;/a&gt;.&lt;br&gt;
+&lt;h2 id="code"&gt;Code&lt;/h2&gt;
+&lt;p&gt;The main parts of the code can be found on &lt;a href="https://github.com/JanRuettinger/chatanalytics_public"&gt;github&lt;/a&gt;.&lt;br /&gt;
 The CI/CD part is private though.&lt;/p&gt;
 </content>
   </entry>
   <entry>
-    <title>PyConDE 2017</title>
-    <link rel="alternate" href="http://blog.url.com/pyconde-2017.html"/>
-    <id>http://blog.url.com/pyconde-2017.html</id>
-    <published>2017-11-01T01:00:00+01:00</published>
-    <updated>2017-12-31T01:26:24+01:00</updated>
+    <title>Evaluation metrics</title>
+    <link rel="alternate" href="http://blog.url.com/evaluation-metrics.html"/>
+    <id>http://blog.url.com/evaluation-metrics.html</id>
+    <published>2017-12-15T01:00:00+01:00</published>
+    <updated>2017-12-31T16:39:42+01:00</updated>
     <author>
       <name>Article Author</name>
     </author>
-    <content type="html">&lt;h1&gt;PyConDE 2017&lt;/h1&gt;
+    <content type="html">
+&lt;h1 id="evaluation-metrics"&gt;Evaluation metrics&lt;/h1&gt;
 
-&lt;p&gt;After the amazing EuroSciPy I started looking for other similar conferences. I was lucky and only had to wait two more months till PyConDE. As opposed to EuroSciPy, the audience at PyConDE had less an academic but rather an industry background. There were engineers from companies of all sizes but definitely a lot more from smaller companies.&lt;/p&gt;
+&lt;h2 id="what-is-an-evaluation-metric"&gt;What is an evaluation metric?&lt;/h2&gt;
+&lt;p&gt;When you build a model to make predictions based on samples. The metrics shows you how good your predictions are. There is no “best” metric because it depends on what is important to you.&lt;/p&gt;
 
-&lt;p&gt;I found a couchsurfing accomodation last minute. I only mention this because it was probably my best couchsurfing experience so far. My host was a cook turned internet entrepreneur with a mexican girlfriend. They had invited two exchange students from Venezula to discuss a charity project. Their idea was to help people in Venezula who suffer from huge inflation by enabling them to mine coins and getting back dollars. It only works because they have flatrate electricy contracts that means they can use as much electricty as they want without paying more. The tapas were great, the discussion interesting - obviously I didn&amp;rsquo;t get much sleep.&lt;/p&gt;
-
-&lt;p&gt;&lt;a href="https://de.pycon.org/schedule/"&gt;Conference schedule &lt;/a&gt;&lt;/p&gt;
-
-&lt;h3&gt;Day 1 - The conference begins&lt;/h3&gt;
-
-&lt;p&gt;My goal for this conference was to get a better understanding of how Machine Learning algorithms are applied in industry, what the key challenges are and which skills I lack the most.&lt;/p&gt;
-
-&lt;p&gt;On the way to the venue I met a fellow attende who works as a backend engineer at a pretty successful hotel search company. We got along pretty well. He offered to look at the code of one a side proejct. I barely get feedback on my code so this was an invaluable opportunity for me. Later he introduced me to a collegue who works on the ML pipeline at their company. He provided some valuable insights about job hunting and on which skills I should focus. He doesn&amp;rsquo;t take full time offers anymore because he can get a much higher salary when employed as a contractor. Skillwise he mentioned that one should try to understand the whole pipeline and not just a small aspect of it. &lt;/p&gt;
-
-&lt;p&gt;These kind of discussions are where I get the most out of. So I tried to get into as many of such discussions as possible. Sometimes I realize that &lt;/p&gt;
-
-&lt;p&gt;and he introduced me to his&lt;/p&gt;
-
-&lt;p&gt;EuroSciPy (End of August)
-Bits &amp;amp; Pretzels (End of september)
-PyConDe (October)
-Frankfurt Marathon (October)&lt;/p&gt;
-
-&lt;p&gt;Met a guy backend stuff 
-introduced me to his friend who does ML stuff.&lt;/p&gt;
-
-&lt;p&gt;&lt;img alt="david" width="900" height="675" src="/images/pyconde/talk_david-d4cbf572.png" /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img alt="alex" width="768" height="1024" src="/images/pyconde/alex-b1cbe6d7.jpg" /&gt;&lt;/p&gt;
-
-&lt;p&gt;Alex Conway &amp;amp; David Dao&lt;/p&gt;
-
-&lt;p&gt;I was exhausted three days was too much for me. 
-(Marathon)&lt;/p&gt;
-
-&lt;p&gt;Recognized some faces (small community, fast.ai)&lt;/p&gt;
 </content>
   </entry>
   <entry>
@@ -271,30 +232,28 @@ introduced me to his friend who does ML stuff.&lt;/p&gt;
     <author>
       <name>Article Author</name>
     </author>
-    <content type="html">&lt;h1&gt;Frankfurt Marathon 2017&lt;/h1&gt;
+    <content type="html">
+&lt;h1 id="frankfurt-marathon-2017"&gt;Frankfurt Marathon 2017&lt;/h1&gt;
 
-&lt;p&gt;I&amp;rsquo;ve just finished my first marathon in Frankfurt. Frankfurt is one of the biggest running events in Germany with about 11k runners. The atmosphere during the race was phenomenal due to the 500 000 cheering fans at the course. 
+&lt;p&gt;I’ve just finished my first marathon in Frankfurt. Frankfurt is one of the biggest running events in Germany with about 11k runners. The atmosphere during the race was phenomenal due to the 500 000 cheering fans at the course. 
 With a finishing time of 3:28h I managed to reach my goal of staying under 3:30h. In the following are some impressions.&lt;/p&gt;
 
-&lt;h3&gt;Number pick up&lt;/h3&gt;
-
+&lt;h3 id="number-pick-up"&gt;Number pick up&lt;/h3&gt;
 &lt;p&gt;&lt;img alt="number pick up" src="/images/marathon/prep_03-fabd69be.png" /&gt;&lt;/p&gt;
 
-&lt;h3&gt;Notes on my hand&lt;/h3&gt;
-
-&lt;p&gt;When I am really exhausted I sometimes forget how fast I need to run to reach my goal. That&amp;rsquo;s why I wrote it down on my hand.
+&lt;h3 id="notes-on-my-hand"&gt;Notes on my hand&lt;/h3&gt;
+&lt;p&gt;When I am really exhausted I sometimes forget how fast I need to run to reach my goal. That’s why I wrote it down on my hand.
 &lt;img alt="start" src="/images/marathon/hand_notes-b7c6c6a4.jpg" /&gt;&lt;/p&gt;
 
-&lt;h3&gt;During the race&lt;/h3&gt;
-
-&lt;p&gt;&lt;img alt="race" src="/images/marathon/running_01-97c56150.jpeg" /&gt;&lt;br&gt;
+&lt;h3 id="during-the-race"&gt;During the race&lt;/h3&gt;
+&lt;p&gt;&lt;img alt="race" src="/images/marathon/running_01-97c56150.jpeg" /&gt;&lt;br /&gt;
 I think this was at ~30km. I already look quite tired ;)&lt;/p&gt;
 
-&lt;h3&gt;Finish&lt;/h3&gt;
-
-&lt;p&gt;&lt;img alt="finish" src="/images/marathon/finish_01-6c7a3b90.jpeg" /&gt;  &lt;/p&gt;
+&lt;h3 id="finish"&gt;Finish&lt;/h3&gt;
+&lt;p&gt;&lt;img alt="finish" src="/images/marathon/finish_01-6c7a3b90.jpeg" /&gt;&lt;/p&gt;
 
 &lt;p&gt;Next year I want to finish a marathon in under 3:15h.&lt;/p&gt;
+
 </content>
   </entry>
 </feed>

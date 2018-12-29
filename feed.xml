@@ -211,7 +211,7 @@ The CI/CD part is private though.&lt;/p&gt;
     <link rel="alternate" href="http://blog.url.com/evaluation-metrics.html"/>
     <id>http://blog.url.com/evaluation-metrics.html</id>
     <published>2017-12-15T01:00:00+01:00</published>
-    <updated>2018-12-29T23:40:46+01:00</updated>
+    <updated>2018-12-30T00:17:04+01:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -220,6 +220,9 @@ The CI/CD part is private though.&lt;/p&gt;
 
 &lt;h2 id="what-is-an-evaluation-metric"&gt;What is an evaluation metric?&lt;/h2&gt;
 &lt;p&gt;When you build a model to make predictions based on samples. The metrics shows you how good your predictions are. There is no “best” metric because it depends on what is important to you.&lt;/p&gt;
+
+&lt;p&gt;When &lt;script type="math/tex"&gt;a \ne 0&lt;/script&gt;, there are two solutions to &lt;script type="math/tex"&gt;(ax^2 + bx + c = 0)&lt;/script&gt; and they are
+&lt;script type="math/tex"&gt;x = {-b \pm \sqrt{b^2-4ac} \over 2a}.&lt;/script&gt;&lt;/p&gt;
 </content>
   </entry>
   <entry>

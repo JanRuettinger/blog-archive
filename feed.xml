@@ -42,31 +42,31 @@
 &lt;h2 id="how-does-it-work"&gt;How does it work?&lt;/h2&gt;
 &lt;ol&gt;
   &lt;li&gt;Organizer signs up at www.cookandrun.fun
-&lt;img alt="demo" width="1552" height="909" src="/images/project_cookandrun/01-c3370496.png" /&gt;&lt;/li&gt;
+&lt;img src="images/project_cookandrun/01-c3370496.png" alt="demo" width="1552" height="909" /&gt;&lt;/li&gt;
   &lt;li&gt;Organizer signs in
-&lt;img alt="demo" width="1552" height="909" src="/images/project_cookandrun/02-a59ef25c.png" /&gt;&lt;/li&gt;
+&lt;img src="images/project_cookandrun/02-a59ef25c.png" alt="demo" width="1552" height="909" /&gt;&lt;/li&gt;
   &lt;li&gt;Organizer creates a new event
-&lt;img alt="demo" width="1552" height="909" src="/images/project_cookandrun/03-c61ef967.png" /&gt;&lt;/li&gt;
+&lt;img src="images/project_cookandrun/03-c61ef967.png" alt="demo" width="1552" height="909" /&gt;&lt;/li&gt;
   &lt;li&gt;Organizer specifies more details for the event
-&lt;img alt="demo" width="1552" height="909" src="/images/project_cookandrun/04-dee61f7a.png" /&gt;
+&lt;img src="images/project_cookandrun/04-dee61f7a.png" alt="demo" width="1552" height="909" /&gt;
 E.g. specify the area in which the participants need to have an appartment. Participants who don’t live in the specified area won’t be allowed to sign up for the event
-&lt;img alt="demo" width="1552" height="909" src="/images/project_cookandrun/05-2f17c114.png" /&gt;&lt;/li&gt;
+&lt;img src="images/project_cookandrun/05-2f17c114.png" alt="demo" width="1552" height="909" /&gt;&lt;/li&gt;
   &lt;li&gt;Organizer opens the registration phase
-&lt;img alt="demo" width="1552" height="909" src="/images/project_cookandrun/06-19461683.png" /&gt;&lt;/li&gt;
+&lt;img src="images/project_cookandrun/06-19461683.png" alt="demo" width="1552" height="909" /&gt;&lt;/li&gt;
   &lt;li&gt;Participants can now sign up &lt;specified subdomain=""&gt;.cookandrun.fun
 ![demo](project_cookandrun/07.png)&lt;/specified&gt;&lt;/li&gt;
   &lt;li&gt;Organizer closes the registration phase
-&lt;img alt="demo" width="1552" height="909" src="/images/project_cookandrun/08-242b249d.png" /&gt;&lt;/li&gt;
+&lt;img src="images/project_cookandrun/08-242b249d.png" alt="demo" width="1552" height="909" /&gt;&lt;/li&gt;
   &lt;li&gt;
     &lt;p&gt;Organizer draws the teams 
-&lt;img alt="demo" width="1552" height="909" src="/images/project_cookandrun/09-f85a390c.png" /&gt;
+&lt;img src="images/project_cookandrun/09-f85a390c.png" alt="demo" width="1552" height="909" /&gt;
 The goal is that all teams who share a meal together are as close together as possible. I used K-means algorithm with a fixed cluster size to achieve a near optimal result.
-&lt;img alt="demo" width="1552" height="909" src="/images/project_cookandrun/10-04f4a9f3.png" /&gt;&lt;/p&gt;
+&lt;img src="images/project_cookandrun/10-04f4a9f3.png" alt="demo" width="1552" height="909" /&gt;&lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;Organizer starts event
-&lt;img alt="demo" width="1552" height="909" src="/images/project_cookandrun/11-efa43c38.png" /&gt;&lt;/li&gt;
+&lt;img src="images/project_cookandrun/11-efa43c38.png" alt="demo" width="1552" height="909" /&gt;&lt;/li&gt;
   &lt;li&gt;After the event is started participants get access to their individual time table for the event
-&lt;img alt="demo" width="1552" height="909" src="/images/project_cookandrun/12-0e0c445f.png" /&gt;&lt;/li&gt;
+&lt;img src="images/project_cookandrun/12-0e0c445f.png" alt="demo" width="1552" height="909" /&gt;&lt;/li&gt;
 &lt;/ol&gt;
 
 &lt;h2 id="technical-challenges"&gt;Technical challenges&lt;/h2&gt;
@@ -179,19 +179,19 @@ The goal is that all teams who share a meal together are as close together as po
 &lt;/ol&gt;
 
 &lt;p&gt;Landing page&lt;br /&gt;
-&lt;img alt="start" width="1552" height="909" src="/images/project_chatanalytics/01-495809a0.png" /&gt;&lt;/p&gt;
+&lt;img src="images/project_chatanalytics/01-495809a0.png" alt="start" width="1552" height="909" /&gt;&lt;/p&gt;
 
 &lt;p&gt;At which day of the week is the chat the most active? 
-&lt;img alt="start" width="1552" height="909" src="/images/project_chatanalytics/02-8fab1aaa.png" /&gt;&lt;/p&gt;
+&lt;img src="images/project_chatanalytics/02-8fab1aaa.png" alt="start" width="1552" height="909" /&gt;&lt;/p&gt;
 
 &lt;p&gt;At which time of the day is the chat the most active?
-&lt;img alt="start" width="1552" height="909" src="/images/project_chatanalytics/03-38cbaf25.png" /&gt;&lt;/p&gt;
+&lt;img src="images/project_chatanalytics/03-38cbaf25.png" alt="start" width="1552" height="909" /&gt;&lt;/p&gt;
 
 &lt;p&gt;In which month of the year is the chat the most active?
-&lt;img alt="start" width="1552" height="909" src="/images/project_chatanalytics/04-0650ef75.png" /&gt;&lt;/p&gt;
+&lt;img src="images/project_chatanalytics/04-0650ef75.png" alt="start" width="1552" height="909" /&gt;&lt;/p&gt;
 
 &lt;p&gt;How active is each group member?
-&lt;img alt="start" width="1552" height="909" src="/images/project_chatanalytics/05-ee45330b.png" /&gt;&lt;/p&gt;
+&lt;img src="images/project_chatanalytics/05-ee45330b.png" alt="start" width="1552" height="909" /&gt;&lt;/p&gt;
 
 &lt;h2 id="technical-challenges"&gt;Technical challenges&lt;/h2&gt;
 &lt;ul&gt;
@@ -211,7 +211,7 @@ The CI/CD part is private though.&lt;/p&gt;
     <link rel="alternate" href="http://blog.url.com/evaluation-metrics.html"/>
     <id>http://blog.url.com/evaluation-metrics.html</id>
     <published>2017-12-15T01:00:00+01:00</published>
-    <updated>2017-12-31T16:39:42+01:00</updated>
+    <updated>2018-12-29T23:40:46+01:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -220,7 +220,6 @@ The CI/CD part is private though.&lt;/p&gt;
 
 &lt;h2 id="what-is-an-evaluation-metric"&gt;What is an evaluation metric?&lt;/h2&gt;
 &lt;p&gt;When you build a model to make predictions based on samples. The metrics shows you how good your predictions are. There is no “best” metric because it depends on what is important to you.&lt;/p&gt;
-
 </content>
   </entry>
   <entry>
@@ -239,18 +238,18 @@ The CI/CD part is private though.&lt;/p&gt;
 With a finishing time of 3:28h I managed to reach my goal of staying under 3:30h. In the following are some impressions.&lt;/p&gt;
 
 &lt;h3 id="number-pick-up"&gt;Number pick up&lt;/h3&gt;
-&lt;p&gt;&lt;img alt="number pick up" src="/images/marathon/prep_03-fabd69be.png" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src="images/marathon/prep_03-fabd69be.png" alt="number pick up" /&gt;&lt;/p&gt;
 
 &lt;h3 id="notes-on-my-hand"&gt;Notes on my hand&lt;/h3&gt;
 &lt;p&gt;When I am really exhausted I sometimes forget how fast I need to run to reach my goal. That’s why I wrote it down on my hand.
-&lt;img alt="start" src="/images/marathon/hand_notes-b7c6c6a4.jpg" /&gt;&lt;/p&gt;
+&lt;img src="images/marathon/hand_notes-b7c6c6a4.jpg" alt="start" /&gt;&lt;/p&gt;
 
 &lt;h3 id="during-the-race"&gt;During the race&lt;/h3&gt;
-&lt;p&gt;&lt;img alt="race" src="/images/marathon/running_01-97c56150.jpeg" /&gt;&lt;br /&gt;
+&lt;p&gt;&lt;img src="images/marathon/running_01-97c56150.jpeg" alt="race" /&gt;&lt;br /&gt;
 I think this was at ~30km. I already look quite tired ;)&lt;/p&gt;
 
 &lt;h3 id="finish"&gt;Finish&lt;/h3&gt;
-&lt;p&gt;&lt;img alt="finish" src="/images/marathon/finish_01-6c7a3b90.jpeg" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src="images/marathon/finish_01-6c7a3b90.jpeg" alt="finish" /&gt;&lt;/p&gt;
 
 &lt;p&gt;Next year I want to finish a marathon in under 3:15h.&lt;/p&gt;
 

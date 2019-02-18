@@ -14,7 +14,7 @@
     <link rel="alternate" href="http://blog.url.com/linear-regression.html"/>
     <id>http://blog.url.com/linear-regression.html</id>
     <published>2019-01-18T01:00:00+01:00</published>
-    <updated>2019-02-17T15:21:34+01:00</updated>
+    <updated>2019-02-18T10:58:23+01:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -27,7 +27,7 @@
 
 &lt;p&gt;Some models types can capture/learn only a specific type of pattern (e.g. Linear Regression), others are more powerful and can learn any type of pattern (e.g. Neural Networks). Unfortunately the more powerful models will not only learn useful patterns but also the noise in our data. Usually it’s best to pick the simplest model type which is yet able to learn the most important patterns in your data because the simpler the model is the less chance there is that it learns noise.&lt;/p&gt;
 
-&lt;h2 id="model-assumption-no-1"&gt;Model assumption No. 1&lt;/h2&gt;
+&lt;h2 id="implicit-model-assumption-for-linear-regression"&gt;Implicit model assumption for Linear Regression&lt;/h2&gt;
 &lt;p&gt;Linear Regression is a simple model type which assumes that the relationship between &lt;script type="math/tex"&gt;x&lt;/script&gt; and &lt;script type="math/tex"&gt;y&lt;/script&gt; is linear. Because of the added bias term the relationship it is strictly speaking affine and not linear. But you can apply a neat trick to make it linear again.&lt;/p&gt;
 
 &lt;p&gt;&lt;strong&gt;For scalar valued &lt;script type="math/tex"&gt;x&lt;/script&gt;:&lt;/strong&gt;&lt;br /&gt;
@@ -43,11 +43,11 @@ By adding a new entry &lt;script type="math/tex"&gt;+1&lt;/script&gt; to every d
 &lt;h2 id="what-if-the-assumption-doesnt-hold"&gt;What if the assumption doesn’t hold?&lt;/h2&gt;
 
 &lt;p&gt;Here are three examples of how the relationship between x and y might look like.  The relationship can either be &lt;strong&gt;exactly linear&lt;/strong&gt;, &lt;strong&gt;roughly linear&lt;/strong&gt; or &lt;strong&gt;not linear at all&lt;/strong&gt;.
-&lt;img src="images/linear_regression/assumptions-b8f7fed9.png" alt="linear_regression" width="1169" height="441" /&gt;&lt;/p&gt;
+&lt;img src="images/linear_regression/assumptions-24a49f19.png" alt="linear_regression" width="1169" height="441" /&gt;&lt;/p&gt;
 
 &lt;p&gt;We can fit a linear regression model in any case but the predictions won’t make much sense in the case when the data doesn’t follow a linear relationship.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src="images/linear_regression/assumptions_with_line-6a4e79e0.png" alt="linear_regression" width="1169" height="441" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src="images/linear_regression/assumptions_with_line-d26deafb.png" alt="linear_regression" width="1169" height="441" /&gt;&lt;/p&gt;
 
 &lt;!--**Example: assumption holds exactly**
 ![linear_regression](linear_regression/points_linear.png)
@@ -75,14 +75,10 @@ E(w)&amp; =\frac{1}{2} \sum\nolimits_{n=1}^N (w^{T}x_i - y_i)^2 \\
  &amp; = \frac{1}{2}(w^TX^TXw - 2w^TX^Ty - Y^{T}y) \\
 \end{split} %]]&gt;&lt;/script&gt;
 
-&lt;p&gt;Here are the dimensions of the vectors and matrices.&lt;br /&gt;
-&lt;script type="math/tex"&gt;w&lt;/script&gt;: Dx1&lt;br /&gt;
-&lt;script type="math/tex"&gt;x_i&lt;/script&gt;: Dx1&lt;br /&gt;
-&lt;script type="math/tex"&gt;y_i&lt;/script&gt;: 1x1&lt;br /&gt;
-&lt;script type="math/tex"&gt;X&lt;/script&gt;: NxD&lt;br /&gt;
-&lt;script type="math/tex"&gt;y&lt;/script&gt;: Nx1&lt;/p&gt;
+&lt;p&gt;The vectors and matrices have the following dimensions.&lt;br /&gt;
+&lt;script type="math/tex"&gt;w&lt;/script&gt;&lt;script type="math/tex"&gt;: Dx1&lt;/script&gt;x_i&lt;script type="math/tex"&gt;: Dx1&lt;/script&gt;y_i&lt;script type="math/tex"&gt;: 1x1&lt;/script&gt;y&lt;script type="math/tex"&gt;: Nx1&lt;/script&gt;X$$: NxD&lt;/p&gt;
 
-&lt;p&gt;In order to minizme the error function with respect to &lt;script type="math/tex"&gt;w&lt;/script&gt;, we take the gradient,set it to zero and solve for &lt;script type="math/tex"&gt;w&lt;/script&gt;.&lt;/p&gt;
+&lt;p&gt;In order to minizme the error function with respect to &lt;script type="math/tex"&gt;w&lt;/script&gt;, we take the gradient, set it to zero and solve for &lt;script type="math/tex"&gt;w&lt;/script&gt;.&lt;/p&gt;
 
 &lt;script type="math/tex; mode=display"&gt;% &lt;![CDATA[
 \begin{split}

@@ -14,7 +14,7 @@
     <link rel="alternate" href="http://blog.url.com/probabilistic-inference.html"/>
     <id>http://blog.url.com/probabilistic-inference.html</id>
     <published>2019-01-20T01:00:00+01:00</published>
-    <updated>2019-02-18T11:07:32+01:00</updated>
+    <updated>2019-02-18T11:09:00+01:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -24,11 +24,17 @@
 &lt;h2 id="what-do-the-terms-actually-mean"&gt;What do the terms actually mean?&lt;/h2&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;Reading:  Murphy [ch. 3.1 - 3.3]&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Reading:  Murphy [ch. 3.1 - 3.3]&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Making a prediction
+    &lt;ul&gt;
+      &lt;li&gt;predictive distributions&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
   &lt;li&gt;MLE&lt;/li&gt;
   &lt;li&gt;MAP&lt;/li&gt;
   &lt;li&gt;Fully Bayesian Analysis&lt;/li&gt;
-  &lt;li&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;h2 id="how-do-we-get-w-and-sigma"&gt;How do we get w and sigma?&lt;/h2&gt;
@@ -376,19 +382,23 @@ L(w,\sigma^2) &amp;= log(\prod_{i=1}^{N} p(y_i,x_i|,w,\sigma^2)) \\
     <link rel="alternate" href="http://blog.url.com/machine-learning-behind-the-scenes.html"/>
     <id>http://blog.url.com/machine-learning-behind-the-scenes.html</id>
     <published>2019-01-18T01:00:00+01:00</published>
-    <updated>2019-02-15T13:41:06+01:00</updated>
+    <updated>2019-02-18T11:15:13+01:00</updated>
     <author>
       <name>Article Author</name>
     </author>
     <content type="html">&lt;h1 id="machine-learning---behind-the-scenes"&gt;Machine Learning - behind the scenes&lt;/h1&gt;
 
-&lt;p&gt;This will be a tutorial series which tries to illustrate underlying assumptions of popular Machine Learning algorithms and also draw connections between them.&lt;/p&gt;
+&lt;p&gt;This will be a tutorial series which tries to illustrate underlying concepts of popular Machine Learning algorithms and also draw connections between them.&lt;/p&gt;
 
 &lt;ol&gt;
   &lt;li&gt;Linear Regression&lt;/li&gt;
-  &lt;li&gt;Logistic Regression&lt;/li&gt;
-  &lt;li&gt;K-means&lt;/li&gt;
-  &lt;li&gt;PCA/PPCA/SVD&lt;/li&gt;
+  &lt;li&gt;Probabilistic Inference&lt;/li&gt;
+  &lt;li&gt;Linear Classification&lt;/li&gt;
+  &lt;li&gt;Constrained Optimization&lt;/li&gt;
+  &lt;li&gt;Support Vector Machine&lt;/li&gt;
+  &lt;li&gt;K-Means vs Gaussian Mixture Model&lt;/li&gt;
+  &lt;li&gt;PCA/PPCA/SVD/Matrix Factorization/Auto Encoders&lt;/li&gt;
+  &lt;li&gt;Variational Inference&lt;/li&gt;
 &lt;/ol&gt;
 
 </content>

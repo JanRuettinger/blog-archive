@@ -14,7 +14,7 @@
     <link rel="alternate" href="http://blog.url.com/probabilistic-inference.html"/>
     <id>http://blog.url.com/probabilistic-inference.html</id>
     <published>2019-01-20T01:00:00+01:00</published>
-    <updated>2019-02-18T11:09:00+01:00</updated>
+    <updated>2019-02-18T13:47:38+01:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -29,12 +29,16 @@
   &lt;/li&gt;
   &lt;li&gt;Making a prediction
     &lt;ul&gt;
-      &lt;li&gt;predictive distributions&lt;/li&gt;
+      &lt;li&gt;Posterior predictive distribution&lt;/li&gt;
+      &lt;li&gt;https://stats.stackexchange.com/questions/71033/what-is-the-difference-between-posterior-and-posterior-predictive-distribution&lt;/li&gt;
     &lt;/ul&gt;
   &lt;/li&gt;
   &lt;li&gt;MLE&lt;/li&gt;
   &lt;li&gt;MAP&lt;/li&gt;
-  &lt;li&gt;Fully Bayesian Analysis&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Fully Bayesian Analysis&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Connection between them we N goes up, when prior changes&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;h2 id="how-do-we-get-w-and-sigma"&gt;How do we get w and sigma?&lt;/h2&gt;
@@ -104,7 +108,7 @@ The first two examples demonstrate cases where using the maximum (green cross) a
     <link rel="alternate" href="http://blog.url.com/linear-regression.html"/>
     <id>http://blog.url.com/linear-regression.html</id>
     <published>2019-01-18T01:00:00+01:00</published>
-    <updated>2019-02-18T11:05:05+01:00</updated>
+    <updated>2019-02-20T11:30:41+01:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -172,21 +176,16 @@ E(w)&amp; =\frac{1}{2} \sum\nolimits_{n=1}^N (w^{T}x_i - y_i)^2 \\
 &lt;script type="math/tex"&gt;y&lt;/script&gt;: Nx1&lt;br /&gt;
 &lt;script type="math/tex"&gt;X&lt;/script&gt;: NxD&lt;/p&gt;
 
-&lt;p&gt;In order to minizme the error function with respect to &lt;script type="math/tex"&gt;w&lt;/script&gt;, we take the gradient, set it to zero and solve for &lt;script type="math/tex"&gt;w&lt;/script&gt;.&lt;/p&gt;
+&lt;p&gt;In order to minizme the error function we take the gradient with respect to &lt;script type="math/tex"&gt;w&lt;/script&gt; set it to zero and solve for &lt;script type="math/tex"&gt;w&lt;/script&gt;.&lt;/p&gt;
 
 &lt;script type="math/tex; mode=display"&gt;% &lt;![CDATA[
 \begin{split}
-\nabla_{w} E(w)&amp; = \nabla_{w} \frac{1}{2}(w^TX^TXw - 2w^TX^Ty - y^{T}y) \\
-&amp; = \frac{1}{2} (2wX^{T}X - 2X^{T}y) \\
-&amp; = wX^{T}X - X^{T}y \\
+&amp; \nabla_{w} E(w) =  0 \\
+&amp; \Rightarrow\quad \nabla_{w} \frac{1}{2}(w^TX^TXw - 2w^TX^Ty - y^{T}y) = 0 \\
+&amp; \Rightarrow\quad X^{T}Xw = X^{T}y \\
+&amp; \Rightarrow\quad X^{T}Xw = X^{T}y \\
+&amp; \Rightarrow\quad w* = (X^{T}X)^{-1}X^{T}y \\
 \end{split} %]]&gt;&lt;/script&gt;
-
-&lt;script type="math/tex; mode=display"&gt;% &lt;![CDATA[
-\begin{split}
-\nabla_{w} E(w)&amp; = 0 = wX^{T}X - X^{T}y \\
-\end{split} %]]&gt;&lt;/script&gt;
-
-&lt;p&gt;&lt;strong&gt;Optimal solution:&lt;/strong&gt; &lt;script type="math/tex"&gt;w^{*} = (X^{T}X)^{-1}X^{T}y&lt;/script&gt;&lt;/p&gt;
 
 &lt;h3 id="error-meassure-2-least-absolute-error"&gt;Error meassure 2: least absolute error&lt;/h3&gt;
 &lt;p&gt;&lt;script type="math/tex"&gt;E(w) = \sum\nolimits_{n=1}^N |w^{T}x_i - y_i|&lt;/script&gt;&lt;/p&gt;
@@ -255,12 +254,22 @@ If we use the same transformation technique up to an exponent of 5 we get the fo
 
 &lt;h3 id="l2-regularization-for-linear-regression"&gt;L2 Regularization for Linear Regression&lt;/h3&gt;
 
-&lt;script type="math/tex; mode=display"&gt;E(w) =\sum\nolimits_{n=1}^N (w^{T}x_i - y_i)^2 + \frac{\lambda}{2}\lVert w\rVert_2^2&lt;/script&gt;
+&lt;script type="math/tex; mode=display"&gt;E(w) = \sum\nolimits_{n=1}^N (w^{T}x_i - y_i)^2 + \frac{\lambda}{2}\lVert w\rVert_2^2 = (Xw-y)^T(Xw-y) + \frac{\lambda}{2}w^Tw&lt;/script&gt;
 
-&lt;p&gt;L2 regularization adds a new term to the error function which prevents the parameters w to become too large. It uses the squared euclidean distance/squared L2 norm to do so.&lt;/p&gt;
+&lt;p&gt;L2 regularization adds a new term to the error function which prevents the parameters w to become too large. It uses the squared euclidean distance/squared L2 norm to do so. Let’s again minimize the error function with respect to &lt;script type="math/tex"&gt;w&lt;/script&gt;.&lt;/p&gt;
+
+&lt;script type="math/tex; mode=display"&gt;% &lt;![CDATA[
+\begin{split}
+&amp; \nabla_{w} E(w) =  0 \\
+&amp; \Rightarrow\quad \nabla_{w} (Xw-y)^T(Xw-y) + \frac{\lambda}{2}w^Tw = 0 \\
+&amp; \Rightarrow\quad X^{T}Xw - X^{T}y + \lambda w= 0 \\
+&amp; \Rightarrow\quad (X^{T}X-\lambda I)w = X^{T}y \\
+&amp; \Rightarrow\quad w* = (X^{T}X -\lambda I)^{-1}X^{T}y \\
+\end{split} %]]&gt;&lt;/script&gt;
 
 &lt;h3 id="l1-regularization-for-linear-regression"&gt;L1 Regularization for Linear Regression&lt;/h3&gt;
-&lt;p&gt;&lt;script type="math/tex"&gt;E(w) =\sum\nolimits_{n=1}^N (w^{T}x_i - y_i)^2 + \lambda\lVert w\rVert_1&lt;/script&gt;&lt;/p&gt;
+&lt;p&gt;&lt;script type="math/tex"&gt;E(w) =\sum\nolimits_{n=1}^N (w^{T}x_i - y_i)^2 + \lambda\lVert w\rVert_1 = 
+(Xw-y)^T(Xw-y) + \lambda\lVert w\rVert_1&lt;/script&gt;&lt;/p&gt;
 
 &lt;p&gt;L1 regularization also adds a new term to the error function which pretty much does the same thing as the l2 regularization but uses the L1 norm (not squared) instead.&lt;/p&gt;
 
@@ -313,24 +322,17 @@ L(w,\sigma^2) &amp;= log(\prod_{i=1}^{N} p(y_i,x_i|,w,\sigma^2)) \\
 &lt;p&gt;We made use of a simple trick. We took the log of the whole expression knowing that it doesn’t change the position of the maximum. In order to find the maximum, we take the gradient with respect to &lt;script type="math/tex"&gt;w&lt;/script&gt;, set it to zero and solve for &lt;script type="math/tex"&gt;w&lt;/script&gt;.&lt;/p&gt;
 
 &lt;script type="math/tex; mode=display"&gt;% &lt;![CDATA[
-\begin{align*}
-\nabla_{w} L(w,\sigma^2) &amp;=  \nabla_{w} [-\frac{N}{2}log(2\pi\sigma^2) - \frac{1}{2\sigma^2} (Xw-y)^{T}(Xw-y)]\\
-&amp;=  \nabla_{w} [- \frac{1}{2\sigma^2} (Xw-y)^{T}(Xw-y)]\\
-\end{align*} %]]&gt;&lt;/script&gt;
-
-&lt;p&gt;test&lt;/p&gt;
-
-&lt;script type="math/tex; mode=display"&gt;% &lt;![CDATA[
-\begin{align*}
+\begin{split}
 &amp; \nabla_{w} L(w,\sigma^2) = 0 \\
+&amp; \Rightarrow\quad \nabla_{w} [-\frac{N}{2}log(2\pi\sigma^2) - \frac{1}{2\sigma^2} (Xw-y)^{T}(Xw-y)] = 0 \\
 &amp; \Rightarrow\quad  \nabla_{w}[- \frac{1}{2\sigma^2} (Xw-y)^{T}(Xw-y)] = 0\\
 &amp; \Rightarrow\quad  - \frac{1}{2\sigma^2} \nabla_{w}(Xw-y)^{T}(Xw-y) = 0 \\
 &amp; \Rightarrow\quad  - \frac{1}{2\sigma^2} (2XX^Tw-2X^Ty) = 0 \\
 &amp; \Rightarrow\quad  XX^Tw-X^Ty = 0 \\
 &amp; \Rightarrow\quad  w_{MLE} = (XX^T)^{-1}-X^Ty \\
-\end{align*} \\ %]]&gt;&lt;/script&gt;
+\end{split} \\ %]]&gt;&lt;/script&gt;
 
-&lt;p&gt;You can see that &lt;script type="math/tex"&gt;w_{MLE}&lt;/script&gt; is independent of &lt;script type="math/tex"&gt;\sigma^2&lt;/script&gt; and also that the result is the same as for the non probabilistic least square case.&lt;/p&gt;
+&lt;p&gt;You can see that &lt;script type="math/tex"&gt;w_{MLE}&lt;/script&gt; is independent of &lt;script type="math/tex"&gt;\sigma^2&lt;/script&gt; and also that the result is the same as for the non probabilistic least square case with no regularization.&lt;/p&gt;
 
 &lt;p&gt;Let’s go on to derive the solution for &lt;script type="math/tex"&gt;\sigma_{MLE}^2&lt;/script&gt;. Same procedure, we take the gradient with respect to  &lt;script type="math/tex"&gt;\sigma^2&lt;/script&gt; , set it to 0 and solve for 
 &lt;script type="math/tex"&gt;\sigma^2&lt;/script&gt;.&lt;/p&gt;
@@ -345,15 +347,15 @@ L(w,\sigma^2) &amp;= log(\prod_{i=1}^{N} p(y_i,x_i|,w,\sigma^2)) \\
 &amp; \Rightarrow\quad  \sigma_{MLE}^2 = \frac{1}{N}(Xw-y)^{T}(Xw-y) \\
 \end{split} %]]&gt;&lt;/script&gt;
 
-&lt;p&gt;This is a satisfying result because it is just finding the sample average of the squared deviations between what wMLE predicts and what the training data actually are. It feels exactly like what happens when you compute the maximum likelihood estimate of the variance of a univariate Gaussian distribution.&lt;/p&gt;
+&lt;p&gt;This is a satisfying result because it is just finding the sample average of the squared deviations between what &lt;script type="math/tex"&gt;w_{MLE}&lt;/script&gt; predicts and what the training data actually are. It feels exactly like what happens when you compute the maximum likelihood estimate of the variance of a univariate Gaussian distribution.&lt;/p&gt;
 
-&lt;p&gt;Let’s quickly recap. The solution for &lt;script type="math/tex"&gt;w&lt;/script&gt; with the probabilistic approach (+ our assumptions) and taking the Maximum Likelihood Estimate is exactly the same as for the non probabilistic model. Which means that by using the least squared error function we implictely assume that any noise we have has a mean of zero and is symmetric around the mean. We can’t assume that the noise strictly follows a normal distribution as we would get the same result when the noise would be e.g. uniformly distributed with a mean of 0. But at least we got some better intuition about what’s going on behind the scenes. Let’s go a step further and see if we can also find a corresponding probabilisitc assumption for the regularization term.&lt;/p&gt;
+&lt;p&gt;Let’s quickly recap. The solution for &lt;script type="math/tex"&gt;w&lt;/script&gt; with the probabilistic approach (+ our assumptions) and taking the Maximum Likelihood Estimate leads exactly to the same solution as for the non probabilistic model. Which means that by using the least squared error function we implictely assume that any noise we have has a mean of zero and is symmetric around the mean. We can’t assume that the noise strictly follows a normal distribution as we would get the same result when the noise would be e.g. uniformly distributed with a mean of 0. But at least we got some better intuition about what’s going on behind the scenes. Let’s go a step further and see if we can also find a corresponding probabilisitc assumption for the regularization term.&lt;/p&gt;
 
 &lt;p&gt;NOT QUITE SURE YET&lt;/p&gt;
 
 &lt;h3 id="maximum-a-posteriori-estimation-map"&gt;2. Maximum A Posteriori Estimation (MAP)&lt;/h3&gt;
 
-&lt;p&gt;Bayes formula: &lt;script type="math/tex"&gt;A\text{ } posteriori = \frac{likelihood * prior}{evidence}&lt;/script&gt;&lt;/p&gt;
+&lt;p&gt;Bayes formula: &lt;script type="math/tex"&gt;\text{A posteriori }= \frac{\text{likelihood * prior}}{\text{evidence}}&lt;/script&gt;&lt;/p&gt;
 
 &lt;p&gt;Translated to our model: 
 &lt;script type="math/tex"&gt;p(w, \sigma^2|x,y) = \frac{p(x,y|w, \sigma^2) * p(w,\sigma^2)}{p(x,y)}&lt;/script&gt;&lt;/p&gt;
@@ -361,19 +363,53 @@ L(w,\sigma^2) &amp;= log(\prod_{i=1}^{N} p(y_i,x_i|,w,\sigma^2)) \\
 &lt;p&gt;The evidence term doesn’t depend on &lt;script type="math/tex"&gt;w&lt;/script&gt; or &lt;script type="math/tex"&gt;\sigma^2&lt;/script&gt; and thus doesn’t affect the maximum of the posterior distribution &lt;script type="math/tex"&gt;p(w, \sigma^2|x,y)&lt;/script&gt; . So in order to find the maximum of the posterior distribution we only need the likelihood function &lt;script type="math/tex"&gt;p(x,y|w, \sigma^2)&lt;/script&gt; and the prior distribution 
 &lt;script type="math/tex"&gt;p(w,\sigma^2)&lt;/script&gt;. We already know how to get the likelihood function from the previous step but how do we get the prior?&lt;/p&gt;
 
-&lt;p&gt;First let’s assume the parameters &lt;script type="math/tex"&gt;\sigma&lt;/script&gt; and &lt;script type="math/tex"&gt;w&lt;/script&gt; are indepent thus it follows: 
-&lt;script type="math/tex"&gt;p(w,\sigma^2) = p(w)*p(\sigma^2)&lt;/script&gt;. Let’s now assume &lt;script type="math/tex"&gt;p(w)&lt;/script&gt; is normal distributed 
-&lt;script type="math/tex"&gt;p(w) = N(0,\lambda)&lt;/script&gt; and 
-&lt;script type="math/tex"&gt;p(\sigma^2)&lt;/script&gt; is uniformly distributed thus it follows 
-&lt;script type="math/tex"&gt;p(w,\sigma^2) = N(0,\lambda)&lt;/script&gt;. Now we can mutliply the likelihood function and the prior and compute the maximum of this function which will give us the maximum a posteriori estimate for our parameters &lt;script type="math/tex"&gt;w&lt;/script&gt; and &lt;script type="math/tex"&gt;\sigma&lt;/script&gt;.&lt;/p&gt;
+&lt;p&gt;Eventually we need to make some hard assumptions about &lt;script type="math/tex"&gt;w&lt;/script&gt; and &lt;script type="math/tex"&gt;\sigma^2&lt;/script&gt;. Let’s discuss our options. We could assume that both &lt;script type="math/tex"&gt;w&lt;/script&gt; and &lt;script type="math/tex"&gt;\sigma^2&lt;/script&gt; are indepedent random variables with follow a certain distribution which we can freely choose. For example 
+&lt;script type="math/tex"&gt;p(w, \sigma^2) = p(w) * p(\sigma^2) = N(w|a,b)*N(\sigma^2|c,d)&lt;/script&gt;. Not much progress made, now we need to come up with good values for &lt;script type="math/tex"&gt;a,b,c,d&lt;/script&gt;. We could again assume they follow a certain assumptions to take uncertainty into account but you see that we are trapped in a loop. At some point we have a make a hard assumption and set a parameter to a fixed value. It’s good practice too pick a reasonable fixed value when you can’t make good asusmptions about the distribution of a parameter anymore. In our case we will assume &lt;script type="math/tex"&gt;\sigma^2&lt;/script&gt; is not a random variable but a fixed scalar and &lt;script type="math/tex"&gt;w&lt;/script&gt; is gaussian distributed with a variance of &lt;script type="math/tex"&gt;\frac{1}{\lambda}&lt;/script&gt; thus &lt;script type="math/tex"&gt;p(w) = N(\sigma^2|0,\frac{1}{\lambda})&lt;/script&gt;. Our prior simplifies to &lt;script type="math/tex"&gt;p(w, \sigma^2) = N(\sigma^2|0,\frac{1}{\lambda})&lt;/script&gt;.&lt;/p&gt;
 
-&lt;p&gt;Here we get another insight. Using a &lt;strong&gt;gaussian prior&lt;/strong&gt; corresponds to an added L2 reguarization term to our error function. If you play around a bit with different prior distributions you can find out that a &lt;strong&gt;laplacian prior&lt;/strong&gt; corresponds to L1 regularization.&lt;/p&gt;
+&lt;p&gt;No we can ccalculate the maximum a poserior estimation for our only left random variable &lt;script type="math/tex"&gt;w&lt;/script&gt;.&lt;/p&gt;
+
+&lt;script type="math/tex; mode=display"&gt;% &lt;![CDATA[
+\begin{split}
+w^* &amp;= \mathop{\arg\,\max}\limits_{w} \text{likelihood * prior} \\
+&amp;= \mathop{\arg\,\max}\limits_{w} log(\text{likelihood * prior}) \\
+&amp;= - \mathop{\arg\,\min}\limits_{w} log(\text{likelihood * prior}) \\
+&amp;= - \mathop{\arg\,\min}\limits_{w} log(L(w)) \\
+\end{split} %]]&gt;&lt;/script&gt;
+
+&lt;script type="math/tex; mode=display"&gt;% &lt;![CDATA[
+\begin{equation}
+\begin{split}
+L(w) &amp;= log(\prod_{i=1}^{N} p(y_i|x_i,w,\sigma^2)) * p(w) \\
+&amp;= \sum\nolimits_{n=1}^N log(p(y_i|x_i,w,\sigma^2)) + log(p(w)) \\
+&amp;= \sum\nolimits_{n=1}^N log(\frac{1}{\sqrt{2\pi\sigma^2}}exp(-\frac{(y_i - w^Tx_i)^2}{2\sigma^2})) + log(\frac{1}{\sqrt{2\pi\lambda^{-1}}}exp(-\frac{\lambda}{2} (w^Tw)) \\
+&amp;= \sum\nolimits_{n=1}^N log(\frac{1}{\sqrt{2\pi\sigma^2}}) - \frac{(y_i - w^Tx_i)^2}{2\sigma^2} + log(\frac{1}{\sqrt{2\pi\lambda^{-1}}}) -\frac{\lambda}{2} (w^Tw)) \\
+&amp;= -\frac{N}{2}log(2\pi\sigma^2) -\frac{1}{2}log(2\pi\lambda^{-1}) -\frac{\lambda}{2} (w^Tw)) - \sum\nolimits_{n=1}^N \frac{(y_i - w^Tx_i)^2}{2\sigma^2} \\
+&amp;= -\frac{N}{2}log(2\pi\sigma^2) -\frac{1}{2}log(2\pi\lambda^{-1}) -\frac{\lambda}{2} (w^Tw) -\frac{1}{2\sigma^2}(Xw-y)^T(Xw-y)
+\end{split}
+\end{equation} %]]&gt;&lt;/script&gt;
+
+&lt;p&gt;Now we set the gradient with respect to &lt;script type="math/tex"&gt;w&lt;/script&gt; to zero and solve for &lt;script type="math/tex"&gt;w&lt;/script&gt;.&lt;/p&gt;
+
+&lt;script type="math/tex; mode=display"&gt;% &lt;![CDATA[
+\begin{split}
+&amp; \nabla_{w} L(w) = 0 \\
+&amp; \Rightarrow\quad  \nabla_{w} [-\frac{N}{2}log(2\pi\sigma^2) -\frac{1}{2}log(2\pi\lambda^{-1}) -\frac{\lambda}{2} (w^Tw) -\frac{1}{2\sigma^2}(Xw-y)^T(Xw-y)] = 0 \\
+&amp; \Rightarrow\quad  \nabla_{w} [-\frac{\lambda}{2} (w^Tw) -\frac{(Xw-y)^T(Xw-y)}{2\sigma^2}] = 0 \\
+&amp; \Rightarrow\quad  -\lambda w -\frac{1}{2\sigma^2}  (2X^TXw - 2Xy) = 0 \\
+&amp; \Rightarrow\quad  -\lambda w -\frac{1}{\sigma^2}  (X^TXw - Xy) = 0 \\
+&amp; \Rightarrow\quad  \lambda \sigma^2 w (X^TXw - Xy) = 0 \\
+&amp; \Rightarrow\quad   (X^TX + \lambda \sigma^2 I)w  - Xy = 0 \\
+&amp; \Rightarrow\quad   (X^TX + \lambda \sigma^2 I)w  = Xy \\
+&amp; \Rightarrow\quad   w^*  = (X^TX + \lambda \sigma^2 I)^{-1} Xy \\
+\end{split} %]]&gt;&lt;/script&gt;
+
+&lt;p&gt;Here we get another insight. If you go back to the solution for the optimal &lt;script type="math/tex"&gt;w&lt;/script&gt; when we used a non probabilistic model with L2 regularization, you see that the result is exactly the same as for the probabilistic model if we assume &lt;script type="math/tex"&gt;\sigma^2 =1&lt;/script&gt;. Apparently using a &lt;strong&gt;gaussian prior&lt;/strong&gt; corresponds to an added L2 reguarization term to our error function. If you play around a bit with different prior distributions you can find out that a &lt;strong&gt;laplacian prior&lt;/strong&gt; corresponds to L1 regularization.&lt;/p&gt;
 
 &lt;p&gt;When I first learnt about these correspondences I was pretty amazed!&lt;/p&gt;
 
 &lt;h3 id="fully-bayesian-analysis"&gt;3. Fully Bayesian Analysis&lt;/h3&gt;
 
-&lt;p&gt;So far we only did so called &lt;strong&gt;point estimates&lt;/strong&gt; for &lt;script type="math/tex"&gt;w&lt;/script&gt; and &lt;script type="math/tex"&gt;\sigma^2&lt;/script&gt;. This can work out nicely but we are losing information about the uncertainty of our estimate. If we want to keep the information about the uncertainty we need to compute or estimate the full posterior distribution. I won’t go into more detail here. We will discuss more about this in the next post “Probabilistic Inference - behind the scenes”.&lt;/p&gt;
+&lt;p&gt;So far we only did a so called &lt;strong&gt;point estimates&lt;/strong&gt; for &lt;script type="math/tex"&gt;w&lt;/script&gt;. This can work out nicely but we are losing information about the uncertainty of our estimate for &lt;script type="math/tex"&gt;w&lt;/script&gt;w. If we want to keep the information about the uncertainty we need to compute or estimate the full posterior distribution. I won’t go into more detail here. We will discuss more about this in the next post “Probabilistic Inference - behind the scenes”.&lt;/p&gt;
 
 </content>
   </entry>
@@ -382,7 +418,7 @@ L(w,\sigma^2) &amp;= log(\prod_{i=1}^{N} p(y_i,x_i|,w,\sigma^2)) \\
     <link rel="alternate" href="http://blog.url.com/machine-learning-behind-the-scenes.html"/>
     <id>http://blog.url.com/machine-learning-behind-the-scenes.html</id>
     <published>2019-01-18T01:00:00+01:00</published>
-    <updated>2019-02-18T11:15:13+01:00</updated>
+    <updated>2019-02-18T11:16:33+01:00</updated>
     <author>
       <name>Article Author</name>
     </author>

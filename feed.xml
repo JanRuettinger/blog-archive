@@ -5,578 +5,81 @@
   <id>http://blog.url.com/</id>
   <link href="http://blog.url.com/"/>
   <link href="http://blog.url.com/feed.xml" rel="self"/>
-  <updated>2019-01-20T01:00:00+01:00</updated>
+  <updated>2021-04-27T19:00:00-05:00</updated>
   <author>
     <name>Blog Author</name>
   </author>
   <entry>
-    <title>Probabilisitc Inference - behind the scenes</title>
-    <link rel="alternate" href="http://blog.url.com/probabilistic-inference.html"/>
-    <id>http://blog.url.com/probabilistic-inference.html</id>
-    <published>2019-01-20T01:00:00+01:00</published>
-    <updated>2020-07-08T16:25:20+02:00</updated>
-    <author>
-      <name>Article Author</name>
-    </author>
-    <content type="html">&lt;h1 id="probabilistic-inference---behind-the-scenes"&gt;Probabilistic inference - behind the scenes&lt;/h1&gt;
-
-&lt;h2 id="what-do-the-terms-actually-mean"&gt;What do the terms actually mean?&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;Reading: Murphy [ch. 3.1 - 3.3]&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Making a prediction - Posterior predictive distribution - https://stats.stackexchange.com/questions/71033/what-is-the-difference-between-posterior-and-posterior-predictive-distribution&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;MLE&lt;/li&gt;
-  &lt;li&gt;MAP&lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Fully Bayesian Analysis&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;Connection between them we N goes up, when prior changes&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id="how-do-we-get-w-and-sigma"&gt;How do we get w and sigma?&lt;/h2&gt;
-
-&lt;p&gt;We are now interested in finding the unknown parameters &lt;script type="math/tex"&gt;w&lt;/script&gt; and &lt;script type="math/tex"&gt;\sigma^2&lt;/script&gt;.
-In order to do so, we have three options.&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;Maximum Likelihood Estimation (MLE)
-We assume that our data is iid meaning every data point was generated using the same distribution and all data points are independent of each other. With this assumption we can compute
-&lt;script type="math/tex"&gt;p(y,x|w,\sigma^2) = \prod_{i=1}^{N} p(y_i,x_i|,w,\sigma^2)&lt;/script&gt;. Now we can simply maximize this function in order to find the paramter &lt;script type="math/tex"&gt;w&lt;/script&gt; and &lt;script type="math/tex"&gt;\sigma&lt;/script&gt; would provide the most likely description for our observed data points.&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;script type="math/tex; mode=display"&gt;w*, \sigma^{2*} = {\mathop{\mathrm{arg\,min}}&lt;/script&gt;
-
-&lt;p&gt;Here we arrived at the first connection between the non probabilitic model from the beginning and the probabilitic model. The MLE solution is exactly the same as the non probabilistic solution. Which means that by using the least squared error function we implictely assume that any noise we have has a mean of zero and is symmetric around the mean. We can’t assume that the noise strictly follows a normal distribution as we would get the same result when the noise would be uniformly distributed with a mean of 0. But at least we got some better intuition about what’s going on behind the scenes. Let’s go a step further and see if we can also find a corresponding probabilisitc assumption for the regularization term.&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;Maximum A Posteriori Estimation (MAP)&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;Bayes formula: &lt;script type="math/tex"&gt;A\text{ } posteriori = \frac{likelihood * prior}{evidence}&lt;/script&gt;&lt;/p&gt;
-
-&lt;p&gt;Translated to our model:
-&lt;script type="math/tex"&gt;p(w, \sigma^2|x,y) = \frac{p(x,y|w, \sigma^2) * p(w,\sigma^2)}{p(x,y)}&lt;/script&gt;&lt;/p&gt;
-
-&lt;p&gt;The evidence term doesn’t depend on
-&lt;script type="math/tex"&gt;w&lt;/script&gt; or
-&lt;script type="math/tex"&gt;sigma^2&lt;/script&gt; and thus doesn’t affect the maximum of the posterior distribution
-&lt;script type="math/tex"&gt;p(w, \sigma^2|x,y)&lt;/script&gt;. So in order to find the maximum of the posterior distribution we only need the likelihood function
-&lt;script type="math/tex"&gt;p(x,y|w, \sigma^2)&lt;/script&gt; and the prior distribution
-&lt;script type="math/tex"&gt;p(w,\sigma^2)&lt;/script&gt;. We already know how to get the likelihood function from the previous step but how do we get the prior?&lt;/p&gt;
-
-&lt;p&gt;First let’s assume the parameters &lt;script type="math/tex"&gt;\sigma&lt;/script&gt; and &lt;script type="math/tex"&gt;w&lt;/script&gt; are indepent thus it follows:
-&lt;script type="math/tex"&gt;p(w,\sigma^2) = p(w)*p(\sigma^2)&lt;/script&gt;. Let’s now assume &lt;script type="math/tex"&gt;p(w)&lt;/script&gt; is normal distributed
-&lt;script type="math/tex"&gt;p(w) = N(0,\lambda)&lt;/script&gt; and
-&lt;script type="math/tex"&gt;p(\sigma^2)&lt;/script&gt; is uniformly distributed thus it follows
-&lt;script type="math/tex"&gt;p(w,\sigma^2) = N(0,\lambda)&lt;/script&gt;.&lt;/p&gt;
-
-&lt;p&gt;Now we can mutliply the likelihood function and the prior and compute the maximum of this function which will give us the maximum a posteriori estimate for our parameters &lt;script type="math/tex"&gt;w&lt;/script&gt; and &lt;script type="math/tex"&gt;\sigma&lt;/script&gt;.&lt;/p&gt;
-
-&lt;p&gt;Equations.&lt;/p&gt;
-
-&lt;p&gt;Here we get another insight. Using a &lt;strong&gt;gaussian prior&lt;/strong&gt; corresponds to an added L2 reguarization term to our error function. If you play around a bit with different prior distributions you can find out that a &lt;strong&gt;laplacian prior&lt;/strong&gt; corresponds to L1 regularization.&lt;/p&gt;
-
-&lt;p&gt;When I first learnt about these correspondences I was pretty amazed!&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;Full Bayesian approach&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;So far we only did so called &lt;strong&gt;point estimates&lt;/strong&gt; for &lt;script type="math/tex"&gt;w&lt;/script&gt; and &lt;script type="math/tex"&gt;\sigma^2&lt;/script&gt;. This can work out nicely but we are losing information about the uncertainty of our estimate.&lt;/p&gt;
-
-&lt;p&gt;Let’s look at some examples.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src="images/linear_regression/posterior_mode-2fd3c1ee.png" alt="linear_regression" width="1177" height="441" /&gt;&lt;/p&gt;
-
-&lt;p&gt;When we do do a maximum likelihood estimate or a maximum aposteriori estimate we always select the parameter which gives us the maximum value of our mostly unknown posterior distribution. The maximum of a distribution is called &lt;strong&gt;mode&lt;/strong&gt;. In the plots below you can see (unknown) posterior distirbutions. When we compute w according to MLE or MAP we don’t know the true postirior distribution we only know a distribution which is proportional to it and which thus has the same maximum.&lt;br /&gt;
-The first two examples demonstrate cases where using the maximum (green cross) actually makes sense. Even if we knew the full postirior distribution we would pick the same parameter (0 in both cases). The third example however looks different. If we knew the full posterior we would probably wouldn’t pick the argument (-0.75) which gave us the mode of the distribution but rather a value between 0 and 0.75. This seems to be a safer bet. If we would collect a little bit more data then our likelihood function would change slightly so that our previous chosen parameter (-0.75) is now a minimum instead of a maximum. Blindly taking the maximum is a pretty high risk in this case.&lt;/p&gt;
-
-&lt;p&gt;In order to fully understand what full bayesian approach actually means we need to look into how a final estimate looks depeding on the way we calcualted our unknown parameters.&lt;/p&gt;
-</content>
-  </entry>
-  <entry>
-    <title>Linear Regression - behind the scenes</title>
-    <link rel="alternate" href="http://blog.url.com/linear-regression.html"/>
-    <id>http://blog.url.com/linear-regression.html</id>
-    <published>2019-01-18T01:00:00+01:00</published>
-    <updated>2020-07-08T16:14:08+02:00</updated>
-    <author>
-      <name>Article Author</name>
-    </author>
-    <content type="html">&lt;h1 id="linear-regression---behind-the-scenes"&gt;Linear Regression - behind the scenes&lt;/h1&gt;
-
-&lt;h2 id="which-problem-do-we-want-to-solve"&gt;Which problem do we want to solve?&lt;/h2&gt;
-
-&lt;p&gt;We are given some data points &lt;script type="math/tex"&gt;{(x_1,y_1), (x_2,y_2), (x_3,y_3), (x_n,y_n)}&lt;/script&gt; which we call our training set. Then we get a new data point &lt;script type="math/tex"&gt;x_{new}&lt;/script&gt; for which we want to predict the corresponding &lt;script type="math/tex"&gt;y_{new}&lt;/script&gt; value in a way that it follows the same pattern as in our training set. Thus our task is to find a model which can capture/learn these underlying patterns (aka relationships) in our training set and apply them to new points to make accurate predictions.&lt;/p&gt;
-
-&lt;p&gt;Some models types can capture/learn only a specific type of pattern (e.g. Linear Regression), others are more powerful and can learn any type of pattern (e.g. Neural Networks). Unfortunately the more powerful models will not only learn useful patterns but also the noise in our data. Usually it’s best to pick the simplest model type which is yet able to learn the most important patterns in your data because the simpler the model is the less chance there is that it learns noise.&lt;/p&gt;
-
-&lt;h2 id="implicit-model-assumption-for-linear-regression"&gt;Implicit model assumption for Linear Regression&lt;/h2&gt;
-
-&lt;p&gt;Linear Regression is a simple model type which assumes that the relationship between &lt;script type="math/tex"&gt;x&lt;/script&gt; and &lt;script type="math/tex"&gt;y&lt;/script&gt; is linear. Because of the added bias term the relationship it is strictly speaking affine and not linear. But you can apply a neat trick to make it linear again.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;For scalar valued &lt;script type="math/tex"&gt;x&lt;/script&gt;:&lt;/strong&gt;&lt;br /&gt;
-&lt;script type="math/tex"&gt;y = w_1*x_1 + bias&lt;/script&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;For vector valued &lt;script type="math/tex"&gt;x&lt;/script&gt;:&lt;/strong&gt;&lt;br /&gt;
-&lt;script type="math/tex"&gt;y = w_1*x_1 + w_2*x_2 + w_3*x_3 + bias = w^{T}x + bias&lt;/script&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Trick: affine =&amp;gt; linear&lt;/strong&gt;&lt;br /&gt;
-&lt;script type="math/tex"&gt;y = w_1*x_1 + w_2*x_2 + w_3*x_3 + w_4*(+1) = w^{T}x&lt;/script&gt;&lt;br /&gt;
-By adding a new entry &lt;script type="math/tex"&gt;+1&lt;/script&gt; to every data point &lt;script type="math/tex"&gt;x&lt;/script&gt; we can absorb the bias term (&lt;script type="math/tex"&gt;w_4*1 = bias&lt;/script&gt;) and make the relationship between &lt;script type="math/tex"&gt;x&lt;/script&gt; and &lt;script type="math/tex"&gt;y&lt;/script&gt; linear.&lt;/p&gt;
-
-&lt;h2 id="what-if-the-assumption-doesnt-hold"&gt;What if the assumption doesn’t hold?&lt;/h2&gt;
-
-&lt;p&gt;Here are three examples of how the relationship between x and y might look like. The relationship can either be &lt;strong&gt;exactly linear&lt;/strong&gt;, &lt;strong&gt;roughly linear&lt;/strong&gt; or &lt;strong&gt;not linear at all&lt;/strong&gt;.
-&lt;img src="images/linear_regression/assumptions-24a49f19.png" alt="linear_regression" width="1169" height="441" /&gt;&lt;/p&gt;
-
-&lt;p&gt;We can fit a linear regression model in any case but the predictions won’t make much sense in the case when the data doesn’t follow a linear relationship.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src="images/linear_regression/assumptions_with_line-d26deafb.png" alt="linear_regression" width="1169" height="441" /&gt;&lt;/p&gt;
-
-&lt;!--**Example: assumption holds exactly**
-![linear_regression](linear_regression/points_linear.png)
-
-**Example: assumption holds roughly**
-![linear_regression](linear_regression/points.png)
-
-**Example: assumption doesn't hold**
-![linear_regression](linear_regression/points_nonlinear.png)--&gt;
-
-&lt;h2 id="how-can-we-find-the-best-model-paramter-w"&gt;How can we find the best model paramter w?&lt;/h2&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;You define a function which tells you how good your current estimate of the best paramters &lt;script type="math/tex"&gt;w&lt;/script&gt; is. This function is usually called &lt;strong&gt;error function&lt;/strong&gt; or &lt;strong&gt;loss function&lt;/strong&gt;.&lt;/li&gt;
-  &lt;li&gt;You minimize the error function by changing your paramter values &lt;script type="math/tex"&gt;w&lt;/script&gt;. When people say they fit a model they refer to this step of minimizng an error function. For some model types and error functions there exist a closed form solution for &lt;script type="math/tex"&gt;w&lt;/script&gt; which minimizes the error function for others you need to apply other (often iterative) minimization methods, e.g. for logistic regression.&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h3 id="error-meassure-1-least-square-error"&gt;Error meassure 1: least square error&lt;/h3&gt;
-
-&lt;script type="math/tex; mode=display"&gt;% &lt;![CDATA[
-\begin{split}
-E(w)&amp; =\frac{1}{2} \sum\nolimits_{n=1}^N (w^{T}x_i - y_i)^2 \\
- &amp; = \frac{1}{2}(Xw-Y)^{T}(Xw-y) \\
- &amp; = \frac{1}{2} (w^TX^T-y^{T})(Xw-y) \\
- &amp; = \frac{1}{2}(w^TX^TXw -w^TXy - Y^TXw - Y^{T}y) \\
- &amp; = \frac{1}{2}(w^TX^TXw - 2w^TX^Ty - Y^{T}y) \\
-\end{split} %]]&gt;&lt;/script&gt;
-
-&lt;p&gt;The vectors and matrices have the following dimensions.&lt;br /&gt;
-&lt;script type="math/tex"&gt;w&lt;/script&gt;: Dx1&lt;br /&gt;
-&lt;script type="math/tex"&gt;x_i&lt;/script&gt;: Dx1&lt;br /&gt;
-&lt;script type="math/tex"&gt;y_i&lt;/script&gt;: 1x1&lt;br /&gt;
-&lt;script type="math/tex"&gt;y&lt;/script&gt;: Nx1&lt;br /&gt;
-&lt;script type="math/tex"&gt;X&lt;/script&gt;: NxD&lt;/p&gt;
-
-&lt;p&gt;In order to minizme the error function we take the gradient with respect to &lt;script type="math/tex"&gt;w&lt;/script&gt; set it to zero and solve for &lt;script type="math/tex"&gt;w&lt;/script&gt;.&lt;/p&gt;
-
-&lt;script type="math/tex; mode=display"&gt;% &lt;![CDATA[
-&amp; \nabla_{w} E(w) =  0 \\
-&amp; \Rightarrow\quad \nabla_{w} \frac{1}{2}(w^TX^TXw - 2w^TX^Ty - y^{T}y) = 0 \\
-&amp; \Rightarrow\quad X^{T}Xw = X^{T}y \\
-&amp; \Rightarrow\quad X^{T}Xw = X^{T}y \\
-&amp; \Rightarrow\quad w* = (X^{T}X)^{-1}X^{T}y \\
-\end{split} %]]&gt;&lt;/script&gt;
-
-&lt;h3 id="error-meassure-2-least-absolute-error"&gt;Error meassure 2: least absolute error&lt;/h3&gt;
-&lt;p&gt;$$&lt;/p&gt;
-
-&lt;p&gt;There exists no closed form solution for the least absolute error because of the absolute value in the equation. That’s why an iterative approach like Gradient Descent is required which won’t be introduced at this point.&lt;/p&gt;
-
-&lt;p&gt;For the first plot (above) the least square error was used to fit the model, for the plot below the least absolute error was used. The results are pretty much the same.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src="images/linear_regression/assumptions_with_line_mae-1e4b93d6.png" alt="linear_regression" width="1169" height="441" /&gt;&lt;/p&gt;
-
-&lt;h2 id="basis-functions---how-to-deal-with-nonlinear-data"&gt;Basis functions - how to deal with nonlinear data&lt;/h2&gt;
-
-&lt;p&gt;In case the relationship between &lt;script type="math/tex"&gt;x&lt;/script&gt; and &lt;script type="math/tex"&gt;y&lt;/script&gt; is not linear you have two options. You can either switch to a completely new type of model which is able to capture nonlinear relationships or you can transform your data into a new space where the relationship between your transformed data x and y is linear again. The function which transforms your data is generally called a &lt;strong&gt;basis function&lt;/strong&gt;.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Example 1:&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;Let’s assume we have a quadratic relationship between &lt;script type="math/tex"&gt;x&lt;/script&gt; and &lt;script type="math/tex"&gt;y&lt;/script&gt; in the form of &lt;script type="math/tex"&gt;y = 1.5x^2&lt;/script&gt;. If we transform our data to a new space (again just a 1D space) with the new x axis &lt;script type="math/tex"&gt;x_{transformed} = x^2&lt;/script&gt; then the relationship between &lt;script type="math/tex"&gt;y&lt;/script&gt; and &lt;script type="math/tex"&gt;x_{transformed}&lt;/script&gt; will be linear again &lt;script type="math/tex"&gt;y = 1.5x_{transformed}&lt;/script&gt; as you can see in the plot below.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src="images/linear_regression/basis_function-60eeecc5.png" alt="linear_regression" width="1167" height="442" /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Example 2:&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;Usually you don’t know to which space you should transform your data in order to make the raltionship linear again. To overcome this issue you can transform your data to a very high dimensional space and let your model decide which transformations to use.&lt;/p&gt;
-
-&lt;p&gt;For example assume the true relationship between &lt;script type="math/tex"&gt;y&lt;/script&gt; and &lt;script type="math/tex"&gt;x&lt;/script&gt; has the form of &lt;script type="math/tex"&gt;y = 1.5x^3&lt;/script&gt; but you don’t know it in advance. Now you transform your data to a high dimensional space with the new axes
-&lt;script type="math/tex"&gt;x_{transformed 1} = x^2&lt;/script&gt;,&lt;br /&gt;
-&lt;script type="math/tex"&gt;x_{transformed 2} = x^3&lt;/script&gt;,&lt;br /&gt;
-&lt;script type="math/tex"&gt;x_{transformed 3} = x^4&lt;/script&gt;,&lt;br /&gt;
-&lt;script type="math/tex"&gt;x_{transformed 4} = x^5&lt;/script&gt;,&lt;br /&gt;
-&lt;script type="math/tex"&gt;x_{transformed 5} = x^6&lt;/script&gt;.&lt;/p&gt;
-
-&lt;p&gt;This works well in theory as your model can always decide not to use a transformation by setting the corresponding model parameter to &lt;script type="math/tex"&gt;0&lt;/script&gt;.&lt;/p&gt;
-
-&lt;script type="math/tex; mode=display"&gt;% &lt;![CDATA[
-\begin{split}
-y &amp;= w_1x_{transformed 1} + w_2x_{transformed 2} + w_3x_{transformed 3} + w_4x_{transformed 4} + w_5x_{transformed 5} \\
-&amp;= 0x_{transformed 1} + 1.5x_{transformed 2} + 0x_{transformed 3} + 0x_{transformed 4} + 0x_{transformed 5} \\
-&amp;= 0x^2 + 1.5x^3 + 0x^4 + 0x^5 + 0x^6
-\end{split} %]]&gt;&lt;/script&gt;
-
-&lt;p&gt;&lt;strong&gt;Example 3:&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;Using this technique you can fit your model to data which only approximately follows a polynomial relationship like for example data which was generated in the follwing way: &lt;script type="math/tex"&gt;y = sin(x)&lt;/script&gt;.
-If we use the same transformation technique up to an exponent of 5 we get the following model when we fit our model with a least square error.&lt;/p&gt;
-
-&lt;script type="math/tex; mode=display"&gt;+ 0.0028x^5&lt;/script&gt;
-
-&lt;p&gt;You can see in the plot below that our model captures the data pretty well and it allows us to make good predictions.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src="images/linear_regression/sin_example-466eee1b.png" alt="linear_regression" width="1185" height="441" /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Example 4:&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;So far it seems best to transform the data to an as high dimensional space as possible and let your model figure out which transformations to choose. But there is a drawback. Assume that your data was generated in the following way &lt;script type="math/tex"&gt;y = x^2 + noise&lt;/script&gt;. As before let’s transform our data up to an exponent of 40 and see what happens.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src="images/linear_regression/overfitting_example-fc9b4955.png" alt="linear_regression" width="1167" height="441" /&gt;&lt;/p&gt;
-
-&lt;p&gt;In red you see the fitted model which uses the transformed high dimensional data and in green our desired model. This phenomen is called overfitting. Our model is to complex and uses the extra power (high dimensional features e.g. &lt;script type="math/tex"&gt;x^{40}&lt;/script&gt;) to follow not only the major underlying quadratic pattern but also the noise.&lt;/p&gt;
-
-&lt;p&gt;In conclusion, you can say that our model is &lt;strong&gt;not&lt;/strong&gt; able to figure our itself which transformations to use. When we provide higher dimensional features to our model it will &lt;strong&gt;not&lt;/strong&gt; ignore the ones which are not necessary to describe the major underlying pattern but rather use them to also capture noise in our data. We somehow need to find the sweet spot of complexity where our model is powerful enugh to capture the important patterns but not powerful enough to also capture the noise. There is one technique called &lt;strong&gt;Regularization&lt;/strong&gt; which can help us with that.&lt;/p&gt;
-
-&lt;h2 id="regularization"&gt;Regularization&lt;/h2&gt;
-
-&lt;p&gt;Regularization describes methods which prevent our model from overfitting by reducing the complexity of your model. This is a quite a general definition but provides you with the right intuition for future more complex models where regularization can occure in many different ways and not just by tampering the error function which we will do in a second for linear regression.&lt;/p&gt;
-
-&lt;h3 id="l2-regularization-for-linear-regression"&gt;L2 Regularization for Linear Regression&lt;/h3&gt;
-&lt;p&gt;$$&lt;/p&gt;
-
-&lt;p&gt;L2 regularization adds a new term to the error function which prevents the parameters w to become too large. It uses the squared euclidean distance/squared L2 norm to do so. Let’s again minimize the error function with respect to &lt;script type="math/tex"&gt;w&lt;/script&gt;.&lt;/p&gt;
-
-&lt;script type="math/tex; mode=display"&gt;% &lt;![CDATA[
-&amp; \nabla_{w} E(w) =  0 \\
-&amp; \Rightarrow\quad \nabla_{w} (Xw-y)^T(Xw-y) + \frac{\lambda}{2}w^Tw = 0 \\
-&amp; \Rightarrow\quad X^{T}Xw - X^{T}y + \lambda w= 0 \\
-&amp; \Rightarrow\quad (X^{T}X-\lambda I)w = X^{T}y \\
-&amp; \Rightarrow\quad w* = (X^{T}X -\lambda I)^{-1}X^{T}y \\
-\end{split} %]]&gt;&lt;/script&gt;
-
-&lt;h3 id="l1-regularization-for-linear-regression"&gt;L1 Regularization for Linear Regression&lt;/h3&gt;
-&lt;p&gt;$$&lt;/p&gt;
-
-&lt;p&gt;(Xw-y)^T(Xw-y) + \lambda\lVert w\rVert_1$$&lt;/p&gt;
-
-&lt;p&gt;L1 regularization also adds a new term to the error function which pretty much does the same thing as the l2 regularization but uses the L1 norm (not squared) instead.&lt;/p&gt;
-
-&lt;p&gt;Let’s look at an example similiar to the previous one. Our data was generated in the following way: &lt;script type="math/tex"&gt;y = 8x^2 + 20sin(4x) + noise&lt;/script&gt;. I played around with the coefficients to make the plots look nice. Here are the results.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src="images/linear_regression/regularization-23970b94.png" alt="linear_regression" width="1173" height="441" /&gt;&lt;/p&gt;
-
-&lt;p&gt;Firstly, you can see that a model (red line) with regularization becomes smoother compared to a model without regularization. Secondly, you can see that L1 regularization leads to an even “smoother” model than L2 regularization. Why is this so? The L2 norm doesn’t penalize all errors in the same way. For example when your model is far off &lt;script type="math/tex"&gt;w^Tx &gt;&gt; y&lt;/script&gt; you will get a huge error because of the quadratic term in the L2 norm. However when you are only slighly off &lt;script type="math/tex"&gt;w^Tx ~ y&lt;/script&gt; then your error will be almost zero again because of the quadratic term. This is different in the L1 norm where you use the absolute value of the distance. That’s why L1 regularization can push parameters w down to zero whereas L2 regularization will make them small but not zero.&lt;/p&gt;
-
-&lt;p&gt;The following picture provides another intuitive way to grasp what regularization for linear regression does. Essentially regularization offers a way to shrink the complexity of our model without changing its structure.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src="images/linear_regression/complexity-038a7839.png" alt="linear_regression" width="590" height="560" /&gt;&lt;/p&gt;
-
-&lt;h2 id="behind-the-scenes-probabilistic-view"&gt;Behind the scenes: probabilistic view&lt;/h2&gt;
-
-&lt;p&gt;Now we come to the fun part where we will explore the connection between a regularized non probabilistic model and a probabibilistic model with certain assumptions.&lt;/p&gt;
-
-&lt;p&gt;Our probabilistic model:
-&lt;script type="math/tex"&gt;y_i = w^Tx_i + N(\epsilon|0,\sigma^2)&lt;/script&gt;&lt;/p&gt;
-
-&lt;p&gt;As the noise is the only probabilistic term it follows directly:
-&lt;script type="math/tex"&gt;p(y_i|x_i,w,\sigma^2) = N(\epsilon|w^Tx_i,\sigma^2)&lt;/script&gt;&lt;/p&gt;
-
-&lt;p&gt;It’s a bit confusing at first to read those formulas. In our case we interpret
-&lt;script type="math/tex"&gt;p(y_i|x_i,w,\sigma^2)&lt;/script&gt; not as a function of &lt;script type="math/tex"&gt;y_i&lt;/script&gt; but as a function over
-&lt;script type="math/tex"&gt;w&lt;/script&gt; and &lt;script type="math/tex"&gt;\sigma^2&lt;/script&gt;. This interpretation of the formula is generally called a likelihood function. The integral over &lt;script type="math/tex"&gt;w&lt;/script&gt; and &lt;script type="math/tex"&gt;\sigma^2&lt;/script&gt; doesn’t sum up to 1. That’s why it is not a probability distribution. If we would assume &lt;script type="math/tex"&gt;w&lt;/script&gt; and &lt;script type="math/tex"&gt;\sigma^2&lt;/script&gt; are given/fixed and we look at it as a function of &lt;script type="math/tex"&gt;y_i&lt;/script&gt; then it is a proper probability distribution and the integral over &lt;script type="math/tex"&gt;y_i&lt;/script&gt; does sum of to 1.&lt;/p&gt;
-
-&lt;h2 id="how-do-we-get-w-and-sigma"&gt;How do we get w and sigma?&lt;/h2&gt;
-
-&lt;p&gt;We are now interested in finding the unknown parameters &lt;script type="math/tex"&gt;w&lt;/script&gt; and &lt;script type="math/tex"&gt;\sigma^2&lt;/script&gt;.
-In order to do so, we have three options.&lt;/p&gt;
-
-&lt;h3 id="maximum-likelihood-estimation-mle"&gt;1. Maximum Likelihood Estimation (MLE)&lt;/h3&gt;
-
-&lt;table&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td&gt;We assume that our data is identical and independently distributed (aka i.i.d) meaning every data point was generated using the same distribution and all data points are independent of each other. With this assumption we can compute the likelihood function $$ p(y,x&lt;/td&gt;
-      &lt;td&gt;w,\sigma^2) = \prod_{i=1}^{N} p(y_i,x_i&lt;/td&gt;
-      &lt;td&gt;,w,\sigma^2)&lt;script type="math/tex"&gt;. Now we can simply maximize this function in order to find the parameter&lt;/script&gt;w&lt;script type="math/tex"&gt;and&lt;/script&gt;\sigma$$ which give us the most likely description for our observed data points.&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
-
-&lt;p&gt;Our task:
-&lt;script type="math/tex"&gt;w*, \sigma^{2*} = \mathop{\arg\,\max}\limits_{w, \sigma^2} \prod_{i=1}^{N} p(y_i,x_i|,w,\sigma^2) = \mathop{\arg\,\max}\limits_{w, \sigma^2} L(w,\sigma^2)&lt;/script&gt;&lt;/p&gt;
-
-&lt;p&gt;You might think that we will run into issues when we try to optimize over two variables simultaneously. Generally that can be an issue but not in this case as &lt;script type="math/tex"&gt;w^*&lt;/script&gt; doesn’t depend on &lt;script type="math/tex"&gt;\sigma^2&lt;/script&gt;.&lt;/p&gt;
-
-&lt;script type="math/tex; mode=display"&gt;% &lt;![CDATA[
-\begin{split}
-L(w,\sigma^2) &amp;= log(\prod_{i=1}^{N} p(y_i,x_i|,w,\sigma^2)) \\
-&amp;=  \sum\nolimits_{n=1}^N log(p(y_i,x_i|,w,\sigma^2)) \\
-&amp;=  \sum\nolimits_{n=1}^N log(\frac{1}{\sqrt{2\pi\sigma^2}}exp(-\frac{(y_i - w^Tx_i)^2}{2\sigma^2})) \\
-&amp;=  Nlog(\frac{1}{\sqrt{2\pi\sigma^2}} + \sum\nolimits_{n=1}^N -\frac{(y_i - w^Tx_i)^2}{2\sigma^2}) \\
-&amp;=  -\frac{N}{2}log(2\pi\sigma^2) - \frac{1}{2\sigma^2} (Xw-y)^{T}(Xw-y)\\
-\end{split} %]]&gt;&lt;/script&gt;
-
-&lt;p&gt;We made use of a simple trick. We took the log of the whole expression knowing that it doesn’t change the position of the maximum. In order to find the maximum, we take the gradient with respect to &lt;script type="math/tex"&gt;w&lt;/script&gt;, set it to zero and solve for &lt;script type="math/tex"&gt;w&lt;/script&gt;.&lt;/p&gt;
-
-&lt;script type="math/tex; mode=display"&gt;% &lt;![CDATA[
-\begin{split}
-&amp; \nabla_{w} L(w,\sigma^2) = 0 \\
-&amp; \Rightarrow\quad \nabla_{w} [-\frac{N}{2}log(2\pi\sigma^2) - \frac{1}{2\sigma^2} (Xw-y)^{T}(Xw-y)] = 0 \\
-&amp; \Rightarrow\quad  \nabla_{w}[- \frac{1}{2\sigma^2} (Xw-y)^{T}(Xw-y)] = 0\\
-&amp; \Rightarrow\quad  - \frac{1}{2\sigma^2} \nabla_{w}(Xw-y)^{T}(Xw-y) = 0 \\
-&amp; \Rightarrow\quad  - \frac{1}{2\sigma^2} (2XX^Tw-2X^Ty) = 0 \\
-&amp; \Rightarrow\quad  XX^Tw-X^Ty = 0 \\
-&amp; \Rightarrow\quad  w_{MLE} = (XX^T)^{-1}-X^Ty \\
-\end{split} \\ %]]&gt;&lt;/script&gt;
-
-&lt;p&gt;You can see that &lt;script type="math/tex"&gt;w_{MLE}&lt;/script&gt; is independent of &lt;script type="math/tex"&gt;\sigma^2&lt;/script&gt; and also that the result is the same as for the non probabilistic least square case with no regularization.&lt;/p&gt;
-
-&lt;p&gt;Let’s go on to derive the solution for &lt;script type="math/tex"&gt;\sigma_{MLE}^2&lt;/script&gt;. Same procedure, we take the gradient with respect to &lt;script type="math/tex"&gt;\sigma^2&lt;/script&gt; , set it to 0 and solve for
-&lt;script type="math/tex"&gt;\sigma^2&lt;/script&gt;.&lt;/p&gt;
-
-&lt;script type="math/tex; mode=display"&gt;% &lt;![CDATA[
-\begin{split}
-&amp; \nabla_{\sigma^2} L(w,\sigma^2) = 0 \\
-&amp; \Rightarrow\quad  \nabla_{\sigma^2} [-\frac{N}{2}log(2\pi\sigma^2) - \frac{1}{2\sigma^2} (Xw-y)^{T}(Xw-y)] = 0 \\
-&amp; \Rightarrow\quad -\frac{N}{4\pi\sigma^2}2\pi - \frac{1}{4\sigma^4} (Xw-y)^{T}(Xw-y) = 0 \\
-&amp; \Rightarrow\quad -N - \frac{1}{2\sigma^2} (Xw-y)^{T}(Xw-y) = 0\\
-&amp; \Rightarrow\quad  (Xw-y)^{T}(Xw-y) = N\sigma^2 \\
-&amp; \Rightarrow\quad  \sigma_{MLE}^2 = \frac{1}{N}(Xw-y)^{T}(Xw-y) \\
-\end{split} %]]&gt;&lt;/script&gt;
-
-&lt;p&gt;This is a satisfying result because it is just finding the sample average of the squared deviations between what &lt;script type="math/tex"&gt;w_{MLE}&lt;/script&gt; predicts and what the training data actually are. It feels exactly like what happens when you compute the maximum likelihood estimate of the variance of a univariate Gaussian distribution.&lt;/p&gt;
-
-&lt;p&gt;Let’s quickly recap. The solution for &lt;script type="math/tex"&gt;w&lt;/script&gt; with the probabilistic approach (+ our assumptions) and taking the Maximum Likelihood Estimate leads exactly to the same solution as for the non probabilistic model. Which means that by using the least squared error function we implictely assume that any noise we have has a mean of zero and is symmetric around the mean. We can’t assume that the noise strictly follows a normal distribution as we would get the same result when the noise would be e.g. uniformly distributed with a mean of 0. But at least we got some better intuition about what’s going on behind the scenes. Let’s go a step further and see if we can also find a corresponding probabilisitc assumption for the regularization term.&lt;/p&gt;
-
-&lt;p&gt;NOT QUITE SURE YET&lt;/p&gt;
-
-&lt;h3 id="maximum-a-posteriori-estimation-map"&gt;2. Maximum A Posteriori Estimation (MAP)&lt;/h3&gt;
-
-&lt;p&gt;Bayes formula: &lt;script type="math/tex"&gt;\text{A posteriori }= \frac{\text{likelihood * prior}}{\text{evidence}}&lt;/script&gt;&lt;/p&gt;
-
-&lt;p&gt;Translated to our model:
-&lt;script type="math/tex"&gt;p(w, \sigma^2|x,y) = \frac{p(x,y|w, \sigma^2) * p(w,\sigma^2)}{p(x,y)}&lt;/script&gt;&lt;/p&gt;
-
-&lt;p&gt;The evidence term doesn’t depend on &lt;script type="math/tex"&gt;w&lt;/script&gt; or &lt;script type="math/tex"&gt;\sigma^2&lt;/script&gt; and thus doesn’t affect the maximum of the posterior distribution &lt;script type="math/tex"&gt;p(w, \sigma^2|x,y)&lt;/script&gt; . So in order to find the maximum of the posterior distribution we only need the likelihood function &lt;script type="math/tex"&gt;p(x,y|w, \sigma^2)&lt;/script&gt; and the prior distribution
-&lt;script type="math/tex"&gt;p(w,\sigma^2)&lt;/script&gt;. We already know how to get the likelihood function from the previous step but how do we get the prior?&lt;/p&gt;
-
-&lt;p&gt;Eventually we need to make some hard assumptions about &lt;script type="math/tex"&gt;w&lt;/script&gt; and &lt;script type="math/tex"&gt;\sigma^2&lt;/script&gt;. Let’s discuss our options. We could assume that both &lt;script type="math/tex"&gt;w&lt;/script&gt; and &lt;script type="math/tex"&gt;\sigma^2&lt;/script&gt; are indepedent random variables with follow a certain distribution which we can freely choose. For example
-&lt;script type="math/tex"&gt;p(w, \sigma^2) = p(w) * p(\sigma^2) = N(w|a,b)*N(\sigma^2|c,d)&lt;/script&gt;. Not much progress made, now we need to come up with good values for &lt;script type="math/tex"&gt;a,b,c,d&lt;/script&gt;. We could again assume they follow a certain assumptions to take uncertainty into account but you see that we are trapped in a loop. At some point we have a make a hard assumption and set a parameter to a fixed value. It’s good practice too pick a reasonable fixed value when you can’t make good asusmptions about the distribution of a parameter anymore. In our case we will assume &lt;script type="math/tex"&gt;\sigma^2&lt;/script&gt; is not a random variable but a fixed scalar and &lt;script type="math/tex"&gt;w&lt;/script&gt; is gaussian distributed with a variance of &lt;script type="math/tex"&gt;\frac{1}{\lambda}&lt;/script&gt; thus &lt;script type="math/tex"&gt;p(w) = N(\sigma^2|0,\frac{1}{\lambda})&lt;/script&gt;. Our prior simplifies to &lt;script type="math/tex"&gt;p(w, \sigma^2) = N(\sigma^2|0,\frac{1}{\lambda})&lt;/script&gt;.&lt;/p&gt;
-
-&lt;p&gt;No we can ccalculate the maximum a poserior estimation for our only left random variable &lt;script type="math/tex"&gt;w&lt;/script&gt;.&lt;/p&gt;
-
-&lt;script type="math/tex; mode=display"&gt;% &lt;![CDATA[
-\begin{split}
-w^* &amp;= \mathop{\arg\,\max}\limits_{w} \text{likelihood * prior} \\
-&amp;= \mathop{\arg\,\max}\limits_{w} log(\text{likelihood * prior}) \\
-&amp;= - \mathop{\arg\,\min}\limits_{w} log(\text{likelihood * prior}) \\
-&amp;= - \mathop{\arg\,\min}\limits_{w} log(L(w)) \\
-\end{split} %]]&gt;&lt;/script&gt;
-
-&lt;script type="math/tex; mode=display"&gt;% &lt;![CDATA[
-\begin{equation}
-\begin{split}
-L(w) &amp;= log(\prod_{i=1}^{N} p(y_i|x_i,w,\sigma^2)) * p(w) \\
-&amp;= \sum\nolimits_{n=1}^N log(p(y_i|x_i,w,\sigma^2)) + log(p(w)) \\
-&amp;= \sum\nolimits_{n=1}^N log(\frac{1}{\sqrt{2\pi\sigma^2}}exp(-\frac{(y_i - w^Tx_i)^2}{2\sigma^2})) + log(\frac{1}{\sqrt{2\pi\lambda^{-1}}}exp(-\frac{\lambda}{2} (w^Tw)) \\
-&amp;= \sum\nolimits_{n=1}^N log(\frac{1}{\sqrt{2\pi\sigma^2}}) - \frac{(y_i - w^Tx_i)^2}{2\sigma^2} + log(\frac{1}{\sqrt{2\pi\lambda^{-1}}}) -\frac{\lambda}{2} (w^Tw)) \\
-&amp;= -\frac{N}{2}log(2\pi\sigma^2) -\frac{1}{2}log(2\pi\lambda^{-1}) -\frac{\lambda}{2} (w^Tw)) - \sum\nolimits_{n=1}^N \frac{(y_i - w^Tx_i)^2}{2\sigma^2} \\
-&amp;= -\frac{N}{2}log(2\pi\sigma^2) -\frac{1}{2}log(2\pi\lambda^{-1}) -\frac{\lambda}{2} (w^Tw) -\frac{1}{2\sigma^2}(Xw-y)^T(Xw-y)
-\end{split}
-\end{equation} %]]&gt;&lt;/script&gt;
-
-&lt;p&gt;Now we set the gradient with respect to &lt;script type="math/tex"&gt;w&lt;/script&gt; to zero and solve for &lt;script type="math/tex"&gt;w&lt;/script&gt;.&lt;/p&gt;
-
-&lt;script type="math/tex; mode=display"&gt;% &lt;![CDATA[
-\begin{split}
-&amp; \nabla_{w} L(w) = 0 \\
-&amp; \Rightarrow\quad  \nabla_{w} [-\frac{N}{2}log(2\pi\sigma^2) -\frac{1}{2}log(2\pi\lambda^{-1}) -\frac{\lambda}{2} (w^Tw) -\frac{1}{2\sigma^2}(Xw-y)^T(Xw-y)] = 0 \\
-&amp; \Rightarrow\quad  \nabla_{w} [-\frac{\lambda}{2} (w^Tw) -\frac{(Xw-y)^T(Xw-y)}{2\sigma^2}] = 0 \\
-&amp; \Rightarrow\quad  -\lambda w -\frac{1}{2\sigma^2}  (2X^TXw - 2Xy) = 0 \\
-&amp; \Rightarrow\quad  -\lambda w -\frac{1}{\sigma^2}  (X^TXw - Xy) = 0 \\
-&amp; \Rightarrow\quad  \lambda \sigma^2 w (X^TXw - Xy) = 0 \\
-&amp; \Rightarrow\quad   (X^TX + \lambda \sigma^2 I)w  - Xy = 0 \\
-&amp; \Rightarrow\quad   (X^TX + \lambda \sigma^2 I)w  = Xy \\
-&amp; \Rightarrow\quad   w^*  = (X^TX + \lambda \sigma^2 I)^{-1} Xy \\
-\end{split} %]]&gt;&lt;/script&gt;
-
-&lt;p&gt;Here we get another insight. If you go back to the solution for the optimal &lt;script type="math/tex"&gt;w&lt;/script&gt; when we used a non probabilistic model with L2 regularization, you see that the result is exactly the same as for the probabilistic model if we assume &lt;script type="math/tex"&gt;\sigma^2 =1&lt;/script&gt;. Apparently using a &lt;strong&gt;gaussian prior&lt;/strong&gt; corresponds to an added L2 reguarization term to our error function. If you play around a bit with different prior distributions you can find out that a &lt;strong&gt;laplacian prior&lt;/strong&gt; corresponds to L1 regularization.&lt;/p&gt;
-
-&lt;p&gt;When I first learnt about these correspondences I was pretty amazed!&lt;/p&gt;
-
-&lt;h3 id="fully-bayesian-analysis"&gt;3. Fully Bayesian Analysis&lt;/h3&gt;
-
-&lt;p&gt;So far we only did a so called &lt;strong&gt;point estimates&lt;/strong&gt; for &lt;script type="math/tex"&gt;w&lt;/script&gt;. This can work out nicely but we are losing information about the uncertainty of our estimate for &lt;script type="math/tex"&gt;w&lt;/script&gt;w. If we want to keep the information about the uncertainty we need to compute or estimate the full posterior distribution. I won’t go into more detail here. We will discuss more about this in the next post “Probabilistic Inference - behind the scenes”.&lt;/p&gt;
-</content>
-  </entry>
-  <entry>
-    <title>Machine Learning - behind the scenes</title>
-    <link rel="alternate" href="http://blog.url.com/machine-learning-behind-the-scenes.html"/>
-    <id>http://blog.url.com/machine-learning-behind-the-scenes.html</id>
-    <published>2019-01-18T01:00:00+01:00</published>
-    <updated>2020-07-08T16:14:05+02:00</updated>
-    <author>
-      <name>Article Author</name>
-    </author>
-    <content type="html">&lt;h1 id="machine-learning---behind-the-scenes"&gt;Machine Learning - behind the scenes&lt;/h1&gt;
-
-&lt;p&gt;This will be a tutorial series which illustrates underlying concepts of popular Machine Learning algorithms and also draws connections between them in (e.g. bayesian and geometric interpretation).&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;Linear Regression&lt;/li&gt;
-  &lt;li&gt;Probabilistic Inference&lt;/li&gt;
-  &lt;li&gt;Linear Classification&lt;/li&gt;
-  &lt;li&gt;Constrained Optimization&lt;/li&gt;
-  &lt;li&gt;Support Vector Machine&lt;/li&gt;
-  &lt;li&gt;K-Means vs Gaussian Mixture Model&lt;/li&gt;
-  &lt;li&gt;PCA/PPCA/SVD/Matrix Factorization/Auto Encoders&lt;/li&gt;
-  &lt;li&gt;Variational Inference&lt;/li&gt;
-&lt;/ol&gt;
-</content>
-  </entry>
-  <entry>
-    <title>Cookandrun - Platform for running dinner events</title>
-    <link rel="alternate" href="http://blog.url.com/cookandrun.html"/>
-    <id>http://blog.url.com/cookandrun.html</id>
-    <published>2017-12-28T01:00:00+01:00</published>
-    <updated>2017-12-31T13:23:43+01:00</updated>
-    <author>
-      <name>Article Author</name>
-    </author>
-    <content type="html">&lt;h1 id="cookandrun"&gt;Cookandrun&lt;/h1&gt;
-
-&lt;p&gt;Link to project: &lt;a href="www.cookandrun.fun"&gt;www.cookandrun.fun&lt;/a&gt;&lt;/p&gt;
-
-&lt;h2 id="tech-stack"&gt;Tech stack&lt;/h2&gt;
-&lt;ul&gt;
-  &lt;li&gt;Backend: Flask (Python)&lt;/li&gt;
-  &lt;li&gt;Frontend: Vanilla JS + JQuery, SASS (neat/bourbon framework by thoughtbots)&lt;/li&gt;
-  &lt;li&gt;Database: PostgreSQL&lt;/li&gt;
-  &lt;li&gt;Deployment: AWS + AWS Services (e.g. E-Mail)&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id="what-is-this-project-about"&gt;What is this project about?&lt;/h2&gt;
-&lt;p&gt;I built the project because me and my friends wanted to organize a running dinner event but nobody wanted to the organizational work. A running dinner event is an event where you team up with a partner and invite two other teams consisting of strangers to your appartment and cook a delicious meal for them. In exchange two other teams will prepare a meal for your team. At the end all teams come together for a big after party. It’s especially popular in student cities. At my university such a running dinner event takes place every semester with more than 3000 students. I wanted to build a platform to help organize such events with minimal effort.&lt;/p&gt;
-
-&lt;h2 id="key-challenges"&gt;Key challenges&lt;/h2&gt;
-&lt;ol&gt;
-  &lt;li&gt;Teams must have an appartment in a certain area to make sure that every team can reach the next appartment in time.&lt;/li&gt;
-  &lt;li&gt;At every stage teams should come together who haven’t met each other before.&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h2 id="how-does-it-work"&gt;How does it work?&lt;/h2&gt;
-&lt;ol&gt;
-  &lt;li&gt;Organizer signs up at www.cookandrun.fun
-&lt;img src="images/project_cookandrun/01-c3370496.png" alt="demo" width="1552" height="909" /&gt;&lt;/li&gt;
-  &lt;li&gt;Organizer signs in
-&lt;img src="images/project_cookandrun/02-a59ef25c.png" alt="demo" width="1552" height="909" /&gt;&lt;/li&gt;
-  &lt;li&gt;Organizer creates a new event
-&lt;img src="images/project_cookandrun/03-c61ef967.png" alt="demo" width="1552" height="909" /&gt;&lt;/li&gt;
-  &lt;li&gt;Organizer specifies more details for the event
-&lt;img src="images/project_cookandrun/04-dee61f7a.png" alt="demo" width="1552" height="909" /&gt;
-E.g. specify the area in which the participants need to have an appartment. Participants who don’t live in the specified area won’t be allowed to sign up for the event
-&lt;img src="images/project_cookandrun/05-2f17c114.png" alt="demo" width="1552" height="909" /&gt;&lt;/li&gt;
-  &lt;li&gt;Organizer opens the registration phase
-&lt;img src="images/project_cookandrun/06-19461683.png" alt="demo" width="1552" height="909" /&gt;&lt;/li&gt;
-  &lt;li&gt;Participants can now sign up &lt;specified subdomain=""&gt;.cookandrun.fun
-![demo](project_cookandrun/07.png)&lt;/specified&gt;&lt;/li&gt;
-  &lt;li&gt;Organizer closes the registration phase
-&lt;img src="images/project_cookandrun/08-242b249d.png" alt="demo" width="1552" height="909" /&gt;&lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Organizer draws the teams 
-&lt;img src="images/project_cookandrun/09-f85a390c.png" alt="demo" width="1552" height="909" /&gt;
-The goal is that all teams who share a meal together are as close together as possible. I used K-means algorithm with a fixed cluster size to achieve a near optimal result.
-&lt;img src="images/project_cookandrun/10-04f4a9f3.png" alt="demo" width="1552" height="909" /&gt;&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;Organizer starts event
-&lt;img src="images/project_cookandrun/11-efa43c38.png" alt="demo" width="1552" height="909" /&gt;&lt;/li&gt;
-  &lt;li&gt;After the event is started participants get access to their individual time table for the event
-&lt;img src="images/project_cookandrun/12-0e0c445f.png" alt="demo" width="1552" height="909" /&gt;&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h2 id="technical-challenges"&gt;Technical challenges&lt;/h2&gt;
-
-&lt;h3 id="dynamic-subdomains"&gt;1. Dynamic subdomains&lt;/h3&gt;
-&lt;p&gt;Each event should get its own subdomain for participants to sign up. I split the platform into two seperate applications. The first application serves all requests from cookdandrun.fun. The second application is responsible for all requests from &lt;subdomain&gt;.cookandrun.fun. Both use the flask framework and share the same database.&lt;/subdomain&gt;&lt;/p&gt;
-
-&lt;h3 id="restrict-event-area"&gt;2. Restrict event area&lt;/h3&gt;
-&lt;p&gt;The goal was to make it dead easy for an organizer to specify an area in which all participants need to live in order to be allowed to sign up. I use Google Maps for visualization and the Google Maps API to get the coordinates for an address and check whether it’s within the specified area or not&lt;/p&gt;
-
-&lt;h3 id="deployment--mail-server"&gt;3. Deployment &amp;amp; mail server&lt;/h3&gt;
-&lt;p&gt;Currently the project is deployed on a free tier instance on AWS via four docker containers (2 web apps container, database container and nignx container). As far as the mail server is concerned I couldn’t use a normal mail providers (zoho or gmail) because they limit the number of outgoing emails. Eventually I went with the Simple Email Service (SES) from AWS. If you are using AWS to host your application then the first 62.000 emails are free each month. That’s more than enough for this project. So the current operating costs are $0.&lt;/p&gt;
-
-&lt;h2 id="code"&gt;Code&lt;/h2&gt;
-&lt;p&gt;You can find the code on &lt;a href="https://github.com/JanRuettinger/cookandrun_public"&gt;github&lt;/a&gt;. In order to use it you need to change some configs (mail server, aws key, etc.).&lt;/p&gt;
-</content>
-  </entry>
-  <entry>
-    <title>Kaggle workshop</title>
-    <link rel="alternate" href="http://blog.url.com/kaggle-workshop.html"/>
-    <id>http://blog.url.com/kaggle-workshop.html</id>
-    <published>2017-12-15T01:00:00+01:00</published>
-    <updated>2017-12-30T19:30:41+01:00</updated>
+    <title>Crypto Trading Bot</title>
+    <link rel="alternate" href="http://blog.url.com/crypto-trading-bot.html"/>
+    <id>http://blog.url.com/crypto-trading-bot.html</id>
+    <published>2021-04-27T19:00:00-05:00</published>
+    <updated>2021-10-14T21:34:37-05:00</updated>
     <author>
       <name>Article Author</name>
     </author>
     <content type="html">
-&lt;h1 id="kaggle-workshop"&gt;Kaggle workshop&lt;/h1&gt;
-
-&lt;p&gt;Link to the &lt;a href="https://github.com/JanRuettinger/kaggle_workshop"&gt;material&lt;/a&gt; on github.&lt;/p&gt;
-
-&lt;h2 id="overview"&gt;Overview&lt;/h2&gt;
-&lt;p&gt;I created this material for a pre-christmas event at our department. The goal was to enable even complete ML beginners (all had an engineering major though) to participant in a kaggle competition. The workshop was divided into two parts. In the first part I went through some Machine Learning basics using the &lt;a href="https://www.kaggle.com/c/titanic"&gt;titanic dataset&lt;/a&gt; from kaggle. This took about 3-4 hours. Here is the outline:&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;Machine Learning introduction&lt;/li&gt;
-  &lt;li&gt;Linear models&lt;/li&gt;
-  &lt;li&gt;Pandas introduction&lt;/li&gt;
-  &lt;li&gt;Exploratory Data Analysis (EDA) using Seaborn&lt;/li&gt;
-  &lt;li&gt;Feature engineering&lt;/li&gt;
-  &lt;li&gt;Model evaluation and cross validation&lt;/li&gt;
-  &lt;li&gt;Regularization&lt;/li&gt;
-  &lt;li&gt;Decision Trees&lt;/li&gt;
-  &lt;li&gt;K-nearest Neighbor&lt;/li&gt;
-  &lt;li&gt;Hyperparameter optimization&lt;/li&gt;
-  &lt;li&gt;Ensemble methods (bagging, boosting)&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;In the second part we built teams and worked on the [housing price] (https://www.kaggle.com/c/house-prices-advanced-regression-techniques) challenge on kaggle. I created three different starter kits (all included in the repo) so that even people with no ML background could get to a decent solution.&lt;/p&gt;
-
-&lt;p&gt;Feel free to use it in whatever way you want!&lt;/p&gt;
-
 </content>
   </entry>
   <entry>
-    <title>Reainforcement Learning notes (german)</title>
-    <link rel="alternate" href="http://blog.url.com/rl-notes.html"/>
-    <id>http://blog.url.com/rl-notes.html</id>
-    <published>2017-12-15T01:00:00+01:00</published>
-    <updated>2017-12-31T01:35:36+01:00</updated>
+    <title>Clubhouse Bio Editor</title>
+    <link rel="alternate" href="http://blog.url.com/clubhouse-bio-editor.html"/>
+    <id>http://blog.url.com/clubhouse-bio-editor.html</id>
+    <published>2021-03-09T18:00:00-06:00</published>
+    <updated>2021-10-14T21:34:21-05:00</updated>
     <author>
       <name>Article Author</name>
     </author>
     <content type="html">
-&lt;h1 id="rl-notes"&gt;RL notes&lt;/h1&gt;
-
-&lt;p&gt;You can find the material &lt;a href="https://github.com/JanRuettinger/RL_notes"&gt;here&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;Some time ago I prepared an introduction to Reinforcement Learning for our department. It consists of a PDF presentation an three demos. The slides are in german though.&lt;/p&gt;
-
-&lt;h3 id="how-to-run-the-demos"&gt;How to run the demos?&lt;/h3&gt;
-&lt;p&gt;The demos are based on jupyter notebooks. So all you need to do is start a jupyter notebook server inside the demo folder.&lt;/p&gt;
-
-&lt;h3 id="credits"&gt;Credits&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href="http://www0.cs.ucl.ac.uk/staff/d.silver/web/Teaching.html"&gt;Lecture&lt;/a&gt; by David Silver&lt;/li&gt;
-  &lt;li&gt;&lt;a href="http://incompleteideas.net/book/the-book-2nd.html"&gt;Book&lt;/a&gt; by Richard S. Sutton&lt;/li&gt;
-  &lt;li&gt;&lt;a href="http://www.wildml.com/2016/10/learning-reinforcement-learning/"&gt;Material&lt;/a&gt; by Denny Biatz&lt;/li&gt;
-&lt;/ul&gt;
+</content>
+  </entry>
+  <entry>
+    <title>Efficient exploration in RL using uncertainty estimation</title>
+    <link rel="alternate" href="http://blog.url.com/uncertainty-estimation-rl.html"/>
+    <id>http://blog.url.com/uncertainty-estimation-rl.html</id>
+    <published>2020-11-30T18:00:00-06:00</published>
+    <updated>2021-10-14T21:41:32-05:00</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <content type="html">
+&lt;p&gt;https://github.com/LukasRinder/bayesian-neural-networks&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
+    <title>Meno - Research paper review platform</title>
+    <link rel="alternate" href="http://blog.url.com/meno.html"/>
+    <id>http://blog.url.com/meno.html</id>
+    <published>2020-11-01T18:00:00-06:00</published>
+    <updated>2021-10-14T21:41:58-05:00</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <content type="html">
+</content>
+  </entry>
+  <entry>
+    <title>CVPR2020 Search</title>
+    <link rel="alternate" href="http://blog.url.com/cvpr-search.html"/>
+    <id>http://blog.url.com/cvpr-search.html</id>
+    <published>2020-05-01T19:00:00-05:00</published>
+    <updated>2021-10-14T21:35:33-05:00</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <content type="html">
+</content>
+  </entry>
+  <entry>
+    <title>Piano Progress Tracker</title>
+    <link rel="alternate" href="http://blog.url.com/piano-tracker.html"/>
+    <id>http://blog.url.com/piano-tracker.html</id>
+    <published>2020-04-03T18:00:00-06:00</published>
+    <updated>2021-10-14T21:33:44-05:00</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <content type="html">
 </content>
   </entry>
 </feed>
